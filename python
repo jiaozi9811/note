@@ -4,7 +4,20 @@
 安装psutil
 需安装gcc python-devel beautifulsoup
 
+  os
+  re    正则表达式
 
-module
+三方module
   psutil      系统信息
   IPy         完成IP的规划工作
+  
+  paramiko    如同ssh
+  fabric      如同ssh
+  
+  difflib     文件对比
+  
+  smtplib     email模块
+  
+  pycurl      如同curl
+  
+  pexpect     如同expect
