@@ -6,5 +6,5 @@
 
 
 module
-  psutil
-  IPy
+  psutil      系统信息
+  IPy         完成IP的规划工作
