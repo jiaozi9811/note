@@ -3,3 +3,8 @@
 
 安装psutil
 需安装gcc python-devel beautifulsoup
+
+
+module
+  psutil
+  IPy
