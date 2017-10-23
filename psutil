@@ -1,0 +1,103 @@
+psutil是一个跨平台库，能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要应用于系统监控，分析和限制系统资源及进程的管理。
+它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat、iotop、uptime、pidof、tty、taskset、pmap等。目前支持32位和64位的Linux、Windows、OS X、FreeBSD和Sun Solaris等操作系统
+
+https://pypi.python.org/pypi/psutil
+
+安装
+pip install psutil
+
+源码
+需安装gcc python-devel beautifulsoup
+wget https://pypi.python.org/packages/8d/96/1fc6468be91521192861966c40bd73fdf8b065eae6d82dd0f870b9825a65/psutil-5.4.0.tar.gz
+tar xvf psutil-5.4.0.tar.gz
+cd psutil-5.4.0
+python setup.py install
+
+应用
+psutil.test()   如同 ps
+psutil.users()  系统用户登录信息
+psutil.boot_time() #开机时间,以linux时间格式返回
+datetime.datetime.fromtimestamp(psutil.boot_time ()).strftime("%Y-%m-%d %H: %M: %S") #转换成自然时间格式
+
+CPU
+        psutil.cpu_count()
+        psutil.cpu_percent()
+        psutil.cpu_times()      查看cpu所有信息
+                user    nice    system  idle    iowait  irq     softirq steal   guest   guest_nice
+        psutil.cpu_freq()
+        psutil.cpu_stats()
+                ctx_switches    interrupts      soft_interrupts syscalls
+        psutil.cpu_times_percent()
+                user=0.0, nice=0.0, system=0.0, idle=100.0, iowait=0.0, irq=0.0, softirq=0.0, steal=0.0, guest=0.0, guest_nice=0.0
+查看cpu所有信息
+psutil.cpu_times()
+显示cpu所有逻辑信息
+psutil.cpu_times(percpu=True)
+查看用户的cpu时间比
+psutil.cpu_times().user
+查看cpu逻辑个数
+psutil.cpu_count()
+查看cpu物理个数
+psutil.cpu_count(logical=False)
+
+
+memory
+        psutil.virtual_memory()
+                total   available       percent used    free    active  inactive        buffers cached  shared
+        psutil.swap_memory
+                total   used    free    percent sin     sout
+
+import psutil
+        mem = psutil.virtual_memory()
+        mem.total/1024/1024    系统总计内存   
+        mem.used/1024/1024     系统已经使用内存
+        mem.free/1024/1024     系统空闲内存
+
+disks
+        psutil.disk_partitions()        磁盘信息
+        psutil.disk_usage('/')          磁盘利用率
+        psutil.disk_io_counters()       硬盘IO总个数
+        psutil.disk_io_counters(perdisk=False)  获取单个分区IO个数
+
+
+network
+        psutil.net_connections(
+        psutil.net_if_addrs(
+        psutil.net_if_stats(
+        psutil.net_io_counters()        网络总IO信息
+        psutil.net_io_counters(pernic=True)     每个接口信息
+
+process(进程)
+psutil.pids()   系统全部进程
+
+p = psutil.Process(2423) 
+p.name()   #进程名
+p.exe()    #进程的bin路径
+p.cwd()    #进程的工作目录绝对路径
+p.status()   #进程状态
+p.create_time()  #进程创建时间
+p.uids()    #进程uid信息
+p.gids()    #进程的gid信息
+p.cpu_times()   #进程的cpu时间信息,包括user,system两个cpu信息
+p.cpu_affinity()  #get进程cpu亲和度,如果要设置cpu亲和度,将cpu号作为参考就好
+p.memory_percent()  #进程内存利用率
+p.memory_info()    #进程内存rss,vms信息
+p.io_counters()    #进程的IO信息,包括读写IO数字及参数
+p.connectios()   #返回进程列表
+p.num_threads()  #进程开启的线程数
+p.pid
+p.ppid()
+p.parent()
+p.children()
+p.username()
+p.terminal()
+p.cpu_num()
+p.memory_full_info()
+p.memory_maps()
+p.open_files()
+p.num_fds()
+p.threads()
+p.num_ctx_switches()
+p.nice()
+p.ionice()
+p.environ()
