@@ -1,0 +1,10 @@
+在IP地址规划中，涉及到计算大量的IP地址，包括网段、网络掩码、广播地址、子网数、IP类型等
+Ipy模块可以很好的辅助我们高效的完成IP的规划工作。
+
+#!/usr/bin/env python
+import IPy
+ip = IPy.IP('192.168.0.0/16')
+print ip.len()    #输出192.168.0.0/16网段的ip数
+for x in ip:      #输出192.168.0.0/16网段的所有ip
+    print x
+
