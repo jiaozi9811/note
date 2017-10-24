@@ -1,0 +1,118 @@
+成员操作符(in,not in)
+>>>'bc' in 'abcd' 
+True
+>>>'n' in 'abcd' 
+False
+>>>'nm' not in 'abcd' 
+True
+
+连接符（+）
+
+只适用于字符串的操作符
+格式化操作符(%)
+    %c      转换成字符
+    %r      优先用repr()函数转换
+    %s      优先用str()转换
+    %d/%i   转换长有符号十进制数
+    %u      转换成无符号十进制数
+    %o      转换成无符号八进制数
+    %x/%X   装好成无符号十六进制数
+    %e/%E   转换成科学计数法
+    %f/%F   转换成浮点数
+    %g/%G   %e 和%f/%E 和%F 的简写
+    %%      输出%
+    
+    
+原始字符串操作符( r/R )
+>>> '\n'
+'\n'
+>>> print '\n'
+
+>>> r'\n'
+'\\n'
+>>> print r'\n'
+\n
+
+Unicode 字符串操作符( u/U )
+用来把标准字符串或者是包含Unicode 字符的字符串转换成完全地Unicode 字符串对象
+
+
+工厂函数
+cmp(obj1,obj2)    比较
+len(obj)          长度
+max(str)          返回最大的字符
+mix(str)          返回最小的字符
+enumerate(str)    根据顺序逐行打印
+zip()             zip('foa', 'obr')    [('f', 'o'), ('o', 'b'), ('a', 'r')]
+
+
+raw_input()       使用给定字符串提示用户输入并将这个输入返回
+
+str()
+unicode()
+chr()
+unichr()
+ord()
+
+
+相关模块
+  string        字符串操作相关函数和工具
+  re            正则表达式
+  struct        字符串和二进制之间转换
+  c/StringIO    字符串缓冲对象
+  base64        base16,32,64数据编码解码
+  codecs        解码器注册和基类
+  srypt         进行单方面加密
+  difflib       找出序列间的不同
+  hashlib       多种哈希算法和信息摘要算法的api
+  hma           hmac信息鉴权算法的python实现
+  md5           RSA 的MD5 信息摘要鉴权
+  rotor         提供多平台的加解密服务
+  sha           NIAT 的安全哈希算法SHA
+  stringprep    提供用于IP 协议的Unicode 字符串
+  testwrap      文本打包和填充
+  unicodedata   Unicode 数据库
+  
+  
+  
+string.capitalize()               把字符串的第一个字符大写
+string.center(width)              返回一个原字符串居中,并使用空格填充至长度width 的新字符串
+string.count(str, beg=0,end=len(string)) 返回str 在string 里面出现的次数，如果beg 或者end 指定则返回指定范围内str 出现的次数
+string.decode(encoding='UTF-8',errors='strict') 以encoding 指定的编码格式解码string，如果出错默认报一个ValueError 的异常， 除非errors 指定的是'ignore' 或者'replace'
+string.encode(encoding='UTF-8',errors='strict')a 以encoding 指定的编码格式编码string，如果出错默认报一个ValueError 的异常，除非errors 指定的是'ignore'或者'replace'
+string.endswith(obj, beg=0,end=len(string))b,e 检查字符串是否以obj 结束，如果beg 或者end 指定则检查指定的范围内是否以obj 结束，如果是，返回True,否则返回False.string.expandtabs(tabsize=8)把字符串string 中的tab 符号转为空格，默认的空格数tabsize 是8.
+string.find(str, beg=0,end=len(string)) 检测str 是否包含在string 中，如果beg 和end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1
+string.index(str, beg=0,end=len(string)) 跟find()方法一样，只不过如果str 不在string 中会报一个异常.
+string.isalnum()                  如果string 至少有一个字符并且所有字符都是字母或数字则返回True,否则返回False
+string.isalpha()                  如果string 至少有一个字符并且所有字符都是字母则返回True,否则返回False
+string.isdecimal()                如果string 只包含十进制数字则返回True 否则返回False
+string.isdigit()                  如果string 只包含数字则返回True 否则返回False
+string.islower()                  如果string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回True，否则返回False
+string.isnumeric()                如果string 中只包含数字字符，则返回True，否则返回False
+string.isspace()                  如果string 中只包含空格，则返回True，否则返回False.
+string.istitle()                  如果string 是标题化的(见title())则返回True，否则返回False
+string.isupper()                  如果string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回True，否则返回False
+string.join(seq)                  Merges (concatenates)以string 作为分隔符，将seq 中所有的元素(的字符串表示)合并为一个新的字符串
+string.ljust(width)               返回一个原字符串左对齐,并使用空格填充至长度width 的新字符串
+string.lower()                    转换string 中所有大写字符为小写.
+string.lstrip()                   截掉string 左边的空格
+string.partition(str)             有点像find()和split()的结合体,从str 出现的第一个位置起,把字符串string 分成一个3 元素的元组
+(string_pre_str,str,string_post_str),如果string 中不包含str 则string_pre_str == string.string.replace(str1, str2,num=string.count(str1))把string 中的str1 替换成str2,如果num 指定，则替换不超过num 次.
+string.rfind(str, beg=0,end=len(string))  类似于find()函数，不过是从右边开始查找.
+string.rindex( str, beg=0,end=len(string)) 类似于index()，不过是从右边开始.
+string.rjust(width)               返回一个原字符串右对齐,并使用空格填充至长度width 的新字符串
+string.rpartition(str)            类似于partition()函数,不过是从右边开始查找.
+string.rstrip()                   删除string 字符串末尾的空格.
+string.split(str="", num=string.count(str))   以str 为分隔符切片string，如果num有指定值，则仅分隔num 个子字符串
+string.splitlines(num=string.count('\n'))     按照行分隔，返回一个包含各行作为元素的列表，如果num 指定则仅切片num个行.
+string.startswith(obj, beg=0,end=len(string)) 检查字符串是否是以obj 开头，是则返回True，否则返回False。如果beg 和end 指定值，则在指定范围内
+string.strip([obj])             在string 上执行lstrip()和rstrip()
+string.swapcase()               翻转string 中的大小写
+string.title()                  返回"标题化"的string,就是说所有单词都是以大写开始，其余字母均为小写(见istitle())
+string.translate(str, del="")   根据str 给出的表(包含256 个字符)转换string 的字符,要过滤掉的字符放到del 参数中
+string.upper()                  转换string 中的小写字母为大写
+string.zfill(width)             返回长度为width 的字符串，原字符串string 右对齐，前面填充0
+
+
+
+
