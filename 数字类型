@@ -1,0 +1,39 @@
+整型
+长整型   用"L"表示长整型
+
+布尔值
+双精度浮点型
+十进制浮点型
+复数
+
+
+工厂函数
+bool(obj)     返回obj的布尔值
+int(obj,base=10)  返回obj的整数表示
+long(obj,base=10) 返回obj的长整数表示
+float(obj)        返回obj的浮点数表示
+complex(str)      返回一个字符串的复数表示
+complex(real,imag=0.0)  根据给定的实数,生产一个复数
+
+
+运算函数
+abs()       返回给定参数的绝对值
+coerce()    返回一个包含类型转换完毕的两个数值的元组
+divmod()    返回一个包含商和余数的元组
+pow()       先进行指数运算，然后将运算结果和第三个参数进行取余运算
+round()     对浮点数进行四舍五入运算
+
+仅用于整数的函数
+hex() 进制转换
+oct() 进制转换
+
+chr() 接受一个单字节整数,返回一个字符串
+ord() 与chr相反
+unichr  接受unicode码返回unicode字符
+
+相关模块
+  decimal
+  array
+  math/cmath
+  operator
+  random
