@@ -1,0 +1,29 @@
+成员关系操作符(in,not in)
+obj [not] in sequence   返回值是true/false
+
+序列操作符
+  seq[ind]        获得下标是ind的元素
+  seq[ind1:ind2]  获得下标从ind1到ind2间的元素集合
+  seq*expr        序列重复expr次
+  seq1+seq2       连接序列seq1和seq2
+  obj in seq      判断obj是否在seq中
+  obj not in seq
+  
+  
+工厂函数
+  list(iter)      把可迭代对象转换为列表
+  str(obj)        把obj转换为字符串
+  unicode(obj)    转换成unicode字符串
+  basestring()    
+  tuple(iter)     把可迭代对象转换成一个元组对象
+  
+  enumerate(iter)
+  len(seq)        返回seq的长度
+  max(iter,key=None
+  max(arg0,arg1...,key=None)
+  min(iter,key=None)
+  min(arg0,arg1...,key=None)
+  reversed(seq)
+  sorted(iter,func=None,key=None,reverse=False)
+  sum(seq,init=0)
+  zip([it0,it1,...,itN])
