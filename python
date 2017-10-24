@@ -4,6 +4,9 @@
 安装psutil
 需安装gcc python-devel beautifulsoup
 
+
+#!/usr/bin/env python
+
   os
   re    正则表达式
 
@@ -21,3 +24,150 @@
   pycurl      如同curl
   
   pexpect     如同expect
+
+
+主提示符  >>>     解释器在等待输入下一个语句
+次提示符  ...     解释器等待输入当前语句的其他部分
+
+_       最后一个表达式的值
+
+%s      由一个字符串替换
+%d      由一个整数替换
+%f      由一个浮点数替换
+
+>>      重定向输出
+
+raw_input()     读取标准输入
+
+int()           讲数值字符串转换成整数
+
+
+#       注释
+
+运算符
++ - * 
+/ 
+//  浮点除法(对结果四舍五入)
+%   取余
+**  乘方
+
+比较运算符
+<   <=    >   >=    ==    ！=    <>
+
+逻辑运算符
+and   or     not
+
+数据类型
+数字
+字符串
+列表
+元组
+字典
+
+
+数字类型
+  int       有符号整数
+  long      长整数
+  bool      布尔值
+  float     浮点数
+  complex   复数
+  
+  
+列表    用[]包裹,元素的个数及值可以改变
+元组    用()包裹,不可以更改,可以看成只读的列表
+字典    映射数据类型,用{}包裹
+
+
+if语句
+if expression:
+  if_suite
+elfi expression2:
+  elif_suite
+else:
+   else_suite
+    
+while循环
+while expression:
+  while_suite
+  
+for循环
+
+range()函数
+
+
+文件处理
+open()
+file()
+
+handle=open(file_name,access_mode='r')
+r 读取,默认
+w 写入
+a 添加
++ 读写
+b 二进制访问
+
+
+函数
+定义
+def function_name([arguments]):
+"optional documentation striong"
+function_suite
+
+
+类
+
+模块
+
+
+python内建函数
+dir()   显示对象的属性,如果没有提供参数,则显示全局变量名
+help()  
+int()   将一个对象转换为整数
+len()   返回对象的长度
+open(fn,mode) 以mode方式打开fn文件
+range([[start,]]stop[,step])  返回一个整数列表,以start开始,结束值为stop-1
+raw_input(str)  等待用户输入一个字符串
+str(obj)    将一个对象转换为字符串
+type(obj)   返回对象的类型
+isinstance()
+
+cmp(obj1,obj2)    比较obj1,obj2，如果obj1小于obj2，返回一个负数,如obj1大于obj2,返回一个整数
+repr()
+(``)反引号运算符
+
+
+工厂函数
+int()
+long()
+float()
+complex()
+str()
+unicode()
+basestring()
+list()
+tuple()
+type()
+
+dict()
+bool()
+set()
+frozenset()
+object()
+calssmethod()
+staticmethod()
+super()
+property()
+file()
+
+
+特殊字符
+#     注释
+\n    换行符
+\     继续上一行
+;     将两个语句连接在一行中
+:     将代码块的头和体分开
+
+
+__name__
+如果模块是被导入,__name__的值是模块名称
+如果模块是被直接执行,__name__的值是__main__
