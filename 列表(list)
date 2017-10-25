@@ -1,0 +1,22 @@
+创建
+  列表是由方括号([])来定义的
+  
+更新list  list[1]='obj1'   list[1]='obj2'
+删除list元素  list.remove(obj)
+删除list      del list[]
+
+成员关系操作符(in,not in)
+连接操作符(+)
+重复操作符(*)
+
+dir(list) or dir([])  得到list的所有方法和属性
+
+list.append(obj)          添加一个obj
+list.count(obj)           统计obj出现的次数
+list.extend(seq)          把序列seq的内容添加到list
+list.index(obj,i=0,j=len(list))   返回list[k] == obj 的k 值,并且k 的范围在 i<=k<j;否则引发ValueError 异常
+list.insert(index,obj)    在索引为index的位置插入obj
+list.pop(index=-1)        删除并返回指定位置的obj，默认是最后一个对象
+list.remove(obj)          删除obj
+list.reverse()            翻转列表
+list.sort(func=None,Key=None,reverse=False) 以指定的方式排序列表中的成员,如果func 和key 参数指定,则按照指定的方式比较各个元素,如果reverse 标志被置为True,则列表以反序排列
