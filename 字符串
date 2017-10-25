@@ -36,6 +36,8 @@ True
 Unicode 字符串操作符( u/U )
 用来把标准字符串或者是包含Unicode 字符的字符串转换成完全地Unicode 字符串对象
 
+三引号
+在三引号字符串中可以包含诸如换行回车或者tab 键这样的特殊字符.三引号字符串是用两边各三个单引号(''')或者两边各三个双引号(""")来定义的
 
 工厂函数
 cmp(obj1,obj2)    比较
@@ -73,7 +75,7 @@ ord()
   testwrap      文本打包和填充
   unicodedata   Unicode 数据库
   
-  
+string 模块已经停止了更新，只保留了ASCII 码的支持,string 模块已经不推荐使用,在任何需要跟Unicode 兼容的代码里都不要再用该模块，Python 保留该模块仅仅是为了向后兼容
   
 string.capitalize()               把字符串的第一个字符大写
 string.center(width)              返回一个原字符串居中,并使用空格填充至长度width 的新字符串
