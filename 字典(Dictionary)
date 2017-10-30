@@ -1,0 +1,32 @@
+创建
+dict1={'key':'value','key':'value','key':'value','key':'value'}
+dict2=dict((['key','value'],['key','value'],['key','value']))
+
+访问
+for key in dict1[.keys()]:
+  print 'key=%s,value=%s' % (key,dict1[key])
+  
+删除字典中的元素
+  dict.pop('key')
+  del dict['key']
+  
+  dict.clear()      清空字典
+
+
+成员关系操作(in, not in)
+dict函数
+    clear
+    copy
+    fromkeys
+    get
+    has_key
+    items
+    iteritems
+    iterkeys
+    itervalues
+    keys
+    pop
+    popitem
+    setdefault
+    update
+    values
