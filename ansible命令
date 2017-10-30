@@ -1,0 +1,42 @@
+帮助 
+  ansible-doc copy[file][shell][command][template][yum][service][file][yum-repository][user][anthorzied_key][cron][debug][archive][unarchive][get_url][wait_for][script]
+
+
+ansible命令
+  -a MODULE_ARGS, --args=MODULE_ARGS    传递参数给模块
+  --ask-vault-pass          询问vault的密码
+  -D, --diff                当文件或模板发生了改变，显示出不同之处，和-C选项配合使用更佳
+  -i INVENTORY, --inventory-file=INVENTORY      指定inventory文件，多个文件使用逗号分隔。默认为/etc/ansible/hosts
+  --list-hosts              列出匹配到的主机列表
+  -m MODULE_NAME, --module-name=MODULE_NAME     指定要执行的模块名，默认的模块为"command"
+  -M MODULE_PATH, --module-path=MODULE_PATH     指定模块目录，默认未设置
+  -o, --one-line            简化输出(一行输出模式)
+  --output=OUTPUT_FILE  output file name for encrypt or decrypt; use - for stdout
+  --syntax-check            检查playbook的语法，不会执行
+  -v, --verbose             输出详细信息，-vvv和-vvvv会输出更多新
+  
+以下是连接选项，用于控制谁以及如何连接主机
+  -k, --ask-pass            询问连接时的密码
+  --private-key=PRIVATE_KEY_FILE, --key-file=PRIVATE_KEY_FILE         使用文件来认证SSH连接过程
+  -u REMOTE_USER, --user=REMOTE_USER                使用指定的用户名进行连接
+  -c CONNECTION, --connection=CONNECTION            -c CONNECTION, --connection=CONNECTION
+  -T TIMEOUT, --timeout=TIMEOUT                     连接的超时时间，单位为秒，默认为10
+  --ssh-common-args=SSH_COMMON_ARGS                 指定传递给sftp/scp/ssh等工具的通用额外参数
+  -sftp-extra-args=SFTP_EXTRA_ARGS                  指定只传递给sftp的额外参数，如-f
+  --scp-extra-args=SCP_EXTRA_ARGS                   指定只传递给scp的额外参数，如-l
+  --ssh-extra-args=SSH_EXTRA_ARGS                   指定只传递给ssh的额外参数，如-R
+  
+  
+以下是权限控制选项：控制在目标主机上以什么身份和权限运行任务
+  -b, --become                    使用become的方式升级权限 
+  --become-method=BECOME_METHOD   指定提升权限的方式，可选以下几种：sudo/su/pbrun/pfexec/doas/dzdo/ksu/runas值
+  --become-user=BECOME_USER       要提升为哪个user的权限，默认为root
+  -K, --ask-become-pass           询问become提升权限时的密码
+  
+
+  -s, --sudo                    为运行ansible命令的用户提升权限为sudo_user的权限，此命令已废弃，使用become代替
+  -U SUDO_USER, --sudo-user=SUDO_USER       期望的sudo_user，默认为root，已废弃，使用become替代
+  -S, --su                      使用su的方式执行操作，已废弃，使用become替代
+  -R SU_USER, --su-user=SU_USER   使用此user的su执行操作，默认为root，已废弃，使用become替代
+  --ask-sudo-pass                 询问sudo密码，已废弃，使用become替代
+  --ask-su-pass                   询问su的密码，已废弃，使用become替代
