@@ -1,0 +1,291 @@
+帮助 
+    ansible-doc copy[file][shell][command][template][yum][service][file][yum-repository][user][anthorzied_key][cron][debug][archive][unarchive][get_url][wait_for][script]
+    
+ansible-doc -l        所有模块
+ansible-doc [-s]      查看模块的用法
+
+关于模块的使用方法，需要注意的是"state"。很多模块都会有该选项，且其值几乎都包含有"present"和"absent"，表示肯定和否定的意思
+
+----------------------------------------------------------------------------------
+shell和command
+默认使用的模块是command，即可以执行一些shell命令。shell和command的用法基本一样，实际上shell模块执行命令的方式是在远程使用/bin/sh来执行的，如/bin/sh ping
+command不能解析变量(如$HOME)和某些操作符("<", ">", "|", ";"以及"&")，所以明确要使用这些不可解析的操作符时，使用shell模块来代替command
+
+ansible-doc -s shell
+- name: Execute commands in nodes.
+  action: shell
+      chdir       # 在执行命令前，先cd到指定的目录下
+      creates     # 用于判断命令是否要执行。如果指定的文件(可以使用通配符)存在，则不执行。
+      removes     # 用于判断命令是否要执行。如果指定的文件(可以使用通配符)不存在，则不执行。
+      
+----------------------------------------------------------------------------------
+copy
+ansible-doc -s copy
+- name: Copies files to remote locations.
+  action: copy
+    backup=[yes|no]   # 拷贝的同时也创建一个包含时间戳信息的备份文件，默认为no
+    dest=             # 目标路径，只能是绝对路径，如果拷贝的文件是目录，则目标路径必须也是目录
+    content           # 直接以content给定的字符串或变量值作为文件内容保存到远程主机上，它会替代src选项
+    directory_mode    # 当对目录做递归拷贝时，设置了directory_mode将会使得只拷贝新建文件，
+                      # 旧文件不会被拷贝。默认未设置
+    follow=[yes|no]   # 是否追踪到链接的源文件。
+    force=[yes|no]    # 设置为yes(默认)时，将覆盖远程同名文件。设置为no时，忽略同名文件的拷贝。
+    group             # 设置远程文件的所属组
+    owner             # 设置远程文件的所有者
+    mode=             # 设置远程文件的权限。使用数值表示时不能省略第一位，如0644。
+                      # 也可以使用'u+rwx'或'u=rw,g=r,o=r'等方式设置。
+    src=              # 拷贝本地源文件到远程，可使用绝对路径或相对路径。如果路径是目录，且目录后加了
+                      # 斜杠"/"，则只会拷贝目录中的内容到远程，如果目录后不加斜杠，则拷贝目录本身和
+                      # 目录内的内容到远程。
+                      
+默认情况下，ansible copy会检查文件md5查看是否需要拷贝，相同则不会拷贝，否则会拷贝。如果设置force=yes，则当文件md5不同时(即文件内容不同)才覆盖拷贝，设置force=no时，则只拷贝对方没有的文件
+如果拷贝的是目录，则目标路径必须是目录路径。如果使用"/"结尾，则拷贝的是目录中的文件，如果不以斜杠结尾，则拷贝的是目录加目录中的文件
+
+----------------------------------------------------------------------------------
+template               template模块用法和copy模块用法基本一致，它主要用于复制配置文件
+ansible-doc -s template
+- name: Templates a file out to a remote server.
+  action: template
+      backup    # 拷贝的同时也创建一个包含时间戳信息的备份文件，默认为no
+      dest=     # 目标路径
+      force     # 设置为yes (默认)时，将覆盖远程同名文件。设置为no时，忽略同名文件的拷贝
+      group     # 设置远程文件的所属组
+      owner     # 设置远程文件的所有者
+      mode      # 设置远程文件的权限。使用数值表示时不能省略第一位，如0644。
+                # 也可以使用'u+rwx' or 'u=rw,g=r,o=r'等方式设置
+      src=      # ansible控制器上Jinja2格式的模板所在位置，可以是相对或绝对路径
+      validate  # 在复制到目标主机后但放到目标位置之前，执行此选项指定的命令。
+                # 一般用于检查配置文件语法，语法正确则保存到目标位置。
+                # 如果要引用目标文件名，则使用%s，下面的示例中的s%即表示目标机器上的/etc/nginx/nginx.conf。
+
+----------------------------------------------------------------------------------          
+file            管理文件、目录的属性，也可以创建文件或目录
+ansible-doc -s file
+- name: Sets attributes of files
+  action: file
+      group       # file/directory的所属组
+      owner       # file/directory的所有者
+      mode        # 修改权限，格式可以是0644、'u+rwx'或'u=rw,g=r,o=r'等
+      path=       # 指定待操作的文件，可使用别名'dest'或'name'来替代path
+      recurse     # (默认no)递归修改文件的属性信息，要求state=directory
+      src         # 创建链接时使用，指定链接的源文件
+      state       # directory:如果目录不存在则递归创建
+                  # file:文件不存在时，不会被创建(默认值)
+                  # touch:touch由path指定的文件，即创建一个新文件，或修改其mtime和atime
+                  # link:修改或创建软链接
+                  # hard:修改或创建硬链接
+                  # absent:目录和其中的文件会被递归删除，文件或链接将取消链接状态
+                  
+                  
+----------------------------------------------------------------------------------
+yum
+ansible-doc -s yum
+- name: Manages packages with the `yum' package manager
+  action: yum
+    disable_gpg_check   # 安装包时禁止gpgcheck，仅在state=present或latest时生效。
+    disablerepo         # 禁用指定的repoid，多个repoid使用逗号分隔。
+    enablerepo          # 明确使用该repoid
+    exclude             # 排除哪些包不安装，仅在state=present或latest时生效。
+    list                # 类似于yum list
+    name=               # 指定安装的包名，可带上版本号.
+    state               # 状态。('present'、'installed','latest')用于安装包，
+                        # ('absent'、'removed')用于移除已安装包。
+    update_cache        # 强制更新yum的cache。
+    
+name需要配合state来使用，如果state指定为present/installed/latest将安装包，其中latest是安装最新包，默认为present。如果指定为absent/removed则用于卸载包
+在ansible中，很多地方都会出现present和absent的状态，它们一般都表示目标是否应该存在还是不存在，也就是要进行的动作是创建和删除
+
+----------------------------------------------------------------------------------
+yum_repository           用于配置yum源。可以实现非常完整的yum仓库配置。但是一般只需简单的添加yum源即可
+ansible-doc -s yum_repository
+- name: Add or remove YUM repositories
+  action: yum_repository
+      baseurl      # 地址
+      mirrorlist   # 设置mirrorlist地址
+      description  # 描述信息
+      enabled      # 是否启用该仓库，默认为yes
+      file         # 保存此仓库的文件，不设置该项的话则默认以name选项中的名称命名，将自动以".repo"后缀结尾。
+      gpgcheck     # 是否要进行gpgcheck
+      name=        # 仓库的名称，要保证名称的唯一性
+      reposdir     # 保存.repo文件的目录，默认/etc/yum.repos.d/
+      state        # repo文件的状态，present/absent，默认present。
+
+----------------------------------------------------------------------------------
+service            服务管理模块
+ansible-doc -s service
+- name: Manage services.
+  action: service
+      enabled   # 设置服务为开机自启动，默认为no
+      name=     # 服务名
+      state     # 'started'和'stoped'分别启动和停止服务，它们是幂等操作，多次启动或停止服务的结果是一样的，
+                # 也就是说对于运行中的服务不会再执行启动操作，同理停止也是一样。'restarted'总是重启服务，
+                # 'reloaded'总是重读配置文件，如果服务是未运行状态，则'reloaded会启动服务。
+                # (state和enabled两者至少要给一个)
+----------------------------------------------------------------------------------
+user            用户管理模块,同理还有组管理模块group
+ansible-doc -s user
+- name: Manage user accounts
+  action: user
+      name=            # 要创建、修改、移除的用户名。
+      password         # 设置用户密码。此处只能使用加密密码作为值。
+      system           # 设置为yes表示创建一个系统用户，只能用于创建，不能用于修改已有用户为系统用户。
+      state            # 创建用户(present)还是删除用户(absent)。默认为present。
+      createhome       # 创建家目录，或者已有的用户但家目录不存在也会创建。设置为no则不创建家目录。
+      home             # 指定要创建的家目录路径
+      move_home        # 如果设置为yes，则"home="则表示将家目录移动到此选项指定的路径下。
+      uid              # 设置用户的uid
+      group            # 设置用户的primary group
+      groups           # 将用户加入到辅助组列表中。如果设置"groups="，则会将此用户从所有辅助组中移除。
+      shell            # 设置用户的shell。
+      force            # 配合'state=absent'时，等价于'userdel --force'，即强制删除用户、家目录和邮件列表。
+      remove           # 配合'state=absent'时，等价于'userdel --remove'，即删除家目录和邮件列表。
+      update_password  # user是幂等模块，"always"将总是修改密码。"on_create"将只在创建用户时设置密码。
+----------------------------------------------------------------------------------
+cron                    cron模块用于设置定时任务，也用于管理定时任务中的环境变量
+ansible-doc -s cron
+- name: Manage cron.d and crontab entries.
+  action: cron
+      backup         # (yes/no)如果设置了，则会在修改远程cron_file前备份这些文件
+      cron_file      # 自定义cron_file的文件名，使用相对路径则表示在/etc/cron.d中。必须同时指定user选项
+      user           # 指定哪个用户的crontab将要被修改，默认为root
+      disabled       # 禁用crontab中的某个job，要求state=present
+      env            # (yes/no)设置一个环境变量，将添加在crontab的顶端。使用name和value定义变量名和值
+      job            # 需要执行的命令。如果设置了env，则表示环境变量的值，此时job="XXXX"等价于value="XXXX"。
+                     # 要求state=present
+      minute         # 分(0-59, *, */N)，不写时，默认为*
+      hour           # 时(0-23, *, */N)，不写时，默认为*
+      day            # 日(1-31, *, */N)，不写时，默认为*
+      month          # 月(1-12, *, */N)，不写时，默认为*
+      weekday        # 周(0-6 for Sunday-Saturday, *)，不写时，默认为*
+      name           # 描述crontab任务的字符串。但如果设置的是env，则name为环境变量的名称。要求state=absent
+                     # 注意，若未设置name，且state=present，则总会创建一个新job条目，即使cron_file中已经存在
+                     # 同样的条目
+      special_time   # 定时任务的别称，用于定义何时运行job条目。
+                     # 有效值有reboot/hourly/daily/weekly/monthly/yearly/annually。
+      state          # job或者env的状态是present(默认)还是absent。present用于创建，absent用于移除
+----------------------------------------------------------------------------------
+cronvar                 定义定时任务的环境变量
+ansible-doc -s cronvar
+- name: Manage variables in crontabs
+  action: cronvar
+      backup        # (yes/no)如果设置了，则会在修改远程cron_file前备份这些文件
+      cron_file     # 自定义cron_file的文件名，使用相对路径则表示在/etc/cron.d中
+      state         # present用于创建变量，absent用于移除变量
+      user          # 指定哪个用户的crontab将要被修改，默认为root
+      value         # 环境变量的值，要求state=present
+----------------------------------------------------------------------------------
+archive              归档模块   用于在远端压缩文件。当然，前提是在远端主机上要有对应的压缩工具。支持zip/gz/tar/bz2
+ansible-doc -s archive 
+- name: Creates a compressed archive of one or more files or trees.
+  action: archive
+      dest         # 目标归档文件名。除非path指定要压缩的是单文件，否则需要dest选项
+      format       # 指定压缩格式，默认为gz格式
+      group        # 文件/目录的所属组
+      owner        # 文件/目录的所有者
+      mode         # 设置文件/目录的的权限，支持'0644'或'u+rwx'或'u=rw,g=r,o=r'等格式
+      path=        # 要压缩的文件，可以是绝对路径，也可以是glob统配的路径，还可以是文件列表
+      remove       # 压缩后删除源文件
+----------------------------------------------------------------------------------
+unarchive                解包模块
+默认复制ansible端的归档文件到被控主机，然后在被控主机上进行解包。如果设置选项remote_src=yes，则表示解包被控主机上的归档文件
+要求在被控主机上有对应的解包命令。unzip命令用于解压".zip"文件，gtar(tar包提供)命令用于解压".tar"、".tar.gz"、".tar.bz2"和".tar.xz"
+ansible-doc -s unarchive
+- name: Unpacks an archive after (optionally) copying it from the local machine.
+  action: unarchive
+      creates      # 如果指定的文件存在则不执行该任务。可用于实现幂等性
+      dest=        # 远程机器上需要被解包的归档文件，要求是绝对路径
+      exclude      # 列出解包过程中想要忽略的目录和文件
+      group        # 文件/目录的所属组
+      owner        # 文件/目录的所有者
+      mode         # 设置文件/目录的的权限，支持'0644'或'u+rwx'或'u=rw,g=r,o=r'等格式
+      keep_newer   # 在解包过程中，如果目标路径中和包中有同名文件，且比包中的文件更新，则保留新的文件
+      list_files   # 设置为true时，将返回归档文件中的文件列表
+      remote_src   # 设置为yes表示远程主机上已有目标归档文件，即不再从本地复制归档文件到远端，直接在远端解包。
+                   # 默认为no
+      src=         # 如果remote_src=no,将复制本地归档文件到远端，可相对路径也可绝对路径. 
+                     如果remote_src=yes, 将解包远程已存在的归档文件
+                     如果remote_src=yes且src中包含了"://",将指挥远程主机从url中下载文件并解包
+----------------------------------------------------------------------------------
+script
+script模块用于控制远程主机执行脚本。在执行脚本前，ansible会将本地脚本传输到远程主机，然后再执行。在执行脚本的时候，其采用的是远程主机上的shell环境
+ansible-doc -s script
+- name: Runs a local script on a remote node after transferring it
+  action: script
+      chdir         # 在远程执行脚本前先切换到此目录下。
+      creates       # 当此文件存在时，不执行脚本。可用于实现幂等性。
+      removes       # 当此文件不存在时，不执行脚本。可用于实现幂等性。
+      free_form=    # 本地待执行的脚本路径、选项、参数。之所以称为free_form，是因为它是脚本名+选项+参数
+ 
+ 
+例如，将ansible端/tmp/a.sh发送到各被控节点上执行，但如果被控节点的/tmp下有hello.txt，则不执行。
+
+---
+    - hosts: centos
+      remote_user: root
+      tasks:
+        - name: execute /tmp/a.sh,but only /tmp/hello.txt is not yet created
+          script: /tmp/a.sh hello
+          args:
+            creates: /tmp/hello.txt
+----------------------------------------------------------------------------------
+get_url                 下载模块
+ansible-doc -s get_url
+- name: Downloads files from HTTP, HTTPS, or FTP to node
+  action: get_url
+      backup    # 下载文件时同时创建一个名称中包含时间戳的备份文件
+      dest=     # 文件保存路径，必须为绝对路径。
+                # 如果dest是一个目录，则使用url的base name作为文件名
+                # 如果dest是一个目录，则'force'选项不生效
+                # 如果dest是一个目录，则总是会下载目标文件，但只在已存在的文件变化了才会替换旧文件
+      force     # 如果设置为yes，且dest不是一个目录时，则总是会下载文件，但只在已存在的文件变化了才会替换旧文件
+                # 如果设置为no(默认)，则只会在目录路径下不存在该文件时才会进行下载。
+      tmp_dest  # 下载时临时存放目录，在任务执行完成前会删除下载的临时文件
+      group     # 文件/目录的所属组
+      owner     # 文件/目录的所有者
+      mode      # 设置文件/目录的的权限，支持'0644'或'u+rwx'或'u=rw,g=r,o=r'等格式
+      timeout   # 请求url时的超时时间，默认10秒钟
+      url=      # 要下载的url路径，(http|https|ftp)://[user[:pass]]@host.domain[:port]/path
+                # 还支持file格式的路径，实现复制功能。file:///path/to/file
+----------------------------------------------------------------------------------
+wait_for
+有些时候任务之间对状态、文件、端口等资源是有依赖关系的，只有满足了前提，任务才会继续。wait_for模块就是用于判断任务在满足什么条件的情况下会继续。主要用来判断端口是否开启、文件是否存在、文件中是否存在某些字符串
+ansible-doc -s wait_for
+- name: Waits for a condition before continuing.
+  action: wait_for
+      delay          # 在检查操作进行之前等待的秒数
+      host           # 等待这个主机处于启动状态，默认为127.0.0.1
+      port           # 等待这个端口已经开放
+      path           # 这个文件是否已经存在
+      search_regex   # 在文件中进行正则匹配
+      state          # present/started/stopped/absent/drained.默认started
+                       当检查的是一个端口时：
+                         started:保证端口是开放的 
+                         stopped:保证端口是关闭的
+                        当检查的是一个文件时：
+                         present/started:在检查到文件存在才会继续
+                         absent:检查到文件被移除后才会继续
+      sleep          # 两次检查之间sleep的秒数，默认1秒
+      timeout        # 检查的等待超时时间(秒数，默认300)
+----------------------------------------------------------------------------------
+
+authorzied_key
+ansible-doc -s authorized_key
+- name: Adds or removes an SSH authorized key
+  action: authorized_key
+    key=        # 公钥路径，可以是本地文件，可以是url地址。
+                # 本地文件时使用{{ lookup('file', '~/.ssh/id_rsa.pub') }}，
+                # url使用https://github.com/username.keys。
+    manage_dir  # 是否创建或修改目标authorized_keys所在目录的所有者和权限。默认为yes。
+                # 使用自定义的目标路径时，必须设置为no或false
+    path        # authorized_keys所在的目录，默认为家目录下的.ssh目录中
+    state       # present/absent，是否将密钥添加到目标authorized_keys文件中。
+    user=       # 添加到远程哪个用户下的authorized_keys文件
+----------------------------------------------------------------------------------
+debug           用于输出自定义的信息，类似于echo、print等输出命令。ansible中的debug主要用于输出变量值、表达式值，以及用于when条件判断时。使用方式非常简单
+ansible-doc -s debug
+- name: Print statements during execution
+  action: debug
+      msg        # 输出自定义信息。如果省略，则输出普通字符。
+      var        # 指定待调试的变量。只能指定变量，不能指定自定义信息，且变量不能加{{}}包围，而是直接的变量名。
+      verbosity  # 控制debug运行的调试级别，有效值为一个数值N。
+----------------------------------------------------------------------------------
