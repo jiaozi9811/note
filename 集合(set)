@@ -1,0 +1,53 @@
+集合是一组无序排列的可哈希的值   集合成员可作为字典的键
+    可变集合 set  不可修改
+    不可变集合 frozenset
+    
+通过集合(sets)模块创建,通过ImmutableSet类和Set类访问
+
+
+操作符
+    in
+    not in 
+    ==  
+    !=  
+    <   子集
+    <=
+    >   超集
+    >=
+    &   交集
+    |   合集(联合)
+    -   差补或对称补集
+    ^   对称差分
+    |=
+    &=
+    -=
+    ^=
+    
+创建
+  set1=set('shop')
+  set2=frozenset('shop')
+  
+添加
+  set2.add(obj)
+  set2.update(obj)   |=  相同
+  
+移除  
+  set2.remove(obj)
+  set2 -=set(obj)
+  
+  
+方法
+    s.issubser(t)         如s是t的子集 返回true
+    s.issuperset(t)       如t是s的超集 返回true
+    s.union(t)            返回s和t的并集
+    s.intersection(t)     返回s和t的交集
+    s.difference(t)       返回一个新集合 此集合是s的成员  不是t的成员
+    s.symmetric_difference(t) 是s或t的成员 但不是s和t的共有成员
+    s.copy()              s的浅复制
+    
+    len(t)
+    s.add(obj)            添加
+    s.remove()            删除
+    s.discard()           删除
+    s.pop()               删除
+    s.clear()             清空
