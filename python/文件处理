@@ -1,3 +1,7 @@
 内建函数
     open()
     file()
+
+file_object=open(file_name,access_mode='r',buffering=-1)
+        access_mode     文件打开的模式 r w a(追加) U(通用换行符支持)||使用r或U打开的文件必须存在||使用w打开的文件若存在则首先清空然后(重新)创建
+        buffering       指示访问文件所采用的缓冲方式 0表示不缓冲 1表示只缓冲一行数据 其它大于1的值代表使用给定值作为缓冲区大小. 不提供该参数或者给定负值代表使用系统默认缓冲机制
