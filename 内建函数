@@ -1,0 +1,56 @@
+所谓工厂函数就是指这些内建函数都是类对象， 当你调用它们时，实际上是创建了一个类实例
+
+以Python2.7.5版本为例，其所有的内建函数如下表所示：
+abs()           divmod()            input()           open()            staticmethod()
+all()           enumerate()	        int()	            ord()	            str()
+any()         	eval()	            isinstance()	    pow()	            sum()
+basestring()  	execfile()        	issubclass()	    print()	          super()
+bin()         	file()             	iter()          	property()      	tuple()
+bool()	        filter()	          len()	            range()	          type()
+bytearray()	    float()	            list()	          raw_input()	      unichr()
+callable()	    format()	          locals()	        reduce()	        unicode()
+chr()	          frozenset()	        long()	          reload()	        vars()
+classmethod()	  getattr()         	map()	            repr()	          xrange()
+cmp()	          globals()	          max()	            reversed()	      zip()
+compile()	      hasattr()	          memoryview()	    round()	          __import__()
+complex()	      hash()	            min()	            set()	            apply()
+delattr()	      help()	            next()	          setattr()	        buffer()
+dict()	        hex()	              object()	        slice()	          coerce()
+dir()	          id()	              oct()	            sorted()	        intern()
+
+工厂函数： 
+int()
+long()
+float()
+complex()
+bool() 
+str()
+unicode()
+basestring() 
+list()
+tuple()：生成列表或者元组 
+type()：查看类型 
+dict()：生成一个字典 
+set(): 生产可变集合 
+frozenset()：生成不可变集合 
+object() 
+classmethod()：声明一个类方法 
+staticmethod()：声明一个静态方法 
+super()： 指此类的父类 
+property() 
+file()
+
+
+
+
+
+range()内建函数
+  range(start,end,step=1)
+  
+>>> range(2, 19, 3)       [2, 5, 8, 11, 14, 17]  
+>>> range(3, 7)           [3, 4, 5, 6]
+>>> range(5)              [0, 1, 2, 3, 4]
+
+xrange() 不占用内存
+
+sorted()      排序
