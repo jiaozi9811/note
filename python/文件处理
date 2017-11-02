@@ -21,3 +21,15 @@ file_object=open(file_name,access_mode='r',buffering=-1)
     rb+ 以二进制读写模式打开 (参见 r+ )
     wb+ 以二进制读写模式打开 (参见 w+ )
     ab+ 以二进制读写模式打开 (参见 a+ )
+
+
+file()
+file()和open()函数具有相同的功能, 可以任意替换.任何使用open()的地方,都可以使用file()替换它
+
+一般说来, 建议使用open()来读写文件, 在您想说明您在处理文件对象时使用file(), 例如 if instance(f, file)
+
+处理方法
+    输入
+    输出
+    文件内移动
+    其他
