@@ -47,7 +47,7 @@ file()和open()函数具有相同的功能, 可以任意替换.任何使用open(
     
 移动
     seek()          在文件中移动文件指针到不同的位置
-    text()          文件指针在文件中的位置
+    tell()          文件指针在文件中的位置
     
 其他
     close()
@@ -55,3 +55,47 @@ file()和open()函数具有相同的功能, 可以任意替换.任何使用open(
     flush()         把内部缓冲区中的数据立刻写入文件
     isatty()        是一个布尔内建函数, 当文件是一个类 tty 设备时返回 True , 否则返回False
     truncate()      将文件截取到当前文件指针位置或者到给定 size , 以字节为单位
+
+内建
+file.close()      方法  关闭文件
+file.fileno()       返回文件的描述符(file descriptor ,FD, 整数值)
+file.flush()        刷新文件的内部缓冲区
+file.isatty()       判断 file 是否是一个类 tty 设备
+file.nexta()        返回文件的下一行(类似于file.readline() ), 或在没有其它行时引发 StopIteration 异常
+file.read(size=-1)  从文件读取 size 个字节, 当未给定 size 或给定负值的时候, 读取剩余的所有字节, 然后作为字符串返回
+file.readintob(buf, size)   从文件读取 size 个字节到 buf 缓冲器(已不支持)
+file.readline(size=-1) 从文件中读取并返回一行(包括行结束符), 或返回最大 size个字符
+file.readlines(sizhint=0) 读取文件的所有行并作为一个列表返回(包含所有的行结束符); 如果给定 sizhint 且大于 0 , 那么将返回总和大约为sizhint 字节的行(大小由缓冲器容量的下一个值决定）（ 比如说缓冲器的大小只能为4K 的倍数，如果sizhint 为15k，则最后返回的可能是16k———译者按)
+file.xreadlinesc()  用于迭代, 可以替换 readlines() 的一个更高效的方法
+file.seek(off, whence=0)    在文件中移动文件指针, 从 whence ( 0 代表文件其始, 1 代表当前位置, 2 代表文件末尾)偏移 off 字节
+file.tell()         返回当前在文件中的位置
+file.truncate(size=file.tell()) 截取文件到最大 size 字节, 默认为当前文件位置
+file.write(str)     向文件写入字符串
+file.writelines(seq) 向文件写入字符串序列 seq ; seq 应该是一个返回字符串的可迭代对象; 在 2.2 前, 它只是字符串的列表
+
+
+内建属性
+file.closed True    表示文件已经被关闭, 否则为 False
+file.encodinga      文件所使用的编码 - 当 Unicode 字符串被写入数据时, 它们将自动使用 file.encoding 转换为字节字符串; 若file.encoding 为 None 时使用系统默认编码
+file.mode           文件打开时使用的访问模式
+file.name           文件名
+file.newlinesa      未读取到行分隔符时为 None , 只有一种行分隔符时为一个字符串, 当文件有多种类型的行结束符时，则为一个包含所有当前所遇到的行结束符的列表
+file.softspace      为0 表示在输出一数据后，要加上一个空格符，1 表示不加。这个属性
+
+
+有助于跨平台开发的os模块属性
+    linesep         用于在文件中分隔行的字符串
+    sep             用于分隔文件路径名的字符串
+    pathsep         用于分隔文件路径的字符串
+    curdir          当前工作目录的字符串名称
+    pardir          (当前工作目录)父目录字符串名称
+    
+
+标准输出    sys.stdin
+标准输入    sys.stdout
+标准错误    sys.stderr
+
+
+命令行参数   
+    sys.argv        是命令行参数的列表   $#
+    len(sys.argv)   是命令行参数的个数   $#
