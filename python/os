@@ -57,3 +57,11 @@ shutil.rmtree("dir")    删除空目录
 os.chdir("path")        空目录、有内容的目录都可以删
 
 
+标准输出    sys.stdin
+标准输入    sys.stdout
+标准错误    sys.stderr
+
+
+命令行参数   
+    sys.argv        是命令行参数的列表   $#
+    len(sys.argv)   是命令行参数的个数   $#
