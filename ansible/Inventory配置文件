@@ -1,0 +1,26 @@
+作用
+　　Ansible 可以在同一时间针对多个系统设施进行管理工作。它通过选择Ansible 资源清单文件中列出的系统，该清单文件默认是在/etc/ansible/hosts，也可以使用 -i <path> 进行路径的指定。文件内的格式INI 风格，中括号内为分组名。 除了这个文件之后，还可以同时使用多个清单文件，可以动态的获取，也可以从外部获取外部库存清单文件。云平台上去拉取（如AWS，或者Cobbler 的API结合）
+  
+Inventory清单参数列表
+1.主机连接：
+    ansible_connection：连接主机的类型，这里可以是ansible连接插件的名称中的一个，如ssh 协议中的 smart，ssh或者paramiko。默认值是smart。
+
+2.ssh 连接
+    ansible_host：使用主机的名称去连接，可以使用别名
+    ansible_port：如果默认不是22的话，要定义ssh的端口号
+    ansible_user：默认ssh连接用户
+    ansible_ssh_pass：默认ssh 连接的passwd（不要在这里出现明文密码，而是要使用vault）
+    ansible_ssh_private_key_file：连接时使用私钥文件。如果不想使用ssh代理的话，可以有多个密钥
+    ansible_ssh_common_args：该设置将总是为sftp,scp,ssh附加到命令行，可用于为某个主机或组配置ProxyCommand
+    ansible_sftp_extra_args：该设置将sftp附加到命令行
+    ansible_scp_extra_args：该设置将scp附加到命令行
+    ansible_ssh_extra_args：该设置将ssh附件到命令行
+    ansible_ssh_pipelining：决定是否使用ssh 管道，它将覆盖ansible.cfg中的pipelining设置
+    2.2版本后的特性.
+    ansible_ssh_executable：这个设置将覆盖使用系统ssh的默认行为。它将覆盖ansible.cfg中的ssh_executable设置
+    
+使用特权命令（如sudo）
+    ansible_become：允许升级权限，相当于 ansible_sudo 或者 ansible_su
+    ansible_become_method：允许设置特殊权限的方法
+    ansible_become_user：允许设置特殊权限的用户，相当于 ansible_sudo_user 或者 ansible_su_user
+    ansible_become_pass：允许设置特殊权限的密码（不要在这里直接输入明文），相当于 ansible_sudo_pass 或者 ansible_su_pass
