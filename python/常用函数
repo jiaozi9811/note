@@ -1,0 +1,7 @@
+string.endswith(str, beg=[0,end=len(string)])
+string.search(pattern, string, flags=0)                 在一个字符串中查找匹配
+string.findall(pattern, string ,flags=0)                找到匹配，返回所有匹配部分的列表
+string.sub(pattern, repl, string , count=0, flags=0)    将字符串中匹配正则表达式的部分替换为其他值
+string.split(pattern, string ,maxsplit=0, flags=0)      根据匹配分割字符串，返回分隔符串组成的列表
+
+
