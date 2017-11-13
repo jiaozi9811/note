@@ -1,0 +1,15 @@
+pydoc是Python自带的模块，主要用于从python模块中自动生成文档，这些文档可以基于文本呈现的、也可以生成WEB 页面的，还可以在服务器上以浏览器的方式呈现
+
+用法
+Windows     python -m pydoc <modulename>
+
+Linux       pydoc <modulename>
+
+
+参数
+    -p    在本地机器上，按照给定的端口启动HTTP  python -m pydoc -p 1234 
+    -k    在所有可用的模块中按关键字搜索
+    -w    将指定模块的文本字符串生成HTML格式 python -m pydoc math -w math.html
+
+python -m pydoc -p 1234 
+pydoc server ready at http://localhost:1234
