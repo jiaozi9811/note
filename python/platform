@@ -1,0 +1,16 @@
+platform.platform()   #获取操作系统名称及版本号，'Windows-7-6.1.7601-SP1'
+platform.version()    #获取操作系统版本号，'6.1.7601'
+platform.architecture()   #获取操作系统的位数，('32bit', 'WindowsPE')
+platform.machine()    #计算机类型，'x86'
+platform.node()       #计算机的网络名称，'hongjie-PC'
+platform.processor()  #计算机处理器信息，'x86 Family 16 Model 6 Stepping 3, AuthenticAMD'
+platform.uname()      #包含上面所有的信息汇总
+
+
+platform.python_build()
+platform.python_compiler()
+platform.python_branch()
+platform.python_implementation()
+platform.python_revision()
+platform.python_version()
+platform.python_version_tuple()
