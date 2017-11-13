@@ -1,0 +1,6 @@
+
+platform.platform().split("-")[6].lower()   系统信息
+platform.platform().split("-")[7]           系统版本
+
+socket.gethostbyname(socket.gethostname())  获取ip
+socket.gethostname()                        获取主机名
