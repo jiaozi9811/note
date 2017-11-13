@@ -10,3 +10,15 @@ python交互解释器中使用help()      help("modules")
     yolk -a    #列出激活的模块
     yolk -n    #列出非激活模块
     yolk -U [packagename]  # 通过查询pypi来查看（该）模块是否有新版本
+
+
+切割
+split()[]
+
+大小写
+    upper() #所有字母都转换成大写   isupper() 
+    lower() #所有字母都转换成小写   islower()
+    capitalize() #字符串的首字母转换成大写， 其余转换成小写
+    title() #字符串中所有单词的首字母转换成大写， 其余转换成小写   istitle()
+    
+    
