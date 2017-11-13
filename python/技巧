@@ -1,0 +1,12 @@
+查看python已安装模块
+使用pydoc命令                     pydoc modules
+
+python交互解释器中使用help()      help("modules")
+
+在python交互是解释器下导入sys模块查看   sys.modules.keys()
+
+使用yolk
+    yolk -l    #列出所有安装模块
+    yolk -a    #列出激活的模块
+    yolk -n    #列出非激活模块
+    yolk -U [packagename]  # 通过查询pypi来查看（该）模块是否有新版本
