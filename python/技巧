@@ -21,4 +21,5 @@ split()[]
     capitalize() #字符串的首字母转换成大写， 其余转换成小写
     title() #字符串中所有单词的首字母转换成大写， 其余转换成小写   istitle()
     
-    
+ 
+datetime.date.today().strftime("%Y%m%d") 获取当前时间
