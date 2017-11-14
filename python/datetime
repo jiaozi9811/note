@@ -1,0 +1,138 @@
+    Python提供了多个内置模块用于操作日期时间，如calendar，time，datetime。calendar用于处理日历相关 ；time提供的接口与C标准库time.h基本一致；而其中应用最广的即datetime，相比于time模块，datetime模块的接口则更直观、更容易调用
+    datetime 模块为日期和时间处理提供了多种方法。支持方法的同时，还可格式化输出。此外，该模块还支持时区的处理
+    
+datetime模块中包含如下类
+    date            日期对象,常用的属性有year, month, day
+    time            时间对象
+    datetime        日期时间对象,常用的属性有hour, minute, second, microsecond
+    datetime_CAPI   日期时间对象C语言接口
+    timedelta       时间间隔，即两个时间点之间的长度
+    tzinfo          时区信息对象
+
+
+常量
+常量	    功能说明	                用法	          返回值
+MAXYEAR	  返回能表示的最大年份	  datetime.MAXYEAR	9999
+MINYEAR	  返回能表示的最小年份	  datetime.MINYEAR	1
+
+
+date类
+
+date对象由year、month及day三部分构成    date（year，month，day)
+    year的范围是[MINYEAR, MAXYEAR]，即[1, 9999]；
+    month的范围是[1, 12]。（月份是从1开始的，不是从0开始的）；
+    day的最大值根据给定的year, month参数来决定。例如闰年2月份有29天，非闰年28天； 若超范围，会报错 
+
+
+strftime(...) 方法可自定义日期表示法（time和datetime也均可使用）
+today() 返回当日
+weekday() 返回当前星期数，若星期一，返回0、若星期2，返回1，以此类推
+isoweekday()  若星期一，返回1、若星期2，返回2，以此类推
+isoformat() 返回日期以ISO格式，即 'YYYY-MM-DD’的字符串
+date.replace(year/month/day)：生成一个新的日期对象，用参数指定的年，月，日代替原有对象中的属性
+
+datetime.date.today().timetuple()   返还一个元组，包括了时间的所以信息
+time.struct_time(tm_year=2017, tm_mon=11, tm_mday=14, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=318, tm_isdst=-1)
+
+datetime.date.today().year
+datetime.date.today().month
+datetime.date.today().day
+
+datetime.date.today().weekday()
+datetime.date.today().isoweekday()
+datetime.date.today().isoformat()
+
+toordinal()   返回公元公历开始到现在的天数，公元1年1月1日为1
+
+date中包含的方法与属性
+1、用于日期比较大小的方法
+
+方法名	      方法说明	      用法
+__eq__(…)	  等于(x==y)	    x.__eq__(y)
+__ge__(…)	  大于等于(x>=y)	x.__ge__(y)
+__gt__(…)	  大于(x>y)	      x.__gt__(y)
+__le__(…)	  小于等于(x<=y)	x.__le__(y)
+__lt__(…)	  小于(x	        x.__lt__(y)
+__ne__(…)	  不等于(x!=y)	    x.__ne__(y)
+
+
+获得二个日期相差多少天
+使用__sub__(...)和__rsub__(...)方法，其实二个方法差不太多，一个是正向操作，一个是反向操作：
+方法名	        方法说明	  用法
+__sub__(…)	  x - y	      x.__sub__(y)
+__rsub__(…)	  y - x	      x.__rsub__(y)
+
+
+__format__()  与strftime相同，将日期对象转化为字符串，以指定格式进行日期输出，
+
+
+time类
+
+time类由hour小时、minute分钟、second秒、microsecond毫秒和tzinfo五部分组成
+
+time.hour
+time.minute
+time.second
+time.microsecond  微秒
+time.tzinfo       时区信息
+
+__nonzero__()   判断时间对象是否非零，返回值为True/False
+
+datetime.time.max   最大的时间表示数值
+datetime.time.min   最小的时间表示数值
+datetime.time.resolution    时间间隔单位为分钟
+
+
+datetime类
+datetime类其实是可以看做是date类和time类的合体，其大部分的方法和属性都继承于这二个类
+
+datetime.datetime.today()         返回一个表示当前本地时间的datetime对象
+datetime.datetime.now()           返回一个表示当前本地时间的datetime对象，如果提供了参数tz，则获取tz参数所指时区的本地时间
+datetime.datetime.now().date()    同datetime.date.today()
+datetime.datetime.now().time()
+
+datetime.datetime.now().utctimetuple()    同datetime.date.today().timetuple()
+time.struct_time(tm_year=2017, tm_mon=11, tm_mday=14, tm_hour=2, tm_min=18, tm_sec=58, tm_wday=1, tm_yday=318, tm_isdst=0)
+
+datetime.datetime.today()         返回一个表示当前本地时间的datetime对象
+datetime.datetime.now([tz])       返回一个表示当前本地时间的datetime对象，如果提供了参数tz，则获取tz参数所指时区的本地时间
+datetime.datetime.utcnow()        返回一个当前utc时间的datetime对象
+datetime.datetime.combine(date, time)   根据date和time，创建一个datetime对象
+datetime.datetime.strptime(date_string, format)   将格式字符串转换为datetime对象
+
+
+timedelta类
+timedelta类是用来计算二个datetime对象的差值的
+
+包含如下属性： 
+      days:天数 
+      microseconds：微秒数(>=0 并且 <1秒） 
+      seconds：秒数(>=0 并且 <1天）
+
+
+python中时间日期格式化符号
+符号	说明
+%y	两位数的年份表示（00-99）
+%Y	四位数的年份表示（000-9999）
+%m	月份（01-12）
+%d	月内中的一天（0-31）
+%H	24小时制小时数（0-23）
+%I	12小时制小时数（01-12）
+%M	分钟数（00=59）
+%S	秒（00-59）
+%a	本地简化星期名称
+%A	本地完整星期名称
+%b	本地简化的月份名称
+%B	本地完整的月份名称
+%c	本地相应的日期表示和时间表示
+%j	年内的一天（001-366）
+%p	本地A.M.或P.M.的等价符
+%U	一年中的星期数（00-53）星期天为星期的开始
+%w	星期（0-6），星期天为星期的开始
+%W	一年中的星期数（00-53）星期一为星期的开始
+%x	本地相应的日期表示
+%X	本地相应的时间表示
+%Z	当前时区的名称
+%%	%号本身
+
+
