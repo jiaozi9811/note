@@ -4,3 +4,5 @@ platform.platform().split("-")[7]           系统版本
 
 socket.gethostbyname(socket.gethostname())  获取ip
 socket.gethostname()                        获取主机名
+
+datetime.date.today().strftime("%Y%m%d") 获取当前时间
