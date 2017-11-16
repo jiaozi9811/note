@@ -1,0 +1,29 @@
+/ssh/sshd_config
+
+注释掉 会禁用sftp
+Subsystem     sftp    /usr/lib64/ssh/sftp-server
+
+
+如果启用了sftp(internal-sftp)   会禁用ssh
+
+Subsystem       sftp    internal-sftp  
+这行指定使用sftp服务使用系统自带的internal-sftp
+ 
+Match Group sftp  
+这行用来匹配sftp组的用户，如果要匹配多个组，多个组之间用逗号分割
+ 
+当然，也可以匹配用户
+Match User mysftp
+这样就可以匹配用户了，多个用户名之间也是用逗号分割，但我们这里按组匹配更灵活和方便
+ 
+ChrootDirectory /data/sftp/%u  
+用chroot将用户的根目录指定到/data/sftp/%u，%u代表用户名，这样用户就只能在/data/sftp/%u下活动
+
+#注释掉这行
+#Subsystem      sftp    /usr/libexec/openssh/sftp-server
+#添加在配置文件末尾
+Subsystem sftp internal-sftp     #指定使用sftp服务使用系统自带的internal-sftp
+Match User www                     #匹配用户，如果要匹配多个组，多个组之间用逗号分割
+    ChrootDirectory /home/www         #用chroot将指定用户的根目录，chroot的含义：http://www.ibm.com/developerworks/cn/linux/l-cn-chroot/
+    ForceCommand internal-sftp        #指定sftp命令
+    X11Forwarding no                #这两行，如果不希望该用户能使用端口转发的话就加上，否则删掉
