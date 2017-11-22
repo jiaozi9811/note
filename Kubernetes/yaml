@@ -1,0 +1,17 @@
+YAML 文件说明
+Kubernetes 对象都可以用 YAML 或者 JSON 文件描述
+
+apiVersion      指定 api 版本，Deployment 用版本 extensions/v1beta1，如果是 Pod 或者 ReplicationController 用 v1
+kind            指定对象类型
+metadata        指定对象名称等元数据
+replicas        指定副本个数，一般指 Pod 的个数
+labels          是 key：value 描述，Selector 按 label 选择符合条件的对象
+containers中定义每个 container 名字，image，协议类型，端口，使用的 env，volume 等信息
+
+多个 Kind 指定的对象定义在一个文件中时，每个段用"---"分割，可以每个文件定义一个对象，然后用 kubectl create –f filename 分别创建
+
+Service type    可以是 ClusterIP, NodePort 或者 LoadBalancer
+Service type    指定为 ClusterIP 时，生成的 ClusterIP 来自 api server 启动时候指定的一个地址段，它是一个只在 Cluster 内部可以访问的地址，Kubernetes proxy 组件根据 Service 定义中的 Selector，找到满足条件的 Pod，生成 iptables 规则，把对 ClusterIP 的访问 DNAT 到 Pod 上面；
+Service type    指定为 NodePort 时，在每个 Cluster 成员开启一个端口，对 Node 端口的访问 DNAT 到 Pod 上
+Service type    指定为 LoadBalancer 时，需要云供应商提供外网访问 Service 的 IP 地址，访问这个 LoadBalancer 地址和端口的流量被转发到 Cluster 成员 NodeIP：NodePort 上
+如果不需要在外网访问 Redis DB 服务，它的 Service type 可以定义为 ClusterIP，这个 Service 就只在 Cluster 内部可见。
