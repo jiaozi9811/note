@@ -1,0 +1,8 @@
+创建用户
+命令:CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+
+授权:
+命令:GRANT privileges ON databasename.tablename TO 'username'@'host' 
+
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'KEYSTONE_DBPASS';
+GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'KEYSTONE_DBPASS';
