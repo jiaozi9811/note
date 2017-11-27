@@ -1,0 +1,8 @@
+进入grub菜单引导界面后，按e
+
+在启动项后面加 init=/bin/bash
+
+输入 mount -n / -o remount,rw
+输入 /usr/bin/passwd重置root密码
+修改完成后输入 mount -n / -o remount,ro，将根文件系统设为原来的状态
+输入exit退出系统，重新启动系统，用新密码登陆。
