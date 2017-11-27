@@ -1,0 +1,46 @@
+
+安装virtualenv
+yum install python-virtualenv
+
+pip install virtualenv
+
+
+创建一个目录用于存放虚拟环境
+mkdir /mnt/env
+virtualenv venv
+
+激活虚拟环境
+source env/venv/bin/activate  source ./bin/activate
+
+(windows) env\venv\Script\activate
+
+
+当主机上安装有不同版本的Python，如Python 2.6、Python 2.7或者Python 3.x，它们会共享相同的bin主目录。
+最新版的virtualenv已经支持--python选项，该选项可以直接指定虚拟环境运行的Python环境。如：
+virtualenv --python=/usr/bin/python3.5 venv
+
+常用的参数有：
+
+-p --python=            指定python版本；当的系统中安装了多个python版本时会用到；默认virtualenv会优先选取宿主python环境
+--no-site-packages      不使用系统环境的python安装包，即隔离包中不能使用真实python环境的安装包；当前版本这个选项是默认的。
+--system-site-packages  与上面相反，使隔离环境能访问系统环境的python安装包
+--distribute            copy一个python环境的分支，默认会安装setup、pip、wheel等基础模块
+ 
+离开虚拟机环境
+deactivate
+
+
+virtualenvwrapper是virtualenv的扩展管理包，用于更方便管理虚拟环境，它可以做
+   将所有虚拟环境整合在一个目录下
+   管理（新增，删除，复制）虚拟环境
+   切换虚拟环境
+
+安装
+pip install virtualenvwrapper
+pip install virtualenvwrapper-win(windows)
+
+lsvirtualenv
+cdvirtualenv
+cdsitepackages
+lssitepackages
+rmvitualenv venv
