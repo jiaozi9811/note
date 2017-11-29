@@ -27,3 +27,41 @@ Match User www                     #匹配用户，如果要匹配多个组，�
     ChrootDirectory /home/www         #用chroot将指定用户的根目录，chroot的含义：http://www.ibm.com/developerworks/cn/linux/l-cn-chroot/
     ForceCommand internal-sftp        #指定sftp命令
     X11Forwarding no                #这两行，如果不希望该用户能使用端口转发的话就加上，否则删掉
+
+
+http://www.cnblogs.com/hujiong/p/3875681.html
+
+第一步：创建sftp服务用户组,创建sftp服务根目录
+groupadd sftp
+#此目录及上级目录的所有者(owner)必须为root，权限不高于755，此目录的组最好设定为sftp
+mkdir /srv/sftp
+chown -R root:sftp /srv/sftp
+chmod -R 0755 /srv/sftp
+
+第二步：备份sshd配置文件然后编辑
+mv /etc/ssh/sshd_config ~/backup/sshd_config_xxx                    
+vim /etc/ssh/sshd_config
+ 
+注释掉/etc/ssh/sshd_config文件中的此行代码  Subsystem  sftp    /usr/libexec/openssh/sftp-server
+
+添加如下代码
+Subsystem sftp internal-sftp
+Match Group sftp
+    ChrootDirectory /srv/sftp/%u
+    X11Forwarding no
+    AllowTcpForwarding no
+    ForceCommand internal-sftp
+    
+
+第三步：添加有效的sftp用户，且给予用户写权限
+#创建test的家目录：test目录的所有者必须是root，组最好设定为sftp，权限不高于755
+mkdir /srv/sftp/test
+chmod 0755 /srv/sftp/test
+chown root:sftp /srv/sftp/test
+#添加用户 使用参数 -s/sbin/nologin禁止用户通过命令行登录                 
+useradd -gsftp -d/srv/sftp/test -s/sbin/nologin test
+
+sftp服务的根目录的所有者必须是root，权限不能超过755(上级目录也必须遵循此规则)，sftp的用户目录所有者也必须是root,且最高权限不能超过755.
+
+
+
