@@ -1,0 +1,16 @@
+安装
+pip install kivy
+
+解决CentOs下用Qt Creator出现找不到GL/gl.h问题
+用命令yum install mesa-libGL-devel mesa-libGLU-devel （2个opengl核心库）就可以了
+也可以再安装yum install freeglut-devel （OpenGL Utility ToolKit ）
+
+
+Cython报错解决：#error Do not use this file, it is the result of a failed Cython compilation
+发现是 cython 版本引起：
+$cython -V
+: Cython version 0.21
+使用 pip* 卸载 0.21 并安装使用 0.20.2 可避免该错误：
+
+pip uninstall cython
+pip install  cython==0.20
