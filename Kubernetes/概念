@@ -1,0 +1,65 @@
+pod
+  pod是k8s中的最小单位，pod支持多个容器在一个pod中共享网络地址和文件系统
+  
+  
+replication controller RC
+  RC监控运行中的pod，保证集群中运行指定数目的pod副本。指定的数目可以是多个也可以是1个；少于指定数目，rc会启动运行新的副本，多于指定数目，rc会杀死多余的pod副本
+
+replica set RS
+  rs是rc的替代，
+  
+部署 deployment
+  reployment表示对k8s的一次更新操作。可以是创建一个服务，更新一个服务，也可以是滚动升级一个服务
+  升级滚动一个服务，实际是创建一个新rs，然后逐渐将新副本增加到理想状态，将旧副本减少为0的复合操作
+  
+  
+服务  service
+  rs和deployment只保证了pod是数量，没有解决如何访问pod的问题。pod只是运行服务的实例，随时可能在一个节点上停止，在另一个节点以新的ip启动，无法提供一个确定的ip和端口提供服务
+   提供稳定的服务，就需要对pod提供服务发现和负载均衡的能力。在k8s中通过service来提供服务发现，kube-proxy提供负载均衡
+   service对应一个k8s虚机ip，k8s集群通过此虚拟ip访问pod服务，通过kube-proxy实现虚拟ip路由及转发
+   
+   service与rc一样，都是通过label与pod关联
+   
+任务  job
+  job是k8s控制批处理性任务的api对象。批处理业务是有始有终的，长期服务业务是长期运行的。
+  job管理的pod根据用户的设置，job执行完成及退出
+  
+  
+后台支撑服务集  daemonset
+  daemonset用于解决pod可能分配不均问题
+  
+  
+
+有状态服务集 statefulset
+  在云原生应用体系里，有两组近义词
+    第一组:stateless(无状态)  cattle(牲畜)   nameless(无名)     disposable(可丢弃)
+    第二组:stateful(有状态)   pet(宠物)      having name(有名)  non-disposable(不可丢弃)
+  rc和rs主要控制无状态服务，其所控制的pod，名称是随机设置的，一个pod出了故障会被丢弃，重要的只是pod是数量
+  statefulset是用来控制有状态服务的，statefulset中的每一个pod的名称都是事先确定的，不能更改
+  
+  rc和rs中的pod一般不挂载存储或挂载共享存储，保存的是所有pod共享的状态，pod如牲畜一样
+  statefulset中的pod挂载自己独立的存储，如果一个pod出现故障，从其他节点启动一个同命名的pod，要挂载上原来的pod的存储继续提供服务
+  
+  适合于statefulset的业务包括mysql  postgresql  zookeeper  stcd等有状态服务
+  
+  
+集群联邦 federation
+  云计算环境中，根据服务作用范围的远近一般区分为: 同主机(host node)  跨主机同可用区(available zone)  跨可用区同地区(region)  跨地区同服务商(cloud service provider) 跨平台
+  集群联邦是为提供跨region服务设计的
+  
+  
+存储卷  volume
+  k8s的volume与docker的volume类似，只是k8s的volume的生命周期和作用范围是pod。一个pod声明的volume由pod中的所有容器共享
+  
+  
+持久存储卷 persistent volume  pv
+持久存储卷声明  persistent volume claim pvc
+  pv和pvc使k8s具备了存储的逻辑抽象能力，配置pod时可以忽略对现实存储的配置，把此工作交给pv
+
+
+节点  node
+  node提供k8s的计算能力，最初称为minion。是所有pod运行所在的主机，通过kubelet管理node上的容器
+  
+  
+秘钥对象  secret
+  secret是用来保存和传递密码，秘钥，认证凭证的对象。使用secret可以避免把敏感信息明文写在配置文件中
