@@ -1,0 +1,9 @@
+virsh list --all
+
+virsh vcpupin
+
+virsh destroy
+
+virsh edit 
+
+virsh start
