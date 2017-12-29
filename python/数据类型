@@ -1,0 +1,29 @@
+数字      
+字符串   
+列表      [1,[2.'three'],4]
+字典      {'food':'spam','taste':'yum'}
+元组      (1,'spam',4,'U')
+集合      set('abc'),{'a','b','c'}
+
+数字
+  整数
+  浮点数
+  +  *  **(乘方)
+  
+math模块
+random
+
+
+字符串
+
+
+
+
+反向索引(从右往左)
+
+str[1:]   str[1:len(str)]
+str[:3]   str[0:3]
+str[:-1]  str[0:-1]
+
+str.find
+str.replace
