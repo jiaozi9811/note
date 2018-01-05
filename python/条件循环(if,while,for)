@@ -30,7 +30,7 @@ while expression:
     suite_to_repeat
     
 for循环
-for iter_var in iterable:
+for iter_var in iterable:  等价于iter_var in iterable.keys():   key in D.keys():
     suite_to_repeat
 
 
