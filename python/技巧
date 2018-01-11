@@ -23,3 +23,8 @@ split()[]
     
  
 datetime.date.today().strftime("%Y%m%d") 获取当前时间
+
+
+break       跳出最近所在的循环(跳出整个循环语句)
+continue    跳到最近所在循环的开头(来到循环的首行)
+pass        什么也不做，只是空站位语句
