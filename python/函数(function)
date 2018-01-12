@@ -1,5 +1,12 @@
 函数
 
+def
+reture
+global
+nonlocal
+yield
+lambda
+
 内嵌函数
 
 装饰器
