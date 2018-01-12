@@ -1,3 +1,13 @@
+
+迭代
+f=open('script.py')
+f.readline()
+f.readline()
+f.__next__()
+f.next()
+next(f)
+
+
 内建函数
     open()
     file()
