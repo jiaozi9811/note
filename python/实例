@@ -7,7 +7,7 @@ socket.gethostname()                        获取主机名
 
 datetime.date.today().strftime("%Y%m%d") 获取当前时间
 
-
+---------------------------------------------------------------------
 [x for x in seq1 if x in seq2]
 或
 def ex(seq1,seq2):
@@ -16,3 +16,10 @@ def ex(seq1,seq2):
         if x in seq2:
             res.append(x)
     reture res
+----------------------------------------------------------------------
+vim eg.py
+from sys import argv
+script,first,second,third = argv
+print script,first,second,third
+
+python eg.py first 2nd 3rd
