@@ -20,3 +20,11 @@ def func2Bdecorated(func_opt_args):
 
 
 传递函数
+
+参数为元组
+def func(*name)
+func(*sequence)
+
+参数为字典
+def func(**name)
+func(**dict)
