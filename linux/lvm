@@ -1,0 +1,8 @@
+
+lvm扩容
+pvcreat /dev/disk_name
+pvscan
+vgextent vg_name /dev/pv_name
+vgscan
+lvextent -l +size /dev/vg_name/vg
+resize2fs /dev/vg_name/vg
