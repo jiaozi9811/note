@@ -1,0 +1,34 @@
+https://www.ibm.com/developerworks/cn/linux/l-devmapper/index.html
+device mapper
+  Device Mapper是Linux2.6内核中支持逻辑卷管理的通用设备映射机制，它为实现用于存储资源管理的块设备驱动提供了一个高度模块化的内核架构
+  
+  整个device mapper机制由两部分组成--内核空间的device mapper驱动、用户空间的device mapper库以及它提供的dmsetup工具
+  
+  Device mapper本质功能就是根据映射关系和target driver描述的IO处理规则，将IO请求从逻辑设备mapped device转发相应的target device上
+  
+  内核部分
+    device mapper内核代码已在linux2.6总集成。代码在内核源码drive/md/目录下，代码文件可以划分为实现 device mapper 内核中基本架构的文件和实现具体映射工作的 target driver 插件文件两部分
+    
+    Device mapper在内核中作为一个块设备驱动被注册的，它包含三个重要的对象概念
+      mapped device
+      映射表
+      target device
+      
+      Mapped device是一个逻辑抽象，可以理解成为内核向外提供的逻辑设备，它通过映射表描述的映射关系和target device建立映射
+      从Mapped device到一个target device的映射表由一个多元组表示，该多元组由表示mapped device逻辑的起始地址、范围、和表示在target device所在物理设备的地址偏移量以及target类型等变量组成
+      Target device表示的是mapped device所映射的物理空间段，对mapped device所表示的逻辑设备来说，就是该逻辑设备映射到的一个物理设备
+   
+   
+   用户空间部分
+      Device mapper在用户空间相对简单，主要包括device mapper库和dmsetup工具
+      
+      Device mapper库就是对ioctl、用户空间创建删除device mapper逻辑设备所需必要操作的封装，
+      dmsetup是一个提供给用户直接可用的创建删除device mapper设备的命令行工具
+      
+      用户空间主要负责如下工作：
+          1、发现每个mapped device相关的target device；
+          2、根据配置信息创建映射表；
+          3、将用户空间构建好的映射表传入内核，让内核构建该mapped device对应的dm_table结构；
+          4、保存当前的映射信息，以便未来重新构建
+          
+      用户空间中最主要的工作就是构建并保存映射表
