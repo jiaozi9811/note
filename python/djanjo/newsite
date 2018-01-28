@@ -1,0 +1,28 @@
+django-admin startproject site_name
+
+site_name
+    manage.py         一个命令行实用脚本，可通过不同的方式与django交互
+    site_name/        项目的python包
+        __init__.py   一个空文件，目的是让python把这个目录识别为python包
+        settings.py   django项目的设置/配置
+        urls.py       django项目的url声明，即django驱动的网站的“目录”
+        wsgi.py       兼容WSGI的web服务器的入口点，用于服务项目
+        
+
+设置django
+
+site_name/settings.py
+修改TIME_ONE
+
+INSTALLED_APPS = [
+    'django.contrib.admin',           管理后台
+    'django.contrib.auth',            身份验证系统
+    'django.contrib.contenttypes',    内容类型框架
+    'django.contrib.sessions',        回话框架
+    'django.contrib.messages',        消息框架
+    'django.contrib.staticfiles',     管理静态文件的框架
+]
+
+python manage.py migrate      初始化数据库
+
+python manage.py runserver    运行服务
