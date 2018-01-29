@@ -32,3 +32,17 @@ device mapper
           4、保存当前的映射信息，以便未来重新构建
           
       用户空间中最主要的工作就是构建并保存映射表
+
+dmsetup
+    dmsetup deps dm-name 　　查看dm-name设备的target信息 
+    dmsetup info dm-name 　　查看dm-name设备的基本信息 
+    dmsetup status dm-name 　　查看dm-name设备的基本状态 
+    dmsetup ls 　　           查看dm-name的设备号 
+    dmsetup table dm-name 　　查看dm-name的table 
+    dmsetup targets 　　      查看系统支持的target_type及版本信息  
+    dmsetup create dm-name dm-table 　　根据dm-table建立一个dm-name的设备,  
+    dmsetup create dm-name --table "dm-table-txt"  根据"dm-table-txt" 建立一个dm-name的设备, 
+    dmsetup load/reload dm-name     dm-table 　　重载dm-table 
+    dmsetup remove dm-name dm-name 　　删除dm-name 　　 
+    dmsetup suspend dm-name 　　暂停dm-name设备 
+    dmsetup resume dm-name 　　重新使用dm-name设备 
