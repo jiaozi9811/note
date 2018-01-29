@@ -26,3 +26,5 @@ INSTALLED_APPS = [
 python manage.py migrate      初始化数据库
 
 python manage.py runserver    运行服务
+
+python manage.py createsuperuser
