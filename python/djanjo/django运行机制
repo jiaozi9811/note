@@ -1,0 +1,6 @@
+浏览器访问http://127.0.0.1:8080/hello/的流程
+    运行python manage.py runserver时，manage.py脚本在内层site_name目录中寻找settings.py。这个文件保存着当前django项目的全部配置，各配置名称都是大写的。其中最重要的是ROOT_URLCONF。它告诉django，网站的URL配置在哪个python模块中
+    服务器收到/hello/请求时，django加载ROOT_URLCONF设置的URL配置。然后按顺序检查URL配置中的各个URL模式，依次与请求的URL比较，直到找到匹配的模式为止。
+    找到匹配的模式后，调用对应的视图函数，并把一个HttpRequest对象作为第一个参数传给视图
+    视图函数返回HttpRequest对象
+    django把HttpRequest对象转换层http响应，得到网页
