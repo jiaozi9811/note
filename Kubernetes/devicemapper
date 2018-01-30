@@ -16,3 +16,18 @@
    ]
 }
 注意：总是使用dm.use_deferred_removal=true和dm.use_deferred_deletion=true选项，以防止无意地泄露映射资源信息。
+
+
+
+docker daemon --storage-driver=devicemapper --storage-opt dm.fs=ext4/xfs   
+              --storage-opt dm.datadev=/dev/vg-docker/data                  #Datadev 指定数据盘的块设备
+              --storage-opt dm.metadatadev=/dev/vg-docker/metadata          #metadatadev指定metadata的设备文件
+
+
+推荐dm配置
+docker daemon –s devicemapper  \
+    --storage-opt dm.use_deferred_deletion=true \
+    --storage-opt dm.use_deferred_removal=true \
+    --storage-opt dm.datadev=/dev/vg-docker/data \
+    --storage-opt dm.metadatadev=/dev/vg-docker/metadata \
+    --storage-opt dm.fs=ext4
