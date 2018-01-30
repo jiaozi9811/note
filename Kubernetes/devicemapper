@@ -1,0 +1,18 @@
+
+有两种方法来配置Docker daemon的devicemapper存储驱动。你可以运行daemon时加上以下参数：
+
+--storage-driver=devicemapper \
+--storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool \
+--storage-opt=dm.use_deferred_removal=true \
+--storage-opt=dm.use_deferred_deletion=true
+
+也可以在daemon配置文件中配置，如默认的配置文件/etc/docker/daemon.json中，可如下配置：
+{
+  "storage-driver": "devicemapper",
+   "storage-opts": [
+     "dm.thinpooldev=/dev/mapper/docker-thinpool",
+     "dm.use_deferred_removal=true",
+     "dm.use_deferred_deletion=true"
+   ]
+}
+注意：总是使用dm.use_deferred_removal=true和dm.use_deferred_deletion=true选项，以防止无意地泄露映射资源信息。
