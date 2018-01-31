@@ -1,0 +1,10 @@
+python manage.py startapp app_name
+app_name
+  /migrations
+    __init__.py
+  __init__py
+  admin.py
+  apps.py
+  models.py     模型
+  tests.py
+  views.py      视图
