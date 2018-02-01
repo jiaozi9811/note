@@ -8,3 +8,16 @@ status      该内容由kubernetes集群提供和更新，描述kubernetes对象
     kind：kubernetes对象的类型。
     metadata：唯一标识该对象的元数据，包括name，UID，可选的namespace。
     spec：标识对象的详细信息，不同对象的spec的格式不同，可以嵌套其他对象的字段
+
+
+API对象
+    属性
+        metadata    元数据，标示API对象
+            namespace
+            name
+            id
+            labels
+        spec        规范。描述了用户期望k8s集群中的分布式系统达到的理想状态
+        status      状态。描述系统当前实际达到的状态
+        
+k8s中所有的配置都是通过API对象的spec设置的，用户通过配置系统的理想状态来改变系统
