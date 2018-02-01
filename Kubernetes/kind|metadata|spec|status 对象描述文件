@@ -1,0 +1,10 @@
+kind
+metadata
+spec        该内容由用户提供，描述用户期望的对象特征及集群状态
+status      该内容由kubernetes集群提供和更新，描述kubernetes对象的实时状态
+
+在对象描述文件.yaml中，必须包含以下字段
+    apiVersion：kubernetes API的版本。
+    kind：kubernetes对象的类型。
+    metadata：唯一标识该对象的元数据，包括name，UID，可选的namespace。
+    spec：标识对象的详细信息，不同对象的spec的格式不同，可以嵌套其他对象的字段
