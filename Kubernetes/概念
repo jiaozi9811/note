@@ -1,3 +1,10 @@
+  k8s的业务主要分为
+        长期伺服型(long-running)               deployment
+        批处理型(batch)                        job
+        节点后台支撑型(node-daemon)             daemonset
+        有状态应用型(stateful application)      petset/statefulsets
+        
+
 pod
   pod是k8s中的最小单位，pod支持多个容器在一个pod中共享网络地址和文件系统
   
@@ -22,10 +29,11 @@ replica set RS
    
 任务  job
   job是k8s控制批处理性任务的api对象。批处理业务是有始有终的，长期服务业务是长期运行的。
-  job管理的pod根据用户的设置，job执行完成及退出
+  job管理的pod根据用户的设置，job执行完成及退出.成功的标志根据spec.completions策略而不同
   
   
 后台支撑服务集  daemonset
+  daemonset的核心关注点在k8s集群中的节点(物理机或虚拟机)，要保证每个节点都有一个此类pod。节点可能是所有集群节点，也可能是通过nodeSelector选定的节点。典型的daemonset包括，存储，日志和监控等在每个节点上支持k8s集群运行的服务
   daemonset用于解决pod可能分配不均问题
   
   
