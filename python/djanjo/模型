@@ -1,0 +1,27 @@
+
+__contains      like
+icontains       不区分大小写的like
+startswith
+endswith
+range           between
+
+
+filter()        返回列表
+get()           返回一个对象
+
+
+排序
+order_by("object")    排序
+order_by("-object")   倒序
+
+filter().order_by()
+
+更新
+filter().update(obj='')   
+all().update(obj='')
+
+obj.save()          保存
+obj.delete()        删除
+
+filter().delete()   
+all().delete()
