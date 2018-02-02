@@ -1,0 +1,26 @@
+namespace
+    namespace是一组资源和对象的抽象集合。常见的pods,services,replication controllers和deployments都属于某一namespaces。node,persistentvolumes则不属于任何namespaces
+    namespaces常用来隔离不同的用户，如kubernetes自带的服务一般运行在kube-system namespaces中
+    
+    namespace包含两种状态Active和Terminating。namespace删除过程中，namespace状态被设置为Terminating
+    
+
+创建
+    kubectl create namespace namespaces_name
+    
+    vim namespace_name.yaml
+    apiVersion: V1
+    Kind: Namespace
+    metadata:
+      name: namespace_name
+    
+    kubectl create -f namespace_name.yaml
+    
+    
+删除
+kubectl delete namespaces namespace_name
+
+删除一个namespace会自动删除所有属于此namespace的资源
+default和kube-system命名空间不可删除
+persistentvolumes不属于任何namespace,但persistentvolumeclaim是属于某个特定的namespace的
+events是否属于namespace取决于产生events的对象
