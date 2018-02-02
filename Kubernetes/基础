@@ -1,0 +1,8 @@
+kubernetes由以下核心组件组成
+    etcd            保存整个集群的状态
+    apiserver       提供资源操作统一接口，并提供认证，授权，访问控制，api注册和发现等机制
+    controller manager  负责维护集群状态，如故障检测，自动扩展，滚动更新等
+    scheduler       负责资源的调度，按照预定的调度策略将pod调度到相应的机器
+    kubelet         负责维护容器的生命周期，同时负责volume(CVI)和网络(CNI)的管理
+    kube-proxy      负责为service提供sclster内部的服务发现和负载均衡
+    container runtime 负责镜像管理以及pod和容器的真正运行(CRI)
