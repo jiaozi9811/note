@@ -1,0 +1,10 @@
+1 强制删除命令，如下所示，即在命令后面加上--grace-period=0 --force即可
+kubectl delete pod (podid) -n namespace --grace-period=0 --force
+
+2 有时候，某些job用--grace-period=0 --force也无法删除是，在删除job命令后面加上--cascade=false即可
+kubectl delete job (job) -n namespace --cascade=false
+
+5 进入pod的两种方法
+a.kubectl exec -ti podname -n namespace sh  
+
+b.docker exec -ti container-id sh
