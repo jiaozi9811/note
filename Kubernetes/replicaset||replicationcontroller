@@ -1,0 +1,26 @@
+replicationcontroller用来确保容器应用的副本数始终保持在用户定义的副本数。如果有容器异常退出，会自动创建新的pod替代，异常的容器则会被自动回收
+
+replicaset和replicationcontroller没有本质的不同，并且replicaset支持集合式的selector
+
+虽然replicaset可以独立使用，但建议用deployment来自动管理replicaset。这样就无需担心兼容问题
+
+replicationcontroller示例
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
