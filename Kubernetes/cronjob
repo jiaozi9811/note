@@ -1,0 +1,30 @@
+cronjob
+类似于linux的crontab。在指定的时间周期运行指定的任务。
+在kubernetes1.5，使用cronjob需要开启batch/v2alpha1 API,即--runtime-config=batch/vaalpha1
+
+cronjob spec
+.spec.schedule          指定任务运行周期，格式同cron
+.spec.jobTemplate       指定需要运行的任务，格式同job
+.spec.startingDeadlineSeconds  指定任务开始的截止期限
+.spec.concurrencyPolicy 指定任务的并发策略，支持Allow,Forbid,Replace
+
+ex
+
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
