@@ -1,0 +1,64 @@
+resource quotas
+用于限制用户资源用量的机制
+
+工作原理
+    资源配额应用在namespace上，并且每个namespace最多只能有一个resourcequota对象
+    开启计算资源配额后，创建容器时必须配置计算资源请求或限制(也可以用LinitRange设置默认值)
+    用户超额后禁止创建新资源
+    
+使用
+    在API server启用时配置ResourceQuota adminssion control
+    在namespace中创建ResourceQuota对象
+    
+    
+资源配额类型
+    计算资源
+    存储资源
+    对象数
+    
+    计算资源
+        包括cpu和memory
+        cpu:limits.cpu,requests.cpu
+        memory:limits.memory,requests.memory
+    存储资源
+        包括存储的总量以及指定storage class的总量
+        requests.storage    存储资源总量
+        persistentvolumeclaims  pvc的个数
+        .storageclass.storage.k8s.io/requests.storage
+        .storageclass.storage.k8s.io/persistentvolumeclaims
+    对象数，即可创建的对象个数
+        pods,replicationcontrollers,configmaps,cecrets
+        resourcequotas,persistentvolumeclaims
+        services,services.loadbalancers,services.nodeports
+        
+ 
+ 计算资源示例
+ apiVersion: v1
+ kind: ResourceQouta
+ metadata:
+   name: compute-resources
+ spec:
+   hard:
+     pods: "4"
+     requests.cpu: "1"
+     requests.cpu: "1"
+     requests.memory: 1Gi
+     limits.cpu: "2"
+     limits.memory: 2Gi
+     
+     
+对象个数示例
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "20"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"
+    
+    
