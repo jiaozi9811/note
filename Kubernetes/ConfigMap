@@ -13,9 +13,13 @@
 
 
 创建configmap
+可使用kubectl create configmap从文件，目录或key-value字符串创建，也可通过kubectl create -f file创建
 
 命令行
 kubectl create configmap lykops-config --from-file=db_config_file=database.conf --from-file=ver.conf --from-literal=username=test --from-literal=hostname=localhost
 
     –from-file表示来自文件，直接把文件内容写入configmap中，可以为目录也可以为文件，如果是文件的话，可以使用db_config_file=database.conf来修改key值 
     –from-literal表示使用键值对配置
+
+
+configmap用于保存配置数据的键值对，可以用来保存单个属性，也可保存配置文件。configmap与secret很类似，但它可以更方便的处理不包含敏感信息的字符串
