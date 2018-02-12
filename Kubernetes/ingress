@@ -1,0 +1,27 @@
+ingress是为进入集群的请求提供路由规则的集合
+ingress可以给service提供集群外部访问的URL，负载均衡，SSL终止，HTTP路由等
+为了配置ingress规则,集群管理员需要部署一个ingress controller，他监听ingress和service的变化，并根据规则配置负载均衡并提供访问入口
+
+ex
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        backend:
+          serviceName: test
+          servicePort: 80
+
+每个ingress都需要配置rules，目前kubenetes仅支持http规则。上面的示例表示请求/testpath时转发到服务test的80端口
+
+类型
+单服务ingress
+路由到多服务的ingress
+虚拟主机ingress
+TLS ingress
+更新ingress
