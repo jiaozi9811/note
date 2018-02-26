@@ -1,0 +1,85 @@
+常用bash
+
+#!/usr/bin/env bash
+
+script_dir=$(cd $(dirname $0) && pwd)
+
+dirname		dirname $0
+basename
+
+时间
+`date +%Y%m%d` 或 `date +%F` 或 $(date +%y%m%d)
+
+
+shell中获取本机ip地址
+
+方法一：
+/sbin/ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"
+or
+/sbin/ifconfig|sed -n '/inet addr/s/^[^:]*:\([0-9.]\{7,15\}\) .*/\1/p'
+
+host_ip=$(sudo /sbin/ifconfig  | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | awk 'NR == 1 { print }')
+
+方法二： 
+local_host="`hostname --fqdn`"
+local_ip=`host $local_host 2>/dev/null | awk '{print $NF}'`
+方法三：
+local_host="`hostname --fqdn`"
+nslookup -sil $local_host 2>/dev/null | grep Address: | sed '1d' | sed 's/Address://g'
+
+
+expect
+/usr/bin/expect -c "spawn su -; expect \"Password:\"; send \"${MYSQL_ROOT_PASSWORD}\\r\"; interact"
+
+   IP=192.168.1.18
+    PASS=passwd
+    expect -c "
+             settimeout 60;
+             spawn ssh root@192.168.0.1
+             expect{
+                     \"*yes/no*\"{send \"yes\r\"; exp_continue}
+                     \"*password*\"{send \"$PASS\r\";}
+                    }
+                    expect eof"
+
+
+expect_ssh $user_name $host_ip $ssh_password $root_password $dest_file $file_name
+function expect_ssh()
+{
+   /usr/bin/expect -c "
+   spawn ssh $1@$2
+   set timeout 10
+   expect {
+    \"(yes/no)?\" {
+        send \"yes\r\"
+        expect \"*Password:*\"
+        send \"$3\r\"
+    }
+    \"*Password:*\" {
+        send \"$3\r\"
+    }
+   }
+    expect \"*@*\"
+    send \"su - root\r\"
+    expect {
+    \"*yes/no\" { send \"yes\r\"; exp_continue}
+    \"*assword:*\" { send \"$4\r\"}
+    \"# \"        {send \"\r\"}
+    }
+  expect \"*#*\"
+  send \"cd $5/$6\r\"
+  expect \"*#*\"
+  set timeout -1
+  send \"sh $6 $bak\r\"
+  expect \"*#*\"
+  send \"exit\r\"
+  expect \"*@*\"
+  send \"exit\r\"
+  expect eof"
+}
+
+
+
+find /var/log -type f -exec chmod g-wx,o-rwx {} +
+
+sed -i '/匹配字符串/s/替换源字符串/替换目标字符串/g' filename
