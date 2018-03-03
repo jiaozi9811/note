@@ -1,0 +1,95 @@
+Django Template Language(DTL)
+
+python manage.py shell
+>>>from django.template import Context,Template
+>>>t=Template('my name is {{ name }}.')
+>>>c=Context({'name': 'stephane'})
+>>>t.render(c)
+'my name is stephane'
+
+不好
+python manage.py shell
+>>>from django.template import Context,Template
+from name in ('john','julie','pat'):
+    t=Template('Hello,{{name}}')
+    print(t.reader(Context({'name': name})))
+    
+
+好
+python manage.py shell
+>>>from django.template import Context,Template
+>>>t=Template('Hello,{{name}}')
+>>>for name in ('john','julie','pat'):
+>>>    print(t.render(context({'name': name})))
+
+
+标签
+if/else
+{& if &} 计算变量的值，如果为真(及存在，不为空，不是假值)，模板系统显示{% if %}和{% endif %}之间的内容
+{% if today_is_weekend %}
+<p>Welcome to the weekend!</p>
+{% endif %}
+
+
+{% else %}可选
+{% if today_is_weekend %}
+<p>Welcome to the weekend!</p>
+{% else %}
+<p>get back to work</p>
+{% endif %}
+
+
+{% elif %}
+
+if支持使用and,or,not测试多个变量，或取反指定的变量
+{% if athlete_list and coach_list %}
+{% if not athlete_list %}
+{%if athlete_list or coach_list %}
+{%if not athlete_list or coach_list %}
+{%if athlete_list or not coach_list %}
+{%if athlete_list and coach_list or cheerleader_list %}  ##if (athlete_list and coach_list) or cheerleader_list
+
+
+
+for
+
+{% for %}  迭代序列中的元素(reversed 反向迭代)
+{% for athlete in athlete_list [reversed] %}
+    {{ athlete.name }}
+{% endfor %}
+
+{% empty %}   列表为空时显示的内容
+
+forloop   for支持的模板变量，这个变量有几个属性，可以获知循环的一些信息。forloop只在循环内部使用，循环结束时，forloop随之消失
+forloop.counter     表示循环的次数，从一开始循环
+forloop.counter0    与forloop相似，不过是从零开始循环
+forloop.revcounter  反向迭代
+forloop.revcounter0 反向迭代，最后一次迭代的值是0
+forloop.first       一个布尔值，第一次循环时为true，需要特殊处理第一个元素时很方便
+forloop.last        一个布尔值,最后一次循环时为true，经常用于在一组链接之间放置管道符合
+forloop.parentloop  引用父循环的forloop对象
+
+
+
+ifequal/ifnotequal
+比较{% ifequal vrg vrg%}中的两个值，如果相等则显示
+{% ifeual user currentuser %}
+    <h1>welcome!,/h1>
+{% endifequal %}
+
+
+注释
+{# this is a comment #}
+
+
+
+过滤器
+{{ name|lower }}      把文本转换成小写
+{{ my_list|first|upper }}   取出第一个元素，转换成大写
+{{ bio|truncatewords:"0" }} 显示bio变量的前30个词
+
+
+include模板标签
+{% include %}   引入另一个模板的内容
+
+{% include 'nav.html' %}
