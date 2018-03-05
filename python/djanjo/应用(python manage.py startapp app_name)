@@ -1,3 +1,19 @@
+python manage.py startproject pro_name
+python manage.py startapp app_name
+一个项目是一系列django应用的实例，外加这些应用的配置。严格来说，一个项目需要的是一个设定文件，定义数据库连接信息，安装的应用列表，DIRS等等
+一个应用是一系列便携节点django功能，通常包含模型和视图。打包在一个python包中。django自带了一些应用。这些应用的独特之处是便携，可在多个项目中复用
+
+
+python manage.py startproject pro_name
+pro_name
+  manage.py
+  __pycache__
+    __init__.py
+    setting.py
+    urls.py
+    wsgi.py
+
+
 python manage.py startapp app_name
 app_name
   /migrations
