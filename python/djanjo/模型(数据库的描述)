@@ -1,3 +1,19 @@
+模型是使用python代码对数据库中的数据进行描述。是数据的结构。等效于sql中的create table语句
+
+django通过模型在背后执行sql，返回便利的python数据结构，表示数据库表中的行。还通过模型表示sql无法处理的高层级的概念
+
+安装模型
+将app加入settings.py的INSTALLED_APPS中
+python manage.py check      验证模型
+python manage.py makemigrations app_name    生产语句
+python manage.py sqlmigrate books 0001      查看sql
+python manage.py mirgrate    执行sql
+
+
+Django2.0中编写models类下的ForeignKey错误及解决
+book = models.ForeignKey('BookInfo', on_delete=models.CASCADE)加上on_delete参数就可以
+
+
 配置数据库
 
 setting.py
