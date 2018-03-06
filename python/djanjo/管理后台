@@ -23,3 +23,33 @@ admin.site.register(Publisher)
 admin.site.register(Author)
 admin.site.register(Book)
 以上代码告诉django，为这几个模型提供界面
+
+
+字段可选(blank=True 可为空 null=Ture可为null)
+email=model.EmailField(blank=Ture，null=Ture)
+默认所有字段都设定不为空blank=False
+字段设为空，管理后台就不会把相关的字段粗体显示
+
+verbose_name    自定义标注
+verbose_name='e-mail'   指定字段为email，中间必须有个@
+
+
+from django.contrib import admin
+from .models import Publisher, Author, Book
+
+class AuthorAdmin(admin.ModelAdmin):
+	list_display = ('first_name', 'last_name', 'email')
+	search_fields = ('first_name', 'last_name')
+
+class BookAdmin(admin.ModelAdmin):
+	list_display = ('title', 'publisher', 'publication_date')
+	list_filter = ('publication_date',)		#按日期查找
+	date_hierarchy='publication_date'		#按日期显示
+	ordering=('-publication_date',)			#排序
+	filter_horizontal=('authors',)			#过滤器 与filter_vertial相似
+	raw_id_fields=('publisher',)			#选择器
+
+
+admin.site.register(Publisher)
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Book, BookAdmin)
