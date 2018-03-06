@@ -54,3 +54,12 @@ all().delete()
 字段可选(blank=True 可为空 null=Ture可为null)
 email=model.EmailField(blank=Ture，null=Ture)
 默认所有字段都设定不为空blank=False
+
+
+verbose_name    自定义标注
+verbose_name='e-mail'   指定字段为email，中间必须有个@
+email=model.EmailField(blank=Ture，null=Ture,verbose_name='e-mail')
+
+
+ModelAdmin类
+定制处理模式的方式。包含特定管理后台实例中特定模型的配置
