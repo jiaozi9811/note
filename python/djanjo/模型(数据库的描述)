@@ -49,3 +49,8 @@ obj.delete()        删除
 
 filter().delete()   
 all().delete()
+
+
+字段可选(blank=True 可为空 null=Ture可为null)
+email=model.EmailField(blank=Ture，null=Ture)
+默认所有字段都设定不为空blank=False
