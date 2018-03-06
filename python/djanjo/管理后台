@@ -1,1 +1,25 @@
+在django-admin startproject mysite时，django创建并配置了默认的管理后台，只需创建一个管理用户(超级用户),就可登录管理后台
+python manage.py createsuperuser
 
+启动开发服务器
+python manage.py runserver [ip:port]
+
+管理后台http://ip:port/admin
+
+django.contrib包
+django.contrib.auth       用户鉴别系统
+django.contrib.sessions   支持匿名会话
+django.contrib.comments   用户评注系统
+
+管理后台需要'django.contrib.auth'，'django.contrib.contenttypes'和'django.contrib.sessions'
+
+管理后台由django自带的身份验证框架django.contrib.auth
+
+
+将模型添加到管理后台
+from django.contrib import admin
+from .models import Publisher,Auther,Book
+admin.site.register(Publisher)
+admin.site.register(Author)
+admin.site.register(Book)
+以上代码告诉django，为这几个模型提供界面
