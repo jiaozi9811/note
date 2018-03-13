@@ -1,0 +1,72 @@
+python manage.py createsuperuser --username=joe --email=joe@example.com
+
+创建用户
+>>>from django.contrib.auth.models import User
+>>>user=User.objects.create_user('john','len@len.com','john_password')  #创建用户
+
+
+>>>user.last_name='Lennon'    #修改
+>>>user.save()                #保存
+
+修改密码
+python manage.py changepassword username
+
+>>>from django.contrib.auth.models import User
+>>>u=User.objects.get(username='john')
+>>>u.set_password('new_password')
+>>>u.save()
+
+
+权限
+ModelAdmin类的以下方法可以定制同一类型不同实例的权限
+    has_add_permission()
+    has_change_permission()
+    has_delete_permission()
+    
+    
+默认权限
+INSTALLED_APPS中列出django.contrib.auth后，django模型默认有三个权限:添加，修改和删除。每次运行manage.py migrate命令创建新模型时都会为其赋予这三个权限
+
+分组
+django.contrib.auth.models.Group
+
+
+在web中验证身份
+django使用会话和中间件把用户的身份信息插入request对象，为每个请求提供request.user属性，表示当前用户
+如果未登录，request.user的值是一个AnonymousUser实例，否则是一个User实例
+可以用is_authenticated方法区别
+if request.user.is_authenticated():
+    #处理通过身份验证的用户
+else:
+    #处理匿名用户
+    
+    
+    
+用户登录
+视图使用login()登录用户。它的参数是一个HttpRequest对象和一个User对象
+login()使用django的会话框架把用户的ID保存到会话中。匿名期间设定的会话数据在用户登录后依然存在
+
+示例
+authenticate()和login()的用法
+
+from django.contrib.auth import authenticate,login
+def my_view(request):
+    username=request.POST['username']
+    password=request.POST['password']
+    user=authenticate(username=username,password=password)
+    if user is not None:
+        if user.is_active:
+            login(request,user)
+            #重定向到成功登录的页面
+        else:
+            #返回账号未激活的错误信息
+    else:
+        #返回无效登录的错误信息
+        
+        
+        
+退出用户
+logout(),参数是HttpRequest对象，没有返回值
+from django.contrib.auth import logout
+def logout_view(request):
+    logout(request)
