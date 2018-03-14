@@ -1,0 +1,35 @@
+HTTP方法
+@app.route('/login',methods=['GET','POST']
+
+methods
+    GET       获取资源
+    HEAD      想要获取信息，但是只关心信息头
+    POST      创建一个新资源
+    PUT       完整地替换资源或创建资源
+    DELETE    删除资源
+    OPTIONS   获取资源支持的所有HTTP方法
+    PATCH     局部更新，修改某个已有的资源
+    
+    
+构造URL    url_for
+url_for接受函数名作为第一参数，接受对应url规则的变量部分的命令参数
+
+with app.test_request_context():
+    print url_for('item',id='1')
+    print url_for('item',id=2,next='/') 
+执行
+/item/1/?id=1
+/item/1/?id=2&next=%F
+
+
+跳转(301)和重定向(302,303,305,307)
+flask.redirect(location)    #302
+
+redirect(location)    #302
+redirect(location,code=301)    #301
+
+
+静态文件
+url_for('static',filename='style.css')    生产路径/static/style.css
+
+app=Flask(__name__,static_folder='/tmp'   /static/style.css的路径/tmp/style.css
