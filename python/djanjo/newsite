@@ -18,9 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.admin',           管理后台
     'django.contrib.auth',            身份验证系统
     'django.contrib.contenttypes',    内容类型框架
-    'django.contrib.sessions',        回话框架
-    'django.contrib.messages',        消息框架
-    'django.contrib.staticfiles',     管理静态文件的框架
+    'django.contrib.sessions',        会话框架
+    'django.contrib.messages',        消息传递框架
+    'django.contrib.staticfiles',     一个管理静态文件的框架
 ]
 
 python manage.py migrate      初始化数据库
