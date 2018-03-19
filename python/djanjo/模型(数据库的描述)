@@ -23,6 +23,51 @@ DATABASES = {
 }
 
 
+INSTALLED_APPS = [
+    'django.contrib.admin',           管理后台
+    'django.contrib.auth',            身份验证系统
+    'django.contrib.contenttypes',    内容类型框架
+    'django.contrib.sessions',        会话框架
+    'django.contrib.messages',        消息传递框架
+    'django.contrib.staticfiles',     一个管理静态文件的框架
+]
+
+python manage.py migrate 命令查看INSTALLED_APPS设置并根据settings.py中数据库的设置更改数据库
+
+
+要将应用程序(app)包含到project中,需要将app添加到settings.py的INSTALLED_APPS中
+
+python manage.py makemigrations app_name
+
+
+Model
+每个模型都是django.db.models.Model的子类
+模型的每个属性表示一个数据库字段
+
+创建模型(models.py)
+from django.db import models
+class Model_name(models.Model):
+    vag_name=models.CharField()
+使用模型
+在settings.py的INSTALLED_APPS中添加app_name
+INSTALLED_APPS=[
+    #...
+    'myapp',
+    #...
+]
+
+字段选项
+null        如果为True,字段允许为null.默认为False
+blank       如果为True,字段允许空白.默认为False
+choices     一个可迭代的元祖，用于字段的选择 year_in_school_choices=(('FR','Freshman'),('SO','Sophomore'),'JR',"Junior')
+default     字段默认值
+help_text   用窗体小部件显示额外的‘帮助’文本
+primary_key 如果为True,字段为主键
+unique      如果为True,字段必须是唯一的
+
+默认，django为每个模型提供一个id字段,是个自动递增的主键。如果已有主键，id则不是主键
+id=models.AutoField(primary_key=True)
+
 __contains      like
 icontains       不区分大小写的like
 startswith
