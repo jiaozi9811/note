@@ -1,0 +1,70 @@
+>>> r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
+>>> r.status_code
+200
+>>> r.headers['content-type']
+'application/json; charset=utf8'
+>>> r.encoding
+'utf-8'
+>>> r.text
+u'{"type":"User"...'
+>>> r.json()
+{u'private_gists': 419, u'total_private_repos': 77, ...}
+
+requests.get|post|put|delete|head|options
+
+安装
+pip install requests
+
+
+传递参数
+args={'key1': 'value1','key2': 'value2'}
+r=requests.get("http://httpbin.org/get",params=args)
+
+>>>r.url
+http://httpbin.org/get?key2=value2&key1=value1
+
+
+列表
+args={'key1': 'value1','key2': ['value2','value3']}
+r=requests.get("http://httpbin.org/get",params=args)
+
+>>>r.url
+'http://httpbin.org/get?key1=value1&key2=value2&key2=value3'
+
+
+定制请求头
+>>>url='https://api.github.com/some/endpoint'
+>>>headers={'user-agent': 'my-app/0.0.1'}
+>>>r=requests.get(url,headers=headers
+
+
+post请求
+>>>args={'key1': 'value1','key2': 'value2'}
+>>>r=requests.post('http://httpbin.org',data=args)
+>>>print(r.text)
+r.
+  text        响应内容
+  encoding    编码
+  content     二进制响应内容
+  json        响应json
+  raw         原始响应内容(需设置stream=True)
+  
+  raise_for_status  响应状态
+  status_code       
+  
+  headers     响应头
+  >>> r.headers['Content-Type']
+  
+  
+  超时
+  requests.get('http://github.com',timeout=0.01)
+  
+  
+  错误与异常
+  遇到网络问题      ConnectionError
+  请求不成功        response.raise_for_status抛出HTTPError
+  请求超时          抛出Timeout
+  
+  
+r.headers           响应头部
+r.request.headers   请求头部
