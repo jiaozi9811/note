@@ -1,0 +1,59 @@
+
+生成三维数组
+>>>b=numpy.arange(24).reshape(2,3,4)
+>>>b
+array([[[0,1,2,3],
+        [4,5,6,7],
+        [8,9,10,11]],
+        [[12,13,14,15],
+        [16,17,18,19],
+        [20,21,22,23]]])
+>>>b.ravel()
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,17, 18, 19, 20, 21, 22, 23])
+
+arange.shape
+arange.reshape
+arange.ravel       展平数组
+arange.flatten     与ravel功能相同,不过,flatten会请求分配内存保存结果,ravel只返回数组的视图
+arange.transpose   转置矩阵
+arange.resize      与reshape功能相同,但resize会直接修改所操作的数组
+
+
+数组的组合
+vstack        垂直组合concatenate((a,b),axis=0)
+dstack        深度组合
+hstack        水平组合concatenate((a,b),axis=1)
+concatenate((a,b),axis=0|1)
+colum_stack   列组合,结果与vstack相同
+row_stack     行组合,,结果与hstack相同
+
+
+数据的分割
+hsplit(a,3)   水平分割 split(a,3,axis=1)
+vsplit(a,3)   垂直分割 split(a,3,axis=0)
+dsplit        深度分割 c=arange(27).reshape(3,3,3);dsplit(c,3);
+
+
+数组的属性
+shape
+dtype
+ndim      数组的维度
+size      数组元素的个数
+itemsize  数组中的单个元素在内存所占字节数
+nbytes    整个数组所占存储空间,是itemsize和size的乘积
+T         T属性和transpose函数效果一样
+real      给出复数数组的实部
+imag      给出复数数组的虚部
+flat      返回一个numpy.flatiter对象
+
+tolist()    将数组转换成列表
+astype()    转换数组时指定数据类型
+
+
+eye()     创建单位矩阵,即对角线上的元素均为1,其余的元素均为o的正方形矩阵
+
+np.savetxt("file.txt",arrayname)    保存array
+np.loadtxt("filename",delimiter=‘，’，)
+
+loadtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=Fa
+lse, ndmin=0, encoding='bytes')
