@@ -53,7 +53,70 @@ astype()    转换数组时指定数据类型
 eye()     创建单位矩阵,即对角线上的元素均为1,其余的元素均为o的正方形矩阵
 
 np.savetxt("file.txt",arrayname)    保存array
-np.loadtxt("filename",delimiter=‘，’，)
-
+np.loadtxt("filename",delimiter=‘，’，)   载入文件
 loadtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=Fa
 lse, ndmin=0, encoding='bytes')
+delimiter       分割符
+usecols         读取的字段
+unpack          设置为true,是拆分存储不同列的数据
+
+
+np.average      平均数
+mean            算数平均数
+min
+max|maximum
+ptp             计算数组的取值范围,返回值等于max(array)-min(array)
+median          中位数
+msort           排序
+var             方差
+
+where           根据指定的条件返回满足条件的数组元素的索引值
+take            按照where的索引值从数组中取出相应的元素
+
+convolve
+exp             计算每个元素的指数
+linspace        需要一个起始值和终止值 以及元素的个数   返回一个元素在指定范围内平均分布的数组(np.linspace(-1,0,5))
+
+fill            将数组元素的值设置为一个指定的标量值
+
+
+ndarray对象的方法
+clip            返回一个修剪过的数组.将所有比给定最大值还大的元素设定为给定的最大值,将所有比给定的最小值还小的元素设定为给定的最小值
+compress        返回一个根据给定条件筛选后的数组
+prod            计算数组中所有元素的乘积
+cumprod         计算数组各个元素的累积乘积
+
+ployfit
+sign
+piecewise
+vectorize
+hanning
+
+
+
+矩阵
+创建   创建矩阵时,矩阵的行和行之间用分号隔开,行内元素之间用空格隔开
+mat             arr=np.mat('1 2 3;4 5 6;7 8 9')
+matrix
+bmat
+
+
+arr.T           旋转矩阵
+arr.I           逆矩阵
+
+
+reduce
+accumulate
+reduceat
+outer
+
+
+linalg          linalg模块包含线性代数的函数,使用linalg可以计算逆矩阵,求特征值,解线性方程组以及求解行列式
+
+
+排序
+sort            返回排序后的数组
+lexsort         根据键值的字典序进排序
+argsort         返回输入数组排序后的下标
+msort           沿着第一个轴排序
+sort_complex    对复数按照先实部后虚部的顺序排序
