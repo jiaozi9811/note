@@ -1,0 +1,104 @@
+PIL(python imaging library)
+pillow是PIL的分支,PIL是python的图像处理库
+
+图像存储
+
+图像显示
+
+图像处理
+
+image类
+from PIL import Image
+Image.open("image_name")
+
+
+image.show()    显示图片
+image.save()    保存
+
+创建JPEG缩略图
+from __future__ import print_function
+import os, sys
+from PIL import Image
+
+size = (128, 128)
+
+for infile in sys.argv[1:]:
+    outfile = os.path.splitext(infile)[0] + ".thumbnail"
+    if infile != outfile:
+        try:
+            im = Image.open(infile)
+            im.thumbnail(size)
+            im.save(outfile, "JPEG")
+        except IOError:
+            print("cannot create thumbnail for", infile)
+            
+            
+复制
+image.crop(100,100,400,400)
+image.load()      选出图像
+image.paste()
+image.resize()
+image.retate()    旋转
+image.transpose() 旋转
+
+image.convert()   颜色变换
+image.point()     用于平移图像的像素值
+
+从tar中读取图片
+from PIL import Image,TarIO
+fp=TarIO.TarIO("test/tarname.tar","imagename")
+im=Image.open(fp)
+
+图像的信息
+mode        图像的模式
+size        图像的尺寸
+info        图像信息
+filename    文件名
+format      格式
+width
+height
+
+
+ImageDraw模块   模块对图像提供2D图形.可以使用此模块创建新图像,对现有图像进行注释或修饰，以及生成图像供web使用
+PIL.ImageDraw.Draw(im,mode=None)
+
+ImageEhhance模块  包括许多可用于图像增强的类
+PIL.ImageEnhance.Color    调整图像的色彩
+PIL.ImageEnhance.Contrast 调整对比度
+PIL.ImageEnhance.Brightness 调整亮度
+PIL.ImageEnhance.Sharpness  调整清晰度
+
+ImageFile模块 为图像的打开和保存提供支持
+PIL.ImageFile.Parser()  逐片解码图片
+
+ImageGrab     用于将屏幕或剪贴板的内容复制到PIL图像存储器
+PIL.ImageGrab.grab      截屏
+PIL.ImageGrab.grabclpboard  抓取剪贴板图片的快照
+
+ImageMath     提供了单独的eval,用于评估图像
+PIL.ImageMath.eval
+
+ImageOps      
+PIL.ImageOps.autocontrast     最大化图像对比度
+PIL.ImageOps.colorrize        着色灰度图像
+PIL.ImageOps.crop             删除边框
+PIL.ImageOps.deform           变形
+PIL.ImageOps.equalize         均衡图像直方图
+PIL.ImageOps.expand           添加边框
+PIL.ImageOps.fit              返回图像的大小和裁剪版本
+PIL.ImageOps.flip             垂直翻转图像
+PIL.ImageOps.grayscale        将图像转换为灰度
+PIL.ImageOps.invert           反转图像
+PIL.ImageOps.mirror           水平翻转图像
+PIL.ImageOps.posterize        减少每个颜色通道的位数
+PIL.ImageOps.solarize         反转阀值以上的所有像素值
+
+ImagePalette      包含一个具有相同名称的类来表示调色板映射图像的调色板
+PIL.ImagePalette.ImagePalette   调色板映射图像的调色板
+
+
+ImageStat     计算图像或图像区域的全局统计信息
+PIL.ImageStat.Stat    计算给定图像的统计信息
+
+PSDraw        此模块为postscript打印机提供简单的打印支持,可以通过此模块打印文本,图形和图像
+PIL.PSDraw.PSDraw   打印给定的文件
