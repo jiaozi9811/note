@@ -1,0 +1,52 @@
+http://blog.xiayf.cn/2013/03/30/argparse/
+
+
+argparse是作为optparse的替代
+
+创建解析器对象   parser=argparse.ArgumentParser()
+定义参数         parser.add_argument()
+解析命令行       parser.parse_args()
+
+
+使用argparse的第一步是创建一个解析器对象,并告诉它会有些什么参数.该解析器用于处理命令行参数
+解析器类是ArgumentParser
+
+argparse.ArgumentParser()
+    prog    程序的名称 默认为sys.argv[0]
+    usage   程序用途的描述信息
+    description 程序描述信息
+    epilog  help信息之后的信息
+    parents ArgumentParser对象组成的列表
+    argument_default  参数的全局默认值
+    
+    
+parser.add_argument()    定义参数
+parser.add_argument('-a',action='store',default=False,type=int)
+
+
+parser.parse_args()       解析命令行  
+parse_args可以解析命令行,默认下,参数是从sys.argv[1:]中获取,也可传递自己的参数
+          parse_args()返回的是一个命名空间,包含传递给命令的参数
+
+import argparse
+parser = argparse.ArgumentParser(description='Short sample app')
+parser.add_argument('-a', action="store_true", default=False)
+parser.add_argument('-b', action="store", dest="b")
+parser.add_argument('-c', action="store", dest="c", type=int)
+print parser.parse_args(['-a', '-bval', '-c', '3'])
+
+Namespace(a=True, b='val', c=3)
+
+
+参数动作
+argparse内置6种动作,在解析到一个参数时进行触发
+store         保存参数值,默认动作
+store_const   保存一个被定义为参数规格一部分的值
+store_ture/store_false  保存相应的布尔值
+append        将值保存到一个列表中
+append_const  将一个定义在参数规格中的值保存到一个列表中
+version       打印版本信息
+
+
+
+parser = argparse.ArgumentParser(add_help=True,version='1.0')   添加帮助和版本信息
