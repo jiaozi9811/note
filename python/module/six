@@ -1,0 +1,9 @@
+Python2和Python3的兼容库
+
+six并不是让Python2写的代码兼容Python3，如果需要迁移工具，那么要找的是2to3。如果代码需要同时运行在Python2和Python3上，那么就需要six
+
+(为什么叫six？ 因为2 * 3 = 6。为什么不是+，因为*更牛逼.之所以使用 2*3 而不是 2+3 ，是因为 five 这个名字已经被 Zope Five 所使用)
+
+six.PY2=sys.version_info[0]==2
+six.PY3=sys.version_info[0]==3
+six.PY34=sys.version_info[0:2]>=(3,4)
