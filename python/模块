@@ -1,0 +1,21 @@
+sh    系统管理神器
+
+subprocess
+
+Python的命令行界面库
+curses
+Urwid
+Blessings
+
+collections
+
+functools
+
+glob
+
+multiprocessing   多进程模块
+threading
+
+queue
+
+pandas
