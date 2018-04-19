@@ -1,0 +1,6 @@
+sh
+
+sh(前身pbs)是基于python完全的subprocess接口,允许像调用函数一样调用
+
+sh.ls("/")
+sh.Command("/home/run.sh")
