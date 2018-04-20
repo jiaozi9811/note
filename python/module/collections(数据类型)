@@ -1,0 +1,77 @@
+Python拥有一些内置的数据类型，比如str, int, list, tuple, dict等，collections(Container datatypes)模块在这些内置数据类型的基础上，提供了几个额外的数据类型：
+namedtuple()    生成可以使用名字来访问元素内容的tuple子类
+deque           双端队列，可以快速的从另外一侧追加和推出对象
+Counter         计数器，主要用来计数
+OrderedDict     有序字典
+defaultdict     带有默认值的字典
+
+* namedtuple   factory function for creating tuple subclasses with named fields
+* deque        list-like container with fast appends and pops on either end
+* ChainMap     dict-like class for creating a single view of multiple mappings
+* Counter      dict subclass for counting hashable objects
+* OrderedDict  dict subclass that remembers the order entries were added
+* defaultdict  dict subclass that calls a factory function to supply missing values
+* UserDict     wrapper around dictionary objects for easier dict subclassing
+* UserList     wrapper around list objects for easier list subclassing
+* UserString   wrapper around string objects for easier string subclassing
+
+
+ChainMap
+用来将多个dict组成一个list(比喻),
+>>> a = {'a': 'A', 'c': 'C'}
+>>> b = {'b': 'B', 'c': 'D'}
+>>> m = ChainMap(a, b)
+>>> m
+ChainMap({'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+>>> m['a']
+'A'
+
+Counter
+
+>>>cnt = Counter()
+>>>for word in ['red', 'blue', 'red', 'green', 'blue', 'blue']:
+...     cnt[word] += 1
+>>> cnt
+Counter({'blue': 3, 'red': 2, 'green': 1})
+
+方法
+  elements()          以统计的数量，返回相应数量的元素
+  most_common([0])    以元素出现的数量排序
+  subtract([])        a.subtract(b)  一个counter中的元素减去另一个counter中对应元素所得的值
+
+  
+  deque(double-ended queue)
+    append        右侧添加
+    appendleft    左侧添加
+    clear         删除所有元素
+    copy          
+    count       
+    extent        扩展
+    entendleft
+    index         找出元素的索引值
+    insert        插入
+    pop           在右侧移除并返回一个元素
+    popleft
+    remove(v)     删除第一次出现的值
+    reverse       翻转
+    rotate        旋转
+    maxlen      
+    
+
+nametuple
+主要用来产生可以使用名称访问元素的数据对象,通常用于增强代码的可读性
+
+
+>>>point=namedtuple('Point',[x','y'])
+>>>p=point(1,2)
+>>>p.x
+>>>p.y
+
+
+
+defaultdict
+defaultdict(default_factory)在普通的dict之上添加了default_factory,key值不存在时会自动生成相应类型的值.default_factory参数可以指定成list,set,int等合法类型
+
+
+ordereddict
+是dict的一个subclass(子类)
