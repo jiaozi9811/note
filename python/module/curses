@@ -1,1 +1,15 @@
 curses是基于文本的终端的提供独立于终端的屏幕绘画和键盘处理功能
+curses库 对基于文本的终端提供了绘图和操作键盘的基本功能.提供了控制终端的一些功能,如移动光标,滚动屏幕,擦除区域等
+curses库起初是写给BSD的.后被ncurses取代
+curses不支持windows平台,可以使用console模块
+
+
+
+python的curses模块完全封装了curses提供的c语言函数
+
+
+初始化
+import curses
+stdscr = curses.initscr()
+
+结束化
