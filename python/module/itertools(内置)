@@ -1,0 +1,61 @@
+itertools 模块包含了一系列用来产生不同类型迭代器的函数或类，这些函数的返回都是一个迭代器，我们可以通过 for 循环来遍历取值，也可以使用 next() 来取值。
+
+itertools模块提供的迭代器函数有以下几种类型：
+    无限迭代器：生成一个无限序列，比如自然数序列 1, 2, 3, 4, ...；
+    有限迭代器：接收一个或多个序列（sequence）作为参数，进行组合、分组和过滤等；
+    组合生成器：序列的排列、组合，求序列的笛卡儿积等；
+
+无限迭代器
+itertools.count(start=0, step=1)
+itertools.cycle(iterable)
+itertools.repeat(object[, times])
+有限迭代器
+itertools.chain(*iterables)
+itertools.compress(data, selectors)
+itertools.dropwhile(predicate, iterable)
+itertools.groupby(iterable[, key])
+itertools.ifilter(predicate, iterable)
+itertools.ifilterfalse(predicate, iterable)
+itertools.islice(iterable, stop)
+itertools.imap(function, *iterables)
+itertools.starmap(function, iterable)
+itertools.tee(iterable[, n=2])
+itertools.takewhile(predicate, iterable)
+itertools.izip(*iterables)
+itertools.izip_longest(*iterables[, fillvalue])
+组合生成器
+itertools.product(*iterables[, repeat])
+itertools.permutations(iterable[, r])
+itertools.combinations(iterable, r)
+itertools.combinations_with_replacement(iterable, r)
+
+
+count(start=0,step=1)
+  count接受两个参数，一个是开始值，默认为0.一个为步长，默认为1。
+  数值如果超过sys.maxint，计数器溢出并继续从sys.maxint-1开始计算
+
+def count(start=0, step=1):
+    n = start
+    while True:
+        yield n
+        n += step
+等同于(start + step * i for i in count())
+
+
+cycle(iterable)
+  创建一个迭代器,对iterable中的元素执行反复循环.内部会生成iterable的元素的一个副本,此副本用于返回循环中的重复项
+
+  
+repeat(object[,times])      用于反复生成一个object.times是重复的次数
+
+
+chain(*iterables)
+  将多个迭代器组合成一个
+  
+  
+compress(data,selectors)    提供一个选择列表,对原始数据进行筛选
+
+dropwhile(predicate,iterable)   创建一个迭代器,只要函数predicate(item)为true,则丢弃iterable中的项.如果predicate返回false，则生成iterable中的项和所有后续项
+
+
+groupby(iterable[,key])   以key进行分组，生成一个迭代器
