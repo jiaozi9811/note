@@ -116,5 +116,13 @@ string.upper()                  转换string 中的小写字母为大写
 string.zfill(width)             返回长度为width 的字符串，原字符串string 右对齐，前面填充0
 
 
+split
+string的split()方法只适应于简单的字符串分割。不支持多个分隔符或分隔符周围有不确定的空格
+需要更加灵活的切割字符串方法时，最好使用re.split()
 
+line = 'asdf fjdk; afed, fjek,asdf, foo'
+re.split(r'[;,\s]\s*', line)
+re.split(r'(?:,|;|\s)\s*', line)
 
+startswith()和endswith()方法提供了一个非常方便的方式去做字符串开头和结尾的检查
+[name for name in filenames if name.endswith(('.c', '.h')) ]
