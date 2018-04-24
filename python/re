@@ -1,0 +1,7 @@
+
+split
+string的split()方法只适应于简单的字符串分割。不支持多个分隔符或分隔符周围有不确定的空格
+
+line = 'asdf fjdk; afed, fjek,asdf, foo'
+re.split(r'[;,\s]\s*', line)
+re.split(r'(?:,|;|\s)\s*', line)
