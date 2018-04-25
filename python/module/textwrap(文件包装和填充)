@@ -1,0 +1,20 @@
+     该模块提供了三个便捷的方法：wrap，fill和decent，也提供了TextWrapper类。其中TextWrapper提供了全套的方法，前三个方法只是便捷的使用，因为在内部的运行中也是建立了一个TextWrapper对象。如果程序中需要大量运用这几个方法，最好还是创建TextWrapper比较快一些
+
+textwrap.wrap(text,[width[,…]])      将一个字符串按照width的宽度进行切割，切割后返回list
+
+textwrap.fill(text[, width[, …]])    和上面wrap方法类似，不过返回结果是不一样
+
+
+textwrap.dedent(text)            用来移除不被期望的空白符
+
+
+class textwrap.TextWrapper(…)
+    width：宽度最大值，默认是70
+    expand_tabs：默认为true，如果设为true，字符串里的所有制表符会被变成空格，相当于字符串方法的expandtabs()
+    replace_whitespace如果设为true，会把字符串中的空白符转化为空格
+    drop_whitespace：默认true，如果设为true，每行开头和结尾的空白符会被去掉，如果去掉的空白符占据了整行，就会把整行去掉
+    initial_indent:进行缩进
+    subsequent_indent:初始化除了第一行的所有行
+    fix_sentence_endings：默认为false，如果为true，那么就会试图检查每个句子的结尾是两个空格分割，这个只在等宽字体里被需要
+    break_long_words：默认为true，切断长句子来让每行的数据宽度都小于width
+    break_on_hyphens：连字符相关，默认true wrap(text) fill(text)上面两个方法和最上面的类似
