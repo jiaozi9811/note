@@ -1,0 +1,5 @@
+fnmatch主要是用来判断一个文件名是否匹配”Unix shell-style wildcards”这种模式,就是平常用的那种ls *.log这样，看是否匹配
+
+fnmatch.fnmatch     一个布尔函数，返回为True或者Faulse。判断文件名是否匹配某个模式
+fnmatch.filter      过滤列表中匹配某个模式的文件名
+fnmatch.fnmatchcase 匹配大小写
