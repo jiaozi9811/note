@@ -1,0 +1,8 @@
+
+random.random()     生成一个0到1的随机浮点数
+random.uniform(a,b) 生成一个a与b之间的浮点数
+random.randint(a,b) 生成一个a与b之间的整数
+random.randrange([start],stop[,step])   在指定的范围内,按step生成的集合中，获取一个随机数
+random.choice(sequence) 从sequence序列中获取一个随机元素
+random.(x[,random])  用于将一个列表中的元素打乱
+random.sample(sequence,k) 从指定序列中随机获取指定长度的片段
