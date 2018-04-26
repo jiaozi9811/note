@@ -1,0 +1,5 @@
+fractions提供了对分数类型的支持
+
+Fraction类 是fractions模块的核心,继承了numbers.Rational类并实现了其方法
+
+class fractions.Fraction(numerator=0, denominator=1)
