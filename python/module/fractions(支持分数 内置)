@@ -3,3 +3,29 @@ fractions提供了对分数类型的支持
 Fraction类 是fractions模块的核心,继承了numbers.Rational类并实现了其方法
 
 class fractions.Fraction(numerator=0, denominator=1)
+
+
+>>> from fractions import Fraction
+>>> a = Fraction(5, 4)
+>>> b = Fraction(7, 16)
+>>> print(a + b)
+27/16
+>>> print(a * b)
+35/64
+>>> # Getting numerator/denominator
+>>> c = a * b
+>>> c.numerator
+35
+>>> c.denominator
+64
+>>> # Converting to a float
+>>> float(c)
+0.546875
+>>> # Limiting the denominator of a value
+>>> print(c.limit_denominator(8))
+4/7
+>>> # Converting a float to a fraction
+>>> x = 3.75
+>>> y = Fraction(*x.as_integer_ratio())
+>>> y
+Fraction(15, 4)
