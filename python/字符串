@@ -6,6 +6,13 @@ False
 >>>'nm' not in 'abcd' 
 True
 
+
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    sep     分隔符
+    end     结束符
+    file    输出到文件
+    flush   whether to forcibly flush the stream
+
 连接符（+）
 
 只适用于字符串的操作符
