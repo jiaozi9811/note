@@ -1,0 +1,34 @@
+mmap是一种虚拟内存映射文件的方法，即将一个文件或者其它对象映射到进程的地址空间，实现文件磁盘地址和进程虚拟地址空间中一段虚拟地址的一一对映关系
+
+mmap(filedesc, length, tagname='') #windows
+mmap(filedesc, length, flag=MAP_SHARED, prot=PROT_READ|PROT_WRITE) #Unix
+
+fileno:文件描述符,可以是file对象的fileno()方法,或者来自os.open(),在调用mmap()之前打开文件,不再需要文件时要关闭
+length:要映射文件部分的大小(以字节为单位),这个值为0,则映射整个文件,如果大小大于文件当前大小,则扩展这个文件。
+flags:
+  mmap.MAP_PRIVATE：这段内存映射只有本进程可用；
+  mmap.MAP_SHARED：将内存映射和其他进程共享，所有映射了同一文件的进程，都能够看到其中一个所做的更改；
+prot：
+  mmap.PROT_READ,
+  mmap.PROT_WRITE
+  mmap.PROT_WRITE | mmap.PROT_READ  含义是同时可读可写。
+access：在mmap中有可选参数access的值有
+  ACCESS_READ：读访问
+  ACCESS_WRITE：写访问，默认
+  ACCESS_COPY：拷贝访问，不会把更改写入到文件，使用flush把更改写到文件
+  
+  
+方法  
+mmap.close()   关闭mmap对应的文件
+mmap.find(str, start=0) 从start下标开始，在mmap中从左往右寻找子串str最早出现的下标
+mmap.flush([offset, n]) 把mmap中从offset开始的n个字节刷到对应的文件中；
+mmap.move(dstoff, srcoff, n)  等于mmap[dstoff:dstoff+n] = mmap[srcoff:srcoff+n]，把从 srcoff 开始的 n 个字节复制到从 dstoff 开始的n个字节，可能会覆盖重叠的部分。
+mmap.read(n) 返回一个字符串，从mmap对应的文件中最多读取n个字节，将会把mmap对应文件的位置指针向后移动；
+mmap.read_byte()返回一个1字节长的字符串，从mmap对应的文件中读1个字节，要是已经到了EOF还调用read_byte()，则抛出异常ValueError；
+m.readline()  返回一个字符串，从mmap对应文件的当前位置到下一个'\n'，当调用readline()时文件位于EOF，则返回空字符串；
+m.resize(n) ***有问题，执行不了***把 m 的长度改为 n，m 的长度和 m 对应文件的长度是独立的；
+m.seek(pos, how=0)同file对象的seek操作，改变m对应的文件的当前位置；
+m.size()返回m对应文件的长度(不是m对象的长度len(m))
+m.tell()返回m对应文件的当前位置；
+m.write(str)把str写到m对应文件的当前位置，如果从m对应文件的当前位置到m结尾剩余的空间不足len(str)，则抛出 ValueError；
+m.write_byte(byte)把1个字节（对应一个字符）写到 m 对应文件的当前位置，实际上 m.write_byte(ch) 等于 m.write(ch)。如果 m 对应文件的当前位置在 m 的结尾，也就是 m 对应文件的当前位置到 m 结尾剩余的空间不足1个字节，write() 抛出异常ValueError，而 write_byte() 什么都不做
