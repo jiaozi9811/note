@@ -8,6 +8,13 @@ f.next()
 next(f)
 
 
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    sep     分隔符
+    end     结束符
+    file    输出到文件
+    flush   whether to forcibly flush the stream
+
+
 内建函数
     open()
     file()
@@ -15,6 +22,7 @@ next(f)
 file_object=open(file_name,access_mode='r',buffering=-1)
         access_mode     文件打开的模式 r w a(追加) U(通用换行符支持)||使用r或U打开的文件必须存在||使用w打开的文件若存在则首先清空然后(重新)创建
         buffering       指示访问文件所采用的缓冲方式 0表示不缓冲 1表示只缓冲一行数据 其它大于1的值代表使用给定值作为缓冲区大小. 不提供该参数或者给定负值代表使用系统默认缓冲机制
+
 
 
 访问模式
@@ -169,3 +177,7 @@ os.path模块中的路径名访问函数
         islink()                指定路径是否存在且为一个符号链接
         ismount()               指定路径是否存在且为一个挂载点
         samefile()              两个路径名是否指向同个文件
+        
+        
+  readinto()        将文件读入缓存区
+  memoryview()      对已存在的缓冲区文件执行切片操作
