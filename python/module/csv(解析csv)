@@ -1,0 +1,22 @@
+csv(comma-separated values)
+
+csv.reader(csvfile,dialect='excel',**fmtparams)
+    dialect   编码风格
+    方法: line_num,dialect,next()
+    
+    
+csv.writer(csvfile,dialect='excel',**fmtparams)
+    方法:writerow()[一行一行写入],writerows()[一次写入多行],writeheader
+    
+    
+csv.register_dialect(name,[dialect,]**fmtparams)
+    用于定义dialect
+    
+csv.unregister_dialect(name)    注销dialect
+    get_dialect(name)
+    list_dialects()
+    field_size_limit([new_limit])
+    
+csv.DictReader
+csv.DictWriter
+    
