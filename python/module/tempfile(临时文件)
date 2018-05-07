@@ -1,0 +1,30 @@
+TemporaryFile
+NameTemporaryFile
+TemporaryDirectory
+SpooledTemporaryFile
+mkstemp()
+mkdtemp()
+
+tempfile.TemporaryFile(mode='w+b', buffering=None, encoding=None, newline=None, suffix=None, prefix=None, dir=None)
+
+tempfile.NamedTemporaryFile(mode='w+b', buffering=None, encoding=None, newline=None, suffix=None, prefix=None, dir=None, delete=True)
+如果delete为true（默认值），则该文件在关闭时立即被删除
+
+tempfile.SpooledTemporaryFile(max_size=0, mode='w+b', buffering=None, encoding=None, newline=None, suffix=None, prefix=None, dir=None)
+tempfile.TemporaryDirectory(suffix=None, prefix=None, dir=None)
+
+tempfile.mkstemp(suffix=None, prefix=None, dir=None, text=False)
+以尽可能安全的方式创建临时文件。mkstemp() 的用户负责在完成时删除临时文件
+
+tempfile.mkdtemp(suffix=None, prefix=None, dir=None)
+以最安全的方式创建临时目录。该目录是可读，可写的
+
+tempfile.gettempdir()返回用于临时文件的目录的名称
+tempfile.gettempdirb()与 gettempdir() 相同，但返回值以字节为单位
+tempfile.gettempprefix()返回用于创建临时文件的文件名前缀
+
+tempfile.tempdir
+
+
+
+
