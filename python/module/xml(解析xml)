@@ -1,0 +1,23 @@
+xml.etree.ElementTree     ElementTree API一个简单和轻量的xml处理器
+xml.dom                   DOM API定义
+xml.dom.minidom           最小的DOM实现
+xml.dom.pulldom           支持构建部分DOm树
+xml.sax                   SAX2基类和便利功能
+
+
+xml.etree.ElementTree 模块实现用于解析和创建XML数据的简单有效的API
+ET有两个类
+  ElementTree   将整个xml文档解析为树
+  Element       表示树中的节点
+
+Element.iter()
+Element.findall()
+Element.find()
+Element.text
+Element.get()
+Element.set()
+Element.append()
+Element.remove()
+
+ElementTree.write()
+ElementTree.parse(source,parser=None) 将xml解析到元素树中
