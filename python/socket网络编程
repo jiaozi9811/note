@@ -1,0 +1,106 @@
+decode()    将字节串转化为字符串
+encode()    将字符串转化为字节串
+
+sock
+    SOCK_DGRAM      在ip网络上使用UDP协议
+    
+    sendto||||recvfrom        接受信息
+    
+    connect  recv|||send
+    getpeername()     获取连接的地址
+    
+    
+TCP
+  SYN         请求
+  SYN-ACK     答复
+  ACK         确认
+  
+  FIN
+  FIN-ACK
+  ACK
+  
+  
+  socket(family,type[,protocal])
+  
+  socket.AF_UNIX          用于同一台机器上的进程通信(即本机通信)
+  socket.AF_INET          用于服务器与服务器之间的网络通信
+  socket.AF_INET6         基于IPV6方式的服务器与服务器之间的网络通信
+  socket.SOCK_STREAM      基于TCP的流式socket通信
+  socket.SOCK_DGRAM       基于UDP的数据报式socket通信
+  socket.SOCK_RAW         原始套接字
+  socker.SOCK_SEQPACKET   可靠的连续数据服务
+  
+创建tcp socket
+sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+创建udp socket
+sock=socket.socket(socket.AF_INET,socket.SOCK_DGREAM)
+
+
+socket函数
+服务器端socket函数
+sock.bind(address)        将套接字绑定到地址,在AF_INET下,以tuple(host,port)的方式传入sock.bind((host,port))
+sock.listen(backlog)      监听tcp传入连接.backlog指定在拒绝连接前,系统可以挂起的最大连接数,最小为1
+sock.accept()             接受tcp连接并返回(conn,address),conn为新的套接字对象,address是连接客户端的地址
+
+客户端socket函数
+sock.connect(address)     连接到address的套接字,address的格式为tuple(host,port)
+sock.connect_ex(address)  功能与connect相同.成功返回0,失败返回errno的值
+
+公共socket函数
+sock.recv(bufsize[,flag])     接受tcp套接字的数据,数据以字符串形式返回.buffsize指定接受的最大数据量.flag提供其他信息,可忽略
+sock.send(string[,flag])      发送tcp数据,将字符串中的数据发送到连接的套接字,返回值是发送的字节数量
+sock.sendall(string[,flag])   完整发送tcp数据,将字符串中的数据发送到套接字,但返回前尝试发送所有数据.成功返回None,失败抛出异常
+sock.recvfrom(bufsize[,flag]) 接受udp套接字的数据u,与recv()相似,但返回值是tuple(data,address).data是包含接受数据的字符串,address是发送数据的套接字地址
+sock.sendto(string[,flag],address)  发送udp数据,将数据发送到套接字
+sock.close()                  关闭套接字
+sock.getpeername()            返回套接字的远程地址,返回值是tuple(ipaddr,port)
+sock.getsockname()            返回套接字自己的地址,返回值是tuple(ipaddr,port)
+sock.setsockopt(level,optname,value)  设置给定套接字选项的值
+sock.getsockopt(level,optname[,buflen]) 返回套接字选项的值
+sock.settimeout(timeout)      设置套接字操作的超出时间.timeout是浮点数,值为none表示永远不超时
+sock.gettimeout()             返回当前超时值
+sock.fileno()                 返回套接字的文件描述
+sock.setblocking(flag)        flag为0,则套接字设置为非阻塞模式,否则设置为阻塞模式(默认值)
+sock.makefile()               创建一个与该套接字相关的文件
+
+
+Socket 编程实践之服务器端代码
+import socket
+
+HOST = '192.168.1.100'
+PORT = 8001
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #创建套接字
+s.bind((HOST, PORT))    #绑定套接字到本地IP与端口
+s.listen(5)   #开始监听链接
+
+print 'Server start at: %s:%s' %(HOST, PORT)
+print 'wait for connection...'
+
+while True:   #进入循环，不断接受客户端的链接请求
+    conn, addr = s.accept()
+    print 'Connected by ', addr
+
+    while True:
+        data = conn.recv(1024)  #接收客户端传来的数据
+        print data
+
+        conn.send("server received you message.")  #发送给对方发送数据
+
+# conn.close()  #传输完毕后，关闭套接字
+
+Socket 编程实践之客户端代码
+import socket
+HOST = '192.168.1.100'
+PORT = 8001
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+
+while True:
+    cmd = raw_input("Please input msg:")
+    s.send(cmd)
+    data = s.recv(1024)
+    print data
+
+    #s.close(
