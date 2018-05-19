@@ -1,0 +1,11 @@
+读取文件
+open(name[,mode[,buffering]])
+    mode      r()读,w(写)，a(追加),b(二进制模式),+(读/写模式)
+    buffer    设为0,无缓存;设为1,数据写入缓存,使用flus或close函数才将数据写入磁盘;设置大于1,代表缓冲区的大小;-1或任何负数,代表默认缓冲区的大小
+    
+方法
+    read([size])        一次性读取
+    readline()          读取一行
+    readlines()         一次性读取,按行返回列表
+    write()             将数据写入缓存
+    close()             将数据写入文件
