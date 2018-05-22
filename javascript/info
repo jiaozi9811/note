@@ -1,0 +1,367 @@
+数组
+[1, 2, 3.14, 'Hello', null, true]
+new Array(1, 2, 3)
+方法
+indexOf()   搜索一个指定的元素的位置
+slice()     截取Array的部分元素，然后返回一个新的Array
+push()      向Array的末尾添加若干元素
+pop()       把Array的最后一个元素删除掉
+unshift()   往Array的头部添加若干元素
+shift()     把Array的第一个元素删掉
+sort()      对当前Array进行排序
+reverse()   把整个Array的元素给掉个个，也就是反转
+splice()    从指定的索引开始删除若干元素，然后再从该位置添加若干元
+concat()    把当前的Array和另一个Array连接起来，并返回一个新的Array
+join()
+
+对象
+avaScript用一个{...}表示一个对象，键值对以xxx: xxx形式申明，用,隔开
+var person = {
+    name: 'Bob',
+    age: 20,
+    tags: ['js', 'web', 'mobile'],
+    city: 'Beijing',
+    hasCar: true,
+    zipcode: null
+};
+
+person.name; // 'Bob'
+person.zipcode; // null
+
+
+变量
+申明一个变量用var语句
+
+
+null和undefined
+  null表示一个“空”的值
+  undefined表示值未定义
+
+反引号 ` ... ` 多行字符串
+
+字符串方法
+length
+toUpperCase()   把字符串全部变为大写
+toLowerCase()   把字符串全部变为小写
+indexOf()       搜索指定字符串出现的位置
+substring()     返回指定索引区间的子串
+    var s = 'hello, world' ; s.substring(0, 5);s.substring(7);
+    
+条件判断 
+if () { ... } else { ... }
+循环
+for循环
+for ... in循环
+while循环
+do { ... } while()循环
+
+
+Map 一组键值对的结构
+get
+set
+has
+delete
+
+
+Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key
+创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set
+
+
+for ... of循环
+
+函数
+function abs(x) {
+    if (x >= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+
+
+var abs = function (x) {
+    if (x >= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+};
+
+arguments 可以获得调用者传入的所有参数
+
+rest参数
+rest参数只能写在最后   
+传入的参数先绑定  多余的参数以数组形式交给变量rest
+
+
+window    全局对象
+全局作用域的变量实际上被绑定到window的一个属性
+
+let
+用let替代var可以申明一个块级作用域的变量
+
+const来定义常量
+const与let都具有块级作用域
+
+this是一个特殊变量，它始终指向当前对象
+
+apply()
+call()
+
+
+map/reduce
+filter()    把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素
+
+
+generator（生成器
+generator由function*定义（注意多出的*号），并且，除了return语句，还可以用yield返回多次
+调用generator对象有两个方法，一是不断地调用generator对象的next()方法
+第二个方法是直接用for ... of循环迭代generator对象，这种方式不需要我们自己判断done
+
+
+typeof  操作符获取对象的类型
+
+typeof 123; // 'number'
+typeof NaN; // 'number'
+typeof 'str'; // 'string'
+typeof true; // 'boolean'
+typeof undefined; // 'undefined'
+typeof Math.abs; // 'function'
+typeof null; // 'object'
+typeof []; // 'object'
+typeof {}; // 'object'
+
+包装对象
+包装对象用new创建
+number、boolean和string都有包装对象
+
+
+Date
+Date对象用来表示日期和时间
+
+var now = new Date();
+now; // Wed Jun 24 2015 19:49:22 GMT+0800 (CST)
+now.getFullYear(); // 2015, 年份
+now.getMonth(); // 5, 月份，注意月份范围是0~11，5表示六月
+now.getDate(); // 24, 表示24号
+now.getDay(); // 3, 表示星期三
+now.getHours(); // 19, 24小时制
+now.getMinutes(); // 49, 分钟
+now.getSeconds(); // 22, 秒
+now.getMilliseconds(); // 875, 毫秒数
+now.getTime(); // 1435146562875, 以number形式表示的时间戳
+d.toLocaleString();本地时间
+d.toUTCString();UTC时间
+
+
+RegExp(正则表达式)
+\d可以匹配一个数字
+\w可以匹配一个字母或数字
+.可以匹配任意字符
+*表示任意个字符（包括0个）
++表示至少一个字符
+?表示0个或1个字符
+{n}表示n个字符
+{n,m}表示n-m个字符
+\s可以匹配一个空格（也包括Tab等空白符）
+[0-9a-zA-Z\_]可以匹配一个数字、字母或者下划线
+[0-9a-zA-Z\_]+可以匹配至少由一个数字、字母或者下划线组成的字符串
+[a-zA-Z\_\$][0-9a-zA-Z\_\$]*可以匹配由字母或下划线、$开头，后接任意个由一个数字、字母或者下划线、$组成的字符串
+[a-zA-Z\_\$][0-9a-zA-Z\_\$]{0, 19}更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）
+^表示行的开头
+$表示行的结束
+
+创建正则表达式
+第一种方式是直接通过/正则表达式/写出来，第二种方式是通过new RegExp('正则表达式')创建一个RegExp对象
+
+var re1 = /ABC\-001/;
+var re2 = new RegExp('ABC\\-001');
+
+RegExp对象的
+test()方法用于测试给定的字符串是否符合条件
+exec()方法提取出子串,匹配成功，会返回一个Array，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串
+
+g表示全局匹配
+
+
+
+JSON(JavaScript Object Notation)
+JSON实际上是JavaScript的一个子集
+
+在JSON中，一共就这么几种数据类型：
+  number：和JavaScript的number完全一致；
+  boolean：就是JavaScript的true或false；
+  string：就是JavaScript的string；
+  null：就是JavaScript的null；
+  array：就是JavaScript的Array表示方式——[]；
+  
+JSON还定死了字符集必须是UTF-8
+JSON的字符串规定必须用双引号""，Object的键也必须用双引号""
+
+序列化(转换json)
+JSON.stringify(xiaoming)
+JSON.stringify(xiaoming, null, '  ');
+JSON.stringify(xiaoming, ['name', 'skills'], '  '); 只输出指定的属性
+
+反序列化
+用JSON.parse()把它变成一个JavaScript对象
+
+面向对象编程
+JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程
+xiaoming.__proto__ = Bird;
+
+
+构造函数
+如果写了new，它就变成了一个构造函数，它绑定的this指向新创建的对象，并默认返回this，也就是说，不需要在最后写return this;
+
+用new Student()创建的对象还从原型上获得了一个constructor属性，它指向函数Student本身：
+xiaoming.constructor === Student.prototype.constructor; // true
+Student.prototype.constructor === Student; // true
+Object.getPrototypeOf(xiaoming) === Student.prototype; // true
+xiaoming instanceof Student; // true
+
+原型继承
+
+
+
+浏览器对象
+
+window对象不但充当全局作用域，而且表示浏览器窗口
+window对象有innerWidth和innerHeight属性.获取浏览器窗口的内部宽度和高度。内部宽高是指除去菜单栏、工具栏、边框等占位元素后，用于显示网页的净宽高
+outerWidth和outerHeight属性，可以获取浏览器窗口的整个宽高
+
+
+navigator
+navigator对象表示浏览器的信息，最常用的属性包括
+    navigator.appName：浏览器名称；
+    navigator.appVersion：浏览器版本；
+    navigator.language：浏览器设置的语言；
+    navigator.platform：操作系统类型；
+    navigator.userAgent：浏览器设定的User-Agent字符串。
+    
+    
+浏览器对象
+阅读: 115248
+JavaScript可以获取浏览器提供的很多对象，并进行操作。
+
+window
+window对象不但充当全局作用域，而且表示浏览器窗口。
+
+window对象有innerWidth和innerHeight属性，可以获取浏览器窗口的内部宽度和高度。内部宽高是指除去菜单栏、工具栏、边框等占位元素后，用于显示网页的净宽高。
+
+兼容性：IE<=8不支持。
+
+'use strict';
+
+// 可以调整浏览器窗口大小试试:
+console.log('window inner size: ' + window.innerWidth + ' x ' + window.innerHeight);
+
+ Run
+对应的，还有一个outerWidth和outerHeight属性，可以获取浏览器窗口的整个宽高。
+
+navigator
+navigator对象表示浏览器的信息，最常用的属性包括：
+
+navigator.appName：浏览器名称；
+navigator.appVersion：浏览器版本；
+navigator.language：浏览器设置的语言；
+navigator.platform：操作系统类型；
+navigator.userAgent：浏览器设定的User-Agent字符串。
+'use strict';
+
+console.log('appName = ' + navigator.appName);
+console.log('appVersion = ' + navigator.appVersion);
+console.log('language = ' + navigator.language);
+console.log('platform = ' + navigator.platform);
+console.log('userAgent = ' + navigator.userAgent);
+
+ Run
+请注意，navigator的信息可以很容易地被用户修改，所以JavaScript读取的值不一定是正确的。很多初学者为了针对不同浏览器编写不同的代码，喜欢用if判断浏览器版本，例如：
+
+var width;
+if (getIEVersion(navigator.userAgent) < 9) {
+    width = document.body.clientWidth;
+} else {
+    width = window.innerWidth;
+}
+但这样既可能判断不准确，也很难维护代码。正确的方法是充分利用JavaScript对不存在属性返回undefined的特性，直接用短路运算符||计算：
+
+
+screen
+screen对象表示屏幕的信息，常用的属性有
+      screen.width：屏幕宽度，以像素为单位；
+      screen.height：屏幕高度，以像素为单位；
+      screen.colorDepth：返回颜色位数，如8、16、24
+      
+      
+      
+location
+location对象表示当前页面的URL信息
+      location.href
+      location.protocol; // 'http'
+      location.host; // 'www.example.com'
+      location.port; // '8080'
+      location.pathname; // '/path/index.html'
+      location.search; // '?a=1&b=2'
+      location.hash; // 'TOP'
+      
+      location.assign() 加载一个新页面
+      location.reload() 重新加载
+      
+
+
+document
+document对象表示当前页面。由于HTML在浏览器中以DOM形式表示为树形结构，document对象就是整个DOM树的根节点。
+document的title属性是从HTML文档中的<title>xxx</title>读取的，但是可以动态改变
+
+getElementById()和getElementsByTagName()可以按ID获得一个DOM节点和按Tag名称获得一组DOM节点;getElementsByClassName(
+cookie属性，可以获取当前页面的Cookie;为了确保安全，服务器端在设置Cookie时，应该始终坚持使用httpOnly
+
+
+history
+history对象保存了浏览器的历史记录;back()或forward ()，相当于用户点击了浏览器的“后退”或“前进”按钮
+
+
+操作DOM
+更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容；
+遍历：遍历该DOM节点下的子节点，以便进行进一步操作；
+添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；
+删除：将该节点从HTML中删除，相当于删掉了该DOM节点的内容以及它包含的所有子节点。
+
+更新
+修改节点的文本，方法有两种
+一种是修改innerHTML属性
+第二种是修改innerText或textContent属性;两者的区别在于读取属性时，innerText不返回隐藏元素的文本，而textContent返回所有文本
+
+style属性对应所有的CSS，可以直接获取或设置
+
+
+插入DOM
+appendChild
+
+insertBefore    插入到指定的位置
+parentElement.insertBefore(newElement, referenceElement)
+
+删除DOM
+要删除一个节点，首先要获得该节点本身以及它的父节点，然后，调用父节点的removeChild把自己删掉
+// 拿到待删除节点:
+var self = document.getElementById('to-be-removed');
+// 拿到父节点:
+var parent = self.parentElement;
+// 删除:
+var removed = parent.removeChild(self);
+removed === self; // true
+
+
+
+操作表单
+HTML表单的输入控件主要有以下几种：
+文本框，对应的<input type="text">，用于输入文本；
+口令框，对应的<input type="password">，用于输入口令；
+单选框，对应的<input type="radio">，用于选择一项；
+复选框，对应的<input type="checkbox">，用于选择多项；
+下拉框，对应的<select>，用于选择一项；
+隐藏文本，对应的<input type="hidden">，用户不可见，但表单提交时会把隐藏文本发送到服务器
+
+
+
