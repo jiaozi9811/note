@@ -1,2 +1,57 @@
 AJAX  Asynchronous JavaScript and XML
 意思就是用JavaScript执行异步网络请求
+
+XMLHttpRequest是AJAX的基础
+XMLHttpRequest用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新
+
+创建 XMLHttpRequest 对象
+var xmlhttp;
+if (window.XMLHttpRequest)
+{
+    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+    xmlhttp=new XMLHttpRequest();
+}
+else
+{
+    // IE6, IE5 浏览器执行代码
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+
+如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open() 和 send() 方法
+open(method,url,async)
+    method：请求的类型；GET 或 POST
+    url：文件在服务器上的位置
+    async：true（异步）或 false（同步）
+      
+send(string)
+    string：仅用于 POST 请求
+      
+setRequestHeader(header,value)      向请求添加 HTTP 头
+    header: 规定头的名称
+    value: 规定头的值
+    
+属性
+responseText    获得字符串形式的响应数据
+responseXML     获得 XML 形式的响应数据
+
+
+onreadystatechange 事件
+当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+每当 readyState 改变时，就会触发 onreadystatechange 事件。
+readyState 属性存有 XMLHttpRequest 的状态信息
+
+XMLHttpRequest 对象的三个重要的属性
+    onreadystatechange    存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数
+    readyState            存有 XMLHttpRequest 的状态。从 0 到 4 发生变化
+                          0: 请求未初始化  1: 服务器连接已建立  2: 请求已接收  3: 请求处理中  4: 请求已完成，且响应已就绪
+    status                200: "OK"    404: 未找到页面
+
+
+xmlhttp.onreadystatechange=function()
+{
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+        document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+}
