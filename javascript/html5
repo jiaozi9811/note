@@ -1,0 +1,99 @@
+基本元素
+DOCTYPE   <!DOCTYPE html>
+html
+head
+  title
+  style
+  script
+  base
+      href
+      target(跳转方法)
+  mete  标记
+      name
+      http-equiv(refresh)
+      content
+      charset
+  link
+  
+body
+    templete  模板标记
+    main    描述文件的主要内容，html5添加
+    article 独立内容区域
+    section 段落部分
+    nav   导航
+    aside 补充说明
+    
+    h1-h6
+    header
+    footer
+    address
+    
+    a
+        href
+        target   _blank   _parent   _self   _top
+         rel
+         media
+         hreflang
+         type
+    p(自然段)(paragraph)
+    blockquote(内容引用)
+    
+    div(柳布局文字块)  lang  class
+    hr(水平线)
+    
+    ol(有序列表)
+    ul(无序列表)
+    li
+    
+    dl(定义的列表)
+    dt(定义的关键字)
+    dd(定义的说明)
+    <dl>
+      <dt></dt>
+      <dd></dd>
+     </dl>
+     
+     figure 表示图片 图表 插图 代码等内容
+     figcaption 为图片添加标题或说明
+     <figure>
+        <img>
+        <figcaption>
+     </figure>
+     
+     pre    显示格式化后的文本
+     code   计算机语言代码的描述
+     
+     em(强调文字)
+     strong(重要内容)
+     b(特别文字)
+     i(专门用语)
+     
+     mark   高亮显示
+     u      文字标签
+     small  小文字或注释
+     s      无效文字
+     
+     cite   作品标题
+     q      语句引用
+     dfn    短语定义
+     abbr   略称
+
+link
+    href
+    rel
+    media
+    hreflang
+    type
+    sizes
+    
+    
+style   描述css样式的定义
+    media
+    type="text/css"
+    
+script
+    src
+    async/defer
+    type
+    charset
+noscript
