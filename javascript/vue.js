@@ -4,7 +4,8 @@ cn.vue.org
  v-text     更新元素的textContent。如果要更新部分的textContent ，需要使用{{ Mustache }}插值
  v-once     能执行一次性地插值，当数据改变时，插值处的内容不会更新
  v-html     更新元素的innerHTML
- v-bind     动态地绑定一个或多个特性，或一个组件 prop 到表达式
+ v-bind     动态地绑定一个或多个特性，或一个组件 prop 到表达式   
+   v-bind:class  绑定css样式
  v-show     根据表达式之真假值，切换元素的 display CSS 属性
  v-if
  v-else
@@ -13,6 +14,9 @@ cn.vue.org
  v-on       绑定事件监听器
       keydown  keyup  click  dbclick  load
  v-model    在表单控件或者组件上创建双向绑定
+     .lazy - 取代 input 监听 change 事件
+     .number - 输入字符串转为数字
+     .trim - 输入首尾空格过滤
  v-pre      跳过这个元素和它的子元素的编译过程
  
  
@@ -21,8 +25,17 @@ cn.vue.org
         可以用vm.$el访问
  template   一个字符串模板作为 Vue 实例的标识使用。模板将会 替换 挂载的元素
             常用的技巧是用<script type="x-template">包含模板
-render
-
+ render
+ 
+ component
+ 
+ filters  过滤器
+ computed
+   props
+   get
+   set
+ watch
+ setter
 
 生命周期钩子
 生命周期钩子自动绑定this上下文到实例中，因此你可以访问数据，对属性和方法进行运算
@@ -50,7 +63,19 @@ vm.$children    当前实例的直接子组件
 vm.$refs        一个对象，持有注册过 ref 特性 的所有 DOM 元素和组件实例
 vm.$isServer    当前 Vue 实例是否运行于服务器
 
+组件树
+$parent     父实例
+$root       当前组件树的根实例
+$children
+$refs       访问使用了v-ref指令的子组件
 
+DOM
+$el
+$els
+
+数据访问
+$data
+$options
 
 
 <!DOCTYPE html>
