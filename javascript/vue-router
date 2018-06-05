@@ -1,0 +1,8 @@
+路由模式
+mode
+    hash(#) 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器
+    history 依赖 HTML5 History API 和服务器配置
+    
+    <router-view/>
+    <router-link :to="{path:'all'}">to all</router-link>
+    <router-link to="all">all</router-link>
