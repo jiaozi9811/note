@@ -1,0 +1,14 @@
+<template>
+  <div id="app">
+    <ex></ex>                 3 显示
+  </div>
+</template>
+<script>
+import ex from "./ex.vue"     1 载入
+export default {
+  name: 'App',
+  components:{ex}             2 注册
+}
+</script>
+<style>
+</style>
