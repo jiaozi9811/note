@@ -6,3 +6,20 @@ mode
     <router-view/>
     <router-link :to="{path:'all'}">to all</router-link>
     <router-link to="all">all</router-link>
+
+
+动态路由
+    path: '/all/:id/:item',       添加以:开头的参数
+    在视图中通过this.$router.params以字典的方式传递
+    path: '/all/:id&:item'
+    
+    
+嵌套路由
+routers:[{
+    path:'/',
+    component:item,
+    children:[{
+        path:'child',
+        component:child
+    }]
+}]
