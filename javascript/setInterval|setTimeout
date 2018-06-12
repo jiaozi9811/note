@@ -1,0 +1,258 @@
+setTimeout()方法用于在指定的毫秒数后调用函数或计算表达式
+
+
+setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式
+setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。由 setInterval() 返回的 ID 值可用作 clearInterval() 方法的参数
+setInterval(code,millisec[,"lang"])
+      code	必需。要调用的函数或要执行的代码串
+      millisec	必须。周期性执行或调用code之间的时间间隔，以毫秒计
+
+两个函数十分类似，只不过前者执行一次，而后者可以执行多次，两个函数的参数也相同，第一个参数是要执行的code或句柄，第二个是延迟的毫秒数
+
+<body>
+<input type="text" id="clock" size="35" />
+<script language=javascript>
+var int=self.setInterval("clock()",50)
+function clock()
+  {
+  var t=new Date()
+  document.getElementById("clock").value=t
+  }
+</script>
+<button onclick="int=window.clearInterval(int)">Stop interval</button>
+</body>
+
+setInterval	定期去调用function或者执行一段程式。
+clearInterval	取消掉setInterval所重复执行的动作。
+setTimeout	在指定的延迟时间之后调用一个函数或者执行一段程式。
+clearTimeout	可取消由setTimeout() 设置的timeout
+
+
+案例  时钟
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="app">
+  <h1 class="title">Pomodoro Clock</h1>
+  <div class="ctrl">
+    <div class="ctrl-block">
+      <p class="text">BREAK LENGTH</p>
+      <div class="break">
+        <div class="less" @click="changeTime(&quot;break&quot;, -1)">-</div>
+        <div class="num">{{ breakLength }}</div>
+        <div class="add" @click="changeTime(&quot;break&quot;, +1)">+</div>
+      </div>
+    </div>
+    <div class="ctrl-block">
+      <p class="text">SESSION LENGTH</p>
+      <div class="session">
+        <div class="less" @click="changeTime(&quot;session&quot;, -1)">-</div>
+        <div class="num">{{ sessionLength }}</div>
+        <div class="add" @click="changeTime(&quot;session&quot;, 1)">+</div>
+      </div>
+    </div>
+  </div>
+  <div class="timer" @click="setTime" :class="{ break: sessionTime === 0 }">
+    <div class="status">{{ status }}</div>
+    <div class="time">{{ clock }}</div><span class="fill" :style="{ height: fill }"></span>
+  </div>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+  el: '#app',
+  data: {
+    breakLength: 5,
+    sessionLength: 25,
+    breakTime: 300,
+    sessionTime: 1500,
+    timerStart: false,
+    time: null,
+  },
+  computed: {
+    clock() {
+      if (this.sessionTime > 0) {
+        let min = ('0' + parseInt(this.sessionTime/60, 10)).slice(-2)
+        let sec = ('0' + this.sessionTime%60).slice(-2)
+        
+        return `${min}:${sec}`
+      }
+      else {
+        let min = ('0' + parseInt(this.breakTime/60, 10)).slice(-2)
+        let sec = ('0' + this.breakTime%60).slice(-2)
+            
+        return `${min}:${sec}`
+      }
+    },
+    status() {
+      if (this.sessionTime > 0) {
+        return 'Session'
+      }
+      else {
+        return 'Break'
+      }
+    },
+    fill() {
+      if (this.sessionTime > 0) {
+        let max = this.sessionLength * 60
+        
+        return `${(1 - this.sessionTime / max) * 100}%`
+      }
+      else {
+        let max = this.breakLength * 60
+        
+        return `${(this.breakTime / max) * 100}%`
+      }
+    }
+  },
+  methods: {
+    changeTime(item, sec) {
+      if (!this.timerStart) {
+        if (item === 'break') {
+          if (this.breakLength+sec > 0) {
+            this.breakLength += sec
+          }
+        }
+        else if (item === 'session') {
+          if (this.sessionLength+sec > 0) {
+            this.sessionLength += sec
+          }
+        }
+        this.breakTime = this.breakLength * 60
+        this.sessionTime = this.sessionLength * 60
+      }
+    },
+    timer() {
+      let my = this
+      this.time = setInterval(() => {
+        if (my.sessionTime > 0) {
+          my.sessionTime--
+        }
+        else {
+          my.breakTime--
+        }
+        if (my.sessionTime === 0 && my.breakTime === 0) {
+          my.sessionTime = my.sessionLength * 60
+          my.breakTime = my.breakLength * 60
+        }
+      }, 1000)
+    },
+    setTime() {
+      if (!this.timerStart) {
+        this.timer()
+      }
+      else {
+        clearInterval(this.time)
+      }
+      this.timerStart = !this.timerStart
+    }
+  }
+})
+</script>
+<style type="text/css">
+@charset "UTF-8";
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  color: #eeeeee;
+  background-color: #393e46;
+  font-family: "Roboto", "黑體-繁", "微軟正黑體", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 5em;
+  margin: 0px auto 10px;
+}
+
+.ctrl {
+  display: flex;
+}
+.ctrl .break,
+.ctrl .session {
+  display: flex;
+}
+.ctrl .ctrl-block {
+  margin: 0px 20px;
+}
+.ctrl .text {
+  font-size: 1em;
+  margin: 0;
+}
+.ctrl .break,
+.ctrl .session {
+  display: flex;
+  justify-content: center;
+}
+.ctrl .less,
+.ctrl .add,
+.ctrl .num {
+  font-size: 2em;
+  padding: 0px 5px;
+}
+.ctrl .less,
+.ctrl .add {
+  cursor: pointer;
+}
+.ctrl .less:hover,
+.ctrl .add:hover {
+  color: #00adb5;
+}
+
+.timer {
+  width: 300px;
+  height: 300px;
+  margin: 20px 0px;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 10px solid #00adb5;
+  overflow: hidden;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.timer.break {
+  border: 10px solid #ff7600;
+}
+.timer.break span.fill {
+  background-color: #ff7600;
+}
+.timer:before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border: 7px solid #393e46;
+}
+.timer .status,
+.timer .time {
+  font-size: 2.4em;
+}
+.timer span.fill {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  height: 10%;
+  background-color: #00adb5;
+}
+</style>
+</body>
+</html>
