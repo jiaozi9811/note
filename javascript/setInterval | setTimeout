@@ -28,6 +28,7 @@ setTimeout	在指定的延迟时间之后调用一个函数或者执行一段程
 clearTimeout	可取消由setTimeout() 设置的timeout
 
 
+https://jd615645.github.io/2017/10/16/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8setInterval%E3%80%81clearInterval%E3%80%81clearLnterval%E3%80%81setTimeout/index.html
 案例  时钟
 <!DOCTYPE html>
 <html>
