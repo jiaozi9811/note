@@ -16,8 +16,18 @@ proxyTable: {
 
 
 axios.vue
-$axios.get('/api/v2/global').then(response => {
+this.$axios.get('/api/v2/global').then(response => {
   this.testData = response.data
   }).catch(error => {
   console.log(error)
   })
+
+
+this.$axios({
+  method: 'get',
+  url: '/token/v2/ticker/1'
+}).then(response => {
+  this.testData = response.data
+}).catch(error => {
+  console.log(error)
+})
