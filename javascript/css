@@ -60,3 +60,59 @@ CSS列表
     list-style-position	设置列表中列表项标志的位置。
     list-style-type	设置列表项标志的类型。
     marker-offset	 
+
+
+
+框模式(box model)
+    margin      外边距
+    border      边距
+    padding     内边距
+    
+podding属性
+    podding-top     上
+    padding-right   右
+    padding-bottom  下
+    padding-left    左
+    
+    
+    
+border
+    border-style    样式
+        none    默认无边框
+        dashed  虚线边框
+        solid   实线边框
+        double  定义两个边框
+        groove  3D沟槽边框
+        ridge   3D脊边框
+        inset   3D嵌入边框
+        outset  3D突出边框
+        border[-top|right|bottom|left]-style
+    border-width    宽度
+        border[-top|right|bottom|left]-width
+    border-color    颜色
+        border[-top|right|bottom|left]-color
+        
+        
+CSS轮廓(outline)
+轮廓(outline)是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用
+    outline-color
+    outline-style
+    outline-width 胜利
+    
+    
+    
+对齐(水平，垂直)
+
+水平对齐
+元素居中对齐      margin: auto;
+文本居中对齐      text-align: center;
+左右对齐-使用定位方式     position: absolute;
+左右对齐-使用float方式      float: right;
+
+解决子元素溢出问题       overflow: auto;
+
+
+垂直对齐
+padding:
+line-height
+transform
