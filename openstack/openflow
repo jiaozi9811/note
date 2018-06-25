@@ -1,0 +1,5 @@
+openflow协议涉及2个元素
+    openflow controller 控制器
+    openflow switch     交换机
+        port        端口
+        flow table  流表
