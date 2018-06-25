@@ -1,0 +1,16 @@
+sdn属性
+  控制面与转发面分离
+  开发的可编程接口
+  
+  
+sdn架构
+  network devices   转发设备,可以说硬件交换机,虚拟交换机或路由器.通过南向接口与contrtollers通信
+  southbound        南向接口
+  controllers
+  northbound        北向接口,controller与应用程序之间的接口
+  services          应用服务,包括load balancing,security,monitoring,performance management,LLDP.这些服务以软件程序的方式展现,代替传统的网管软件
+  automation        自动化,是对应用程序的封装和整合.orchestration.
+  
+ONF   open networking foundation
+
+SDN通过好每台设备的控制面从设备里剥离出来,放到一个统一的外部服务器,由这个服务器通过统一的指令来集中管理转发路径的所有设备.这个集中控制器知道所有的必需信息,而且这个控制器可以通过提供的开发api被上层应用程序通过编程控制.
