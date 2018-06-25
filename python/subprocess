@@ -1,0 +1,33 @@
+subprocess.call()   
+    父进程直接创建子进程执行程序，然后等待子进程完成
+    返回子进程的退出状态 即child.returncode属性
+    
+    
+subprocess.check_call()
+     无论子进程是否成功,该函数都返回0.如果子进程退出状态不是0，抛出异常CalledProcessError，异常对象中包含了child.returncode对应的返回码
+     
+     
+subprocess.check_output()
+    返回字符串形式的子进程的输出结果，如果子进程的退出状态不是0，抛出异常CalledProcessError，异常对象中包含了child.returncode 对应的返回码
+    
+以上几个函数默认都会等待子进程完成
+
+
+subprocess.Popen( args, 
+      bufsize=0, 
+      executable=None,
+      stdin=None,
+      stdout=None, 
+      stderr=None, 
+      preexec_fn=None, 
+      close_fds=False, 
+      shell=False, 
+      cwd=None, 
+      env=None, 
+      universal_newlines=False, 
+      startupinfo=None, 
+      creationflags=0)
+      
+      args    字符串或路径
+      bufsize 0无缓冲,正值,缓冲区大小
+      executable
