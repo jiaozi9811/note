@@ -28,3 +28,8 @@ time.strftime("%Z", time.gmtime())
 
 CPU
 multiprocessing.cpu_count()
+
+memory
+subprocess.check_output("free -h|grep Mem|awk '{print $2}'",shell=True)
+
+datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
