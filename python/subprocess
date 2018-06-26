@@ -1,3 +1,5 @@
+如果只对子进程的执行退出状态感兴趣，可以调用subprocess.call()函数，如果想通过异常处理机制解决子进程异常退出的情形，可以考虑使用subprocess.check_call()和subprocess.check_output。如果希望获得子进程的输出，可以调用subprocess.check_output()，但Popen()无疑是功能最强大的
+
 subprocess.call()   
     父进程直接创建子进程执行程序，然后等待子进程完成
     返回子进程的退出状态 即child.returncode属性
@@ -31,3 +33,20 @@ subprocess.Popen( args,
       args    字符串或路径
       bufsize 0无缓冲,正值,缓冲区大小
       executable
+
+
+p=subprosecc.Popen()
+p.pid
+p.returncode        子进程的返回状态
+
+方法
+    Popen.poll()        检查子进程是否终止,返回returncode属性    
+    Popen.wait()        等待子进程终止,返回returncode属性
+    Popen.communicate   返回一个tuple(标准输出和错误),需设定Popen(stdout=subprocess.PIPE,stderr=subprocess.PIPE),communicate() 立即阻塞父进程，直到子进程结束
+                只有调用Popen()创建子进程的时候参数stdin=subprocess.PIPE，才能通过p.communicate(input)向子进程的stdin发送数据；只有参数 stout和stderr也都为subprocess.PIPE，才能通过p.communicate()从子进程接收数据，否则接收到的二元组中，对应的位置是None
+    Popen.send_signal(signal)   向子进程发送信号signal
+    Popen.terminate()   终止子进程p，等于向子进程发送SIGTERM信号
+    Popen.kill()        杀死子进程p，等于向子进程发送SIGKILL信号
+
+p=subprocess.Popen("dir", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)  
+(stdoutput,erroutput) = p.communicate()  
