@@ -5,6 +5,22 @@ func main() {
 	fmt.Println("hello,world!")
 }
 
+or
+
+package main 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+func main() {
+	who:="World!"
+	if len(os.Args)>1{
+		who = strings.Join(os.Args[1:]," ")
+	}
+	fmt.Println("Hello",who)
+}
+
 
 fmt包	包括接收输入，格式化输出的各种函数
 	Println
@@ -79,4 +95,48 @@ var
 var形式的声明语句往往用于需要显式指定变量类型的地方，或因为变量稍后会被重新赋值而初始化无关紧要的地方
 
 
+简短变量声明语句中必须至少声明一个新的变量，否则将失效
+:=	是一个变量声明语句
+=	是一个变量赋值语句
+
+
+
+
+指针
+	一个指针的值是另一个变量的地址，指针对应的是变量在内存中的存储位置。
+	通过指针，可以直接读写对应变量的值，而无需知道此变量的名字
+	任何类型指针的零值都是nil,如果p !=nil测试为真,那p是指向某个有效变量
+	指针之间可以进行相等测试,当它们指向同一个变量或全部为nil是才相等
+
+	x := 1		
+	p := &x			//p, of type *int,points to x
+	fmt.Println(*p)	//"1"
+	*p = 2			//equivalent to x = 2
+	fmt.Println(x)	//"2"
+
+new函数
+	将创建一个T类型的匿名变量，初始化为T类型的零值，然后返回变量地址，返回的指针类型为*T
+
+p:=new(int)		//p,*int类型,指向匿名的int变量
+fmt.Print(*p)	//"0"
+*p=2			//设置int匿名变量为2
+fmt.Println(*p)	//"2"
+
+
+func newInt() *int {
+	return new(int)
+}
+与上同
+func newInt() *int {
+	var dummy int
+	return &dummy
+}
+
+
+flag	提供用来解析命令行参数的包,使得开发命令行工具更为简单
+	.Usage
+	.Type(参数名,默认值,使用提示)
+	.Type(指针,参数名,默认值,使用提示)
+	.Args		返回命令行的参数
+	.Parse		执行解析
 	
