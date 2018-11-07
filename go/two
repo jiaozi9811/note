@@ -1,0 +1,73 @@
+习惯用法
+value, err := pack1.Function1(param1)
+if err != nil {
+	fmt.Printf("An error occured in pack1.Function1 with parameter %v", param1)
+	return err
+}
+// 未发生错误，继续执行：
+由于本例的函数调用者属于 main 函数，所以程序会直接停止运行。
+
+如果我们想要在错误发生的同时终止程序的运行，我们可以使用 os 包的 Exit 函数：
+习惯用法
+
+if err != nil {
+	fmt.Printf("Program stopping with error %v", err)
+	os.Exit(1)
+}
+
+-----------------------------------------------------
+package main
+import ( "math";"fmt" )
+func mySqrt(f float64) (v float64, ok bool) {
+	if f < 0 { return } // error case
+	return math.Sqrt(f),true
+}
+func main() {
+	t, ok := mySqrt(25.0)
+	if ok { fmt.Println(t) }
+}
+
+
+
+switch 
+
+switch var1 {
+	case val1:
+		...
+	case val2:
+		...
+	default:
+		...
+}
+
+花括号{必须和switch关键字在同一行
+可以同时测试多个可能符合条件的值，使用逗号分割它们，例如：case val1, val2, val3
+如果在执行完每个分支的代码后，还希望继续执行后续分支的代码，可以使用 fallthrough 关键字来达到目的
+可选的default分支可以出现在任何顺序，但最好将它放在最后。它的作用类似与if-else 语句中的 else，表示不符合任何已给出条件时，执行相关语句
+
+switch语句的第二种形式是不提供任何被判断的值（实际上默认为判断是否为 true），然后在每个 case 分支中进行测试不同的条件
+switch {
+	case condition1:
+		...
+	case condition2:
+		...
+	default:
+		...
+}
+
+
+switch 语句的第三种形式是包含一个初始化语句
+switch initialization {
+	case val1:
+		...
+	case val2:
+		...
+	default:
+		...
+}
+
+
+for 
+
+for 初始化语句; 条件语句; 修饰语句 {}
+for i, j := 0, N; i < j; i, j = i+1, j-1 {}
