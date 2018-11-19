@@ -1,0 +1,9 @@
+https://blog.csdn.net/fox009521/article/details/77759015
+
+=VLOOKUP(A2,F:G,2,FALSE)
+    A2    根据该值查找
+    F:G   查找的区域
+    2     返回查找区域里第几列的值
+    FALSE 是否精准查询
+    
+=IFERROR(VLOOKUP(A2,F:G,2,FALSE),"") 
