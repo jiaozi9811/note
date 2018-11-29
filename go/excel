@@ -1,0 +1,102 @@
+
+xlsx
+https://github.com/tealeg/xlsx
+
+excelize
+https://github.com/360EntSecGroup-Skylar/excelize
+
+
+xlsx  读取xlsx
+package main
+import (
+    "fmt"
+    "github.com/tealeg/xlsx"
+)
+
+func main() {
+    excelFileName := "test.xlsx"
+    xlFile, err := xlsx.OpenFile(excelFileName)
+    if err != nil {
+        fmt.Printf("open failed: %s\n", err)
+    }
+    for _, sheet := range xlFile.Sheets {
+        fmt.Printf("Sheet Name: %s\n", sheet.Name)
+        for _, row := range sheet.Rows {
+            for _, cell := range row.Cells {
+                text := cell.String()
+                fmt.Printf("%s\n", text)
+            }
+        }
+    }
+}
+
+创建xlsx
+package main
+import (
+    "fmt"
+    "github.com/tealeg/xlsx"
+)
+
+func main() {
+    var file *xlsx.File
+    var sheet *xlsx.Sheet
+    var row, row1, row2 *xlsx.Row
+    var cell *xlsx.Cell
+    var err error
+
+    file = xlsx.NewFile()
+    sheet, err = file.AddSheet("Sheet1")
+    if err != nil {
+        fmt.Printf(err.Error())
+    }
+    row = sheet.AddRow()
+    row.SetHeightCM(1)
+    cell = row.AddCell()
+    cell.Value = "姓名"
+    cell = row.AddCell()
+    cell.Value = "年龄"
+
+    row1 = sheet.AddRow()
+    row1.SetHeightCM(1)
+    cell = row1.AddCell()
+    cell.Value = "狗子"
+    cell = row1.AddCell()
+    cell.Value = "18"
+
+    row2 = sheet.AddRow()
+    row2.SetHeightCM(1)
+    cell = row2.AddCell()
+    cell.Value = "蛋子"
+    cell = row2.AddCell()
+    cell.Value = "28"
+
+    err = file.Save("test_write.xlsx")
+    if err != nil {
+        fmt.Printf(err.Error())
+    }
+}
+
+修改xlsx
+package main
+import (
+    "github.com/tealeg/xlsx"
+)
+func main() {
+    excelFileName := "test.xlsx"
+    xlFile, err := xlsx.OpenFile(excelFileName)
+    if err != nil {
+        panic(err)
+    }
+    first := xlFile.Sheets[0]
+    row := first.AddRow()
+    row.SetHeightCM(1)
+    cell := row.AddCell()
+    cell.Value = "铁锤"
+    cell = row.AddCell()
+    cell.Value = "99"
+
+    err = xlFile.Save(excelFileName)
+    if err != nil {
+        panic(err)
+    }
+}
