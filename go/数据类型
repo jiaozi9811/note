@@ -1,0 +1,16 @@
+创建map
+
+ages := map[string]int{
+    "alice":   31,
+    "charlie": 34,
+}
+相当于
+ages := make(map[string]int)
+ages["alice"] = 31
+ages["charlie"] = 34
+
+删除元素
+delete(ages, "alice")
+
+
+结构体
