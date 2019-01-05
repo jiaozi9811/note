@@ -10,8 +10,8 @@ func name(parameter-list) (result-list) {
 输出错误信息并结束程序
 有时，我们只需要输出错误信息就足够了
 
-
-
+匿名函数
+func关键字后没有函数名
 
 
 
