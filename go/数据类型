@@ -1,3 +1,15 @@
+数组
+  具有相同唯一类型的一组已编号且长度固定的数据项序列
+  元素可通过索引(位置)读取或修改。索引从0开始
+  
+格式
+  var identifier [len]type
+  
+数组是一种值类型，可以通过new()创建   
+    var arr1=new([5]int)    类型是*[5]int
+    var arr2 [5]int         类型是[5]int
+
+
 创建map
 
 ages := map[string]int{
