@@ -55,5 +55,14 @@ ages["charlie"] = 34
 删除元素
 delete(ages, "alice")
 
-
 结构体
+struct
+
+引用类型
+切片slice	映射map 		通道		接口		函数
+
+结构类型
+
+
+
+接口
