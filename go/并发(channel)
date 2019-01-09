@@ -1,0 +1,2 @@
+go的并发同步模型来自一个叫作通信顺序进程(communicating sequential processes,CSP)的范型
+在goroutine之间同步和传递数据的数据类型是通道(channel)
