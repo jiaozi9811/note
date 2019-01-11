@@ -1,2 +1,19 @@
 go的并发同步模型来自一个叫作通信顺序进程(communicating sequential processes,CSP)的范型
 在goroutine之间同步和传递数据的数据类型是通道(channel)
+
+
+并发(concurrency)	同时管理很多事情
+并行(parallelism)	同时做很多事情
+并行是让不同的代码片段同时在不同的物理处理器执行
+
+
+通道(channel)
+unbuffered :=make(chan type)	无缓冲通道
+buffered :=make(chan type,len)	有缓冲通道
+
+向通道发送值或指针需要用到 <- c操作符
+从通道接收一个值或指针时，<-运算符在要炒作的通道变量的左侧
+
+无缓冲通道(unbuffered channel)
+在接收前没有能力保存任何值的通道
+这种类型的通道要求发送goroutine和接收goroutine同时准备好，才能完成发送和接收操作
