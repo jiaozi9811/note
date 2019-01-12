@@ -1,4 +1,19 @@
 数据类型
+
+bool
+
+string
+
+int   init8   int16   int32   int64
+
+uint uint8  uint16  uint32  uint64  uintptr
+
+byte //uint8的别名   rune //int32的别名
+
+float32   float64
+
+complex64   complex128
+
 数组  切片slice    映射
 数组
   具有相同唯一类型的一组已编号且长度固定的数据项序列
