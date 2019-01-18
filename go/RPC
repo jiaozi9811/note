@@ -1,0 +1,6 @@
+RPC(remote procedure call 远程过程调用)
+    分布式系统中不同节点间的通信方式
+    
+go语言的rpc包在net/rpc下    
+    
+    
