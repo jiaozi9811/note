@@ -1,5 +1,15 @@
 数据类型
 
+new    make
+new
+  用来分配内存的内建函数，但是不像在其它语言中，它并不初始化内存，只是将其置零。也就是说，new(T)会为T类型的新项目，分配被置零的存储，并且返回它的地址，一个类型为*T的值
+  
+make
+  它只用来创建slice，map和channel，并且返回一个初始化的(而不是置零)，类型为T的值
+
+append
+  func append(slice []T, elements ...T) []T
+
 bool
 
 string
