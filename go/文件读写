@@ -37,36 +37,21 @@ string(inputfile)
 err=ioutil.WriteFile("outputfilename",inputfile,0644)
 
 
+复制文件
+funcCopyFile(dstName,srcName string) (written int64,err error){
+    src,err:=os.Open(srcname)
+    if err!=nil{ return }
+    defer src.Close()
+
+    dst.err:=os.Create(dstName)
+    if err!=nil{return}
+    defer det.Close()
+
+    return io.Copy(dst,src)
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+从命令行读入参数
+os.Args   读取命令行输入的参数
+os.Args[0]  命令本身
+os.Args[1：] 参数
