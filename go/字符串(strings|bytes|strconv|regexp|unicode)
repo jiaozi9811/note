@@ -1,0 +1,51 @@
+strings     字符串操作
+bytes       byte slice便利操作
+strconv     字符串和基本数据类型之间转换
+regexp      正则表达式
+unicode     unicode码点，UTF-8/16编码
+
+
+strings
+查找字符串
+func Contains(s,substr string) bool       // 子串substr在s中，返回true
+func ContainsAny(s,char string) bool      // chars中任何一个字符在s中存在，返回true
+func ContainsRune(s string,r rune) bool   // Unicode代码点r在s中，返回true
+
+计数
+func Count(s, sep string) int     子字符串出现次数
+
+分割字符串
+Fields 和 FieldsFunc
+func Fields(s string) []string    用空格分隔字符串s，以slice形式返回
+func FieldsFunc(s string, f func(rune) bool) []string
+
+Split 和 SplitAfter、 SplitN 和 SplitAfterN
+func Split(s, sep string) []string { return genSplit(s, sep, 0, -1) }
+func SplitAfter(s, sep string) []string { return genSplit(s, sep, len(sep), -1) }
+func SplitN(s, sep string, n int) []string { return genSplit(s, sep, 0, n) }
+func SplitAfterN(s, sep string, n int) []string { return genSplit(s, sep, len(sep), n) }
+它们都调用了 genSplit 函数
+如果sep为空，相当于分成一个个的UTF-8字符
+Split(s, sep) 和 SplitN(s, sep, -1) 等价；SplitAfter(s, sep) 和 SplitAfterN(s, sep, -1) 等价
+Split 会将 s 中的 sep 去掉，而 SplitAfter 会保留 sep
+带 N 的方法可以通过最后一个参数 n 控制返回的结果中的 slice 中的元素个数，当 n < 0 时，返回所有的子字符串；当 n == 0 时，返回的结果是 nil；当 n > 0 时，表示返回的 slice 中最多只有 n 个元素，其中，最后一个元素不会分割
+
+
+func HasPrefix(s, prefix string) bool     // s 中是否以 prefix 开始
+func HasSuffix(s, suffix string) bool {   // s 中是否以 suffix 结尾
+    return len(s) >= len(suffix) && s[len(s)-len(suffix):] == suffix
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
