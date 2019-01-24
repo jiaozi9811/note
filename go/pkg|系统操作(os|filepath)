@@ -1,0 +1,76 @@
+os
+    O_RDONLY int = syscall.O_RDONLY // 只读模式打开文件
+    O_WRONLY int = syscall.O_WRONLY // 只写模式打开文件
+    O_RDWR   int = syscall.O_RDWR   // 读写模式打开文件
+    O_APPEND int = syscall.O_APPEND // 写操作时将数据附加到文件尾部
+    O_CREATE int = syscall.O_CREAT  // 如果不存在将创建一个新文件
+    O_EXCL   int = syscall.O_EXCL   // 和O_CREATE配合使用，文件必须不存在
+    O_SYNC   int = syscall.O_SYNC   // 打开文件用于同步I/O
+    O_TRUNC  int = syscall.O_TRUNC  // 如果可能，打开时清空文件
+
+
+    Stdin  = NewFile(uintptr(syscall.Stdin), "/dev/stdin")
+    Stdout = NewFile(uintptr(syscall.Stdout), "/dev/stdout")
+    Stderr = NewFile(uintptr(syscall.Stderr), "/dev/stderr")
+
+var Args []string     //Args保管了命令行参数，第一个是程序名
+
+
+打开一个文件：OpenFile
+func OpenFile(name string, flag int, perm FileMode) (*File, error)
+
+打开一个文件，一般通过 Open 或 Create，我们看这两个函数的实现。
+func Open(name string) (*File, error) {    return OpenFile(name, O_RDONLY, 0) }
+
+func Create(name string) (*File, error) {    return OpenFile(name, O_RDWR|O_CREATE|O_TRUNC, 0666) }
+
+
+读取文件内容：Read
+func (f *File) Read(b []byte) (n int, err error)
+func (f *File) ReadAt(b []byte, off int64) (n int, err error)
+Read 和 ReadAt 的区别：前者从文件当前偏移量处读，且会改变文件当前的偏移量；而后者从 off 指定的位置开始读，且不会改变文件当前偏移量
+
+
+数据写入文件：Write
+func (f *File) Write(b []byte) (n int, err error)
+
+
+关闭文件：Close
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
