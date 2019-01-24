@@ -1,0 +1,110 @@
+sort 包包含基本的排序方法，支持切片数据排序以及用户自定义数据集合排序
+index/suffixary 包实现了后缀数组相关算法以支持许多常见的字符串操作
+container 包提供了对heap、list和ring这3种数据结构的底层支持。任何实现了相应接口的数据结构都可以调用该结构的方法
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+sort
+实现了四种基本排序算法：插入排序、归并排序、堆排序和快速排序
+
+sort包原生支持[]int、[]float64和[]string三种内建数据类型切片的排序操作，即不必我们自己实现相关的Len()、Less()和Swap()方法
+
+type Interface interface {
+        Len() int// 获取数据集合元素个数        
+        Less(i, j int) bool// 如果i索引的数据小于j索引的数据，返回true，且不会调用下面的Swap()，即数据升序排序        
+        Swap(i, j int)// 交换i和j索引的两个元素的位置
+        
+}
+
+func Sort(data Interface)
+func IsSorted(data Interface) bool
+
+
+func Float64s(a []float64)
+func Float64sAreSorted(a []float64) bool
+func Ints(a []int)
+func IntsAreSorted(a []int) bool
+
+func Slice(slice interface{}, less func(i, j int) bool)
+func SliceIsSorted(slice interface{}, less func(i, j int) bool) bool
+
+func Strings(a []string)
+func StringsAreSorted(a []string) bool
+
+
+func Search(n int, f func(int) bool) int
+func SearchFloat64s(a []float64, x float64) int
+func SearchInts(a []int, x int) int
+func SearchStrings(a []string, x string) int
+
+func Reverse(data Interface) Interface    //逆序排序
+该方法会使用“二分查找”算法来找出能使f(x)(0<=x<n)返回ture的最小值i。 前提条件: f(x)(0<=x<i)均返回false, f(x)(i<=x<n)均返回ture。 如果不存在i可以使f(i)返回ture,则返回n
+
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+index/suffixarray
+通过使用内存中的后缀树实现了对数级时间消耗的字符串搜索
+
+index := suffixarray.New(data)  // 创建数据的索引
+// 查找切片s
+offsets1 := index.Lookup(s, -1) // 返回data中所有s出现的位置
+offsets2 := index.Lookup(s, 3)  // 返回data中最多3个所有s出现的位置
+
+func New(data []byte) *Index    //使用给出的[]byte数据生成一个*Index，时间复杂度O(N*log(N))
+
+func (x *Index) Lookup(s []byte, n int) (result []int)
+返回一个未排序的列表，内为s在被索引为index的切片数据中出现的位置。如果n<0，返回全部匹配；如果n==0或s为空，返回nil；否则n为result的最大长度
+
+
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
+container   容器数据类型 heap(堆)  list(链表)  ring(环)
+container/heap
+container/list
+container/ring
+
+
+container/heap
+堆使用的数据结构是最小二叉树，即根节点比左边子树和右边子树的所有值都小
+func Init(h Interface)              //初始化
+func Pop(h Interface) interface{}   //排序
+func Push(h Interface, x interface{}) //插入
+func Remove(h Interface, i int) interface{}   //移除
+
+container/list
+链表是一个有prev和next指针的数组
+基本使用是先创建list，然后往list中插入值，list就内部创建一个Element，并内部设置好Element的next,prev等
+
+方法
+type Element
+    func (e *Element) Next() *Element
+    func (e *Element) Prev() *Element
+type List
+    func New() *List
+    func (l *List) Back() *Element   // 最后一个元素
+    func (l *List) Front() *Element  // 第一个元素
+    func (l *List) Init() *List  // 链表初始化
+    func (l *List) InsertAfter(v interface{}, mark *Element) *Element // 在某个元素后插入
+    func (l *List) InsertBefore(v interface{}, mark *Element) *Element  // 在某个元素前插入
+    func (l *List) Len() int // 在链表长度
+    func (l *List) MoveAfter(e, mark *Element)  // 把e元素移动到mark之后
+    func (l *List) MoveBefore(e, mark *Element)  // 把e元素移动到mark之前
+    func (l *List) MoveToBack(e *Element) // 把e元素移动到队列最后
+    func (l *List) MoveToFront(e *Element) // 把e元素移动到队列最头部
+    func (l *List) PushBack(v interface{}) *Element  // 在队列最后插入元素
+    func (l *List) PushBackList(other *List)  // 在队列最后插入接上新队列
+    func (l *List) PushFront(v interface{}) *Element  // 在队列头部插入元素
+    func (l *List) PushFrontList(other *List) // 在队列头部插入接上新队列
+    func (l *List) Remove(e *Element) interface{} // 删除某个元素
+
+
+
+container/ring
+方法
+    func New(n int) *Ring  // 初始化环
+    func (r *Ring) Do(f func(interface{}))  // 循环环进行操作
+    func (r *Ring) Len() int // 环长度
+    func (r *Ring) Link(s *Ring) *Ring // 连接两个环
+    func (r *Ring) Move(n int) *Ring // 指针从当前元素开始向后移动或者向前（n可以为负数）
+    func (r *Ring) Next() *Ring // 当前元素的下个元素
+    func (r *Ring) Prev() *Ring // 当前元素的上个元素
+    func (r *Ring) Unlink(n int) *Ring // 从当前元素开始，删除n个元素
