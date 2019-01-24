@@ -37,6 +37,44 @@ func HasSuffix(s, suffix string) bool {   // s 中是否以 suffix 结尾
 }
 
 
+字符串出现的位置
+func Index(s, sep string) int       // 在s中查找 sep 的第一次出现，返回第一次出现的索引
+func IndexAny(s, chars string) int          // chars中任何一个Unicode代码点在s中首次出现的位置
+func IndexFunc(s string, f func(rune) bool) int     // 查找字符 c 在 s 中第一次出现的位置，其中 c 满足 f(c) 返回 true
+func IndexRune(s string, r rune) int        // Unicode 代码点 r 在 s 中第一次出现的位置
+
+// 有三个对应的查找最后一次出现的位置
+func LastIndex(s, sep string) int
+func LastIndexAny(s, chars string) int
+func LastIndexFunc(s string, f func(rune) bool) int
+
+
+JOIN 操作
+func Join(a []string, sep string) string
+
+重复字符串
+func Repeat(s string, count int) string
+
+替换字符串
+func Replace(s, old, new string, n int) string  //用new替换s中的old，一共替换n个，如果n< 0，则全部替换
+func ReplaceAll(s, old, new string) string
+
+func ToLower(s string) string
+func ToUpper(s string) string
+
+去除字符串
+func Trim(s string, cutset string) string
+
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+bytes 
+该包定义了一些操作byte slice的便利操作。因为字符串可以表示为 []byte，因此，bytes 包定义的函数、方法等和 strings 包很类似
+
+func Contains(b, subslice []byte) bool// 子slice subslice 在 b 中，返回 true
+
+func Count(s, sep []byte) int// slice sep 在 s 中出现的次数（无重叠）
+
 
 
 
