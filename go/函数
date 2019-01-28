@@ -14,5 +14,5 @@ func name(parameter-list) (result-list) {
 func关键字后没有函数名
 
 
-
-
+defer
+通常⽤于释放资源或错误处理
