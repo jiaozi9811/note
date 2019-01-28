@@ -7,13 +7,93 @@ go的并发同步模型来自一个叫作通信顺序进程(communicating sequen
 并行是让不同的代码片段同时在不同的物理处理器执行
 
 
+任何 Go 程序都必须有的 main() 函数也可以看做是一个协程，尽管它并没有通过 go 来启动。协程可以在程序初始化的过程中运行（在 init() 函数中）
+
+
+
+
+
 通道(channel)
 unbuffered :=make(chan type)	无缓冲通道
 buffered :=make(chan type,len)	有缓冲通道
 
-向通道发送值或指针需要用到 <- c操作符
-从通道接收一个值或指针时，<-运算符在要炒作的通道变量的左侧
+var identifier chan datatype
+
+通道是先进先出（FIFO）的结构所以可以保证发送给他们的元素的顺序
+使用 make() 函数来给通道分配内存
 
 无缓冲通道(unbuffered channel)
 在接收前没有能力保存任何值的通道
 这种类型的通道要求发送goroutine和接收goroutine同时准备好，才能完成发送和接收操作
+
+
+向通道发送值或指针需要用到 <- c操作符
+从通道接收一个值或指针时，<-运算符在要操作的通道变量的左侧
+
+向通道发送数据
+ch <- int1     //表示：用通道 ch 发送变量 int1
+从通道发出数据
+int2 := <- ch   //表示：变量 int2 从通道 ch（一元运算的前缀操作符，前缀 = 接收）接收数据（获取新值）
+
+<- ch可以单独调用获取通道的(下一个)值，当前值会被丢弃，但是可以用来验证
+if <- ch != 1000{
+    ...
+}
+
+defer close(ch)    //关闭通道
+
+v, ok := <-ch// ok is true if v received value   使用ok操作符检测通道是否被关闭
+if !ok {
+  break
+}
+当关闭或者阻塞的时候使用 break
+
+使用 select 切换协程
+select和switch控制语句非常相似，也被称作通信开关
+select {
+case u:= <- ch1:
+        ...
+case v:= <- ch2:
+        ...
+default: // no value ready to be received
+        ...
+}
+
+
+
+
+
+
+
+给程序1 秒时间输出上万个整数
+import (	"fmt",	"time")
+func main() {
+	ch1 := make(chan int)
+	go pump(ch1)
+	go suck(ch1) // tons of numbers appear
+	time.Sleep(1e9)
+}
+func pump(ch chan int) {
+	for i := 0; ; i++ {		ch <- i}
+}
+func suck(ch chan int) {
+	for {		fmt.Println(<-ch) }
+}
+
+-------------------------------------
+c := make(chan int)
+go func() {
+	time.Sleep(15 * 1e9)
+	x := <-c
+	fmt.Println("received", x)
+}()
+fmt.Println("sending", 10)
+c <- 10
+fmt.Println("sent", 10)
+
+/* Output:
+sending 10
+(15 s later):
+received 10
+sent 10
+*/
