@@ -13,6 +13,9 @@ append
 bool
 
 string
+要修改字符串，可先将其转换成[]rune或[]byte，完成后再转换为string。无论哪种转换，都会重新分配内存，并复制字节数组
+for i := 0; i < len(s); i++ { // byte类型
+for _, r := range s {         // rune类型
 
 int   init8   int16   int32   int64
 
@@ -87,6 +90,21 @@ struct
 切片slice	映射map 		通道		接口		函数
 
 结构类型
+
+
+指针
+支持指针类型 *T，指针的指针 **T，以及包含包名前缀的 *<package>.T
+"&"操作符取变量地址，
+"*"透过指针访问⺫标对象
+
+自定义类型
+typr newtype currenttype
+新类型不是原类型的别名，除拥有相同数据存储结构外，它们之间没有任何关系，不会持有原类型任何信息
+
+
+
+
+
 
 
 
