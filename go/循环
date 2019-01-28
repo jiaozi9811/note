@@ -1,3 +1,7 @@
+if request {...
+} else if request {...
+} else
+
 习惯用法
 value, err := pack1.Function1(param1)
 if err != nil {
@@ -65,9 +69,25 @@ switch initialization {
 	default:
 		...
 }
+switch默认相当于每个case最后带有break，匹配成功后不会自动向下执行其他case，而是跳出整个switch, 但是可以使用fallthrough强制执行后面的case代码
+如果case带有fallthrough，程序会继续执行下一条case,不会再判断下一条case
+fallthrough不能用在switch的最后一个分支
+
+
 
 
 for 
 
 for 初始化语句; 条件语句; 修饰语句 {}
 for i, j := 0, N; i < j; i, j = i+1, j-1 {}
+
+range
+for range s {  ...  }  // 忽略全部返回值，仅迭代。
+
+
+
+goto
+
+break
+
+continue
