@@ -43,6 +43,12 @@ complex64   complex128
 var array [][][]type
 
 
+指针数组[n]*T，数组指针 *[n]T
+
+
+
+
+
 切片slice
 make([]type,len,cap)
 []type{value,...}
@@ -54,6 +60,9 @@ slice2:=slice1[start:len:cap]
 append(slice,value)
 append(slice1,slice2...)	...可以将一个切片的所有元素追加到另一个切片
 
+copy
+
+
 迭代slice
 for index,value:=range slice {}
 range返回两个值，一个迭代的索引位置，一个索引值的副本
@@ -62,6 +71,7 @@ range返回两个值，一个迭代的索引位置，一个索引值的副本
 
 多维切片
 [][]type{{value,value},...}
+
 
 
 
