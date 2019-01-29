@@ -1,3 +1,13 @@
+构成要素
+标识符(identifier)  关键字(keyword)  字面量(literal)  操作符(opetator)  分隔符(delimiter)
+
+基本数据类型
+bool  byte  rune  int  float32  complex32 string
+高级数据类型
+array  slice  map  struct  interface
+流程控制语句
+if  switch  for defer
+
 数据类型
 
 new    make
@@ -21,7 +31,7 @@ int   init8   int16   int32   int64
 
 uint uint8  uint16  uint32  uint64  uintptr
 
-byte //uint8的别名   rune //int32的别名
+byte //uint8的别名   rune //int32的别名,专门用于存储unicode编码的单个字符
 
 float32   float64
 
@@ -38,6 +48,7 @@ complex64   complex128
 数组是一种值类型，可以通过new()创建   
     var arr1=new([5]int)    类型是*[5]int
     var arr2 [5]int         类型是[5]int
+    [...]int{}    
 
 多维数组
 var array [][][]type
