@@ -18,7 +18,7 @@ type typename func(ope1 int,ope2 int) (result int,err error)
 
 defer
 通常用于释放资源或错误处理
-
+defer仅在函数返回时才会执行，在循环的结尾或其他一些有限范围的代码内不会执行
 
 匿名函数
 func关键字后没有函数名
