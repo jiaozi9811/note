@@ -34,31 +34,38 @@ var identifier chan datatype
 ch <- int1     //表示：用通道 ch 发送变量 int1
 从通道发出数据
 int2 := <- ch   //表示：变量 int2 从通道 ch（一元运算的前缀操作符，前缀 = 接收）接收数据（获取新值）
-
+int3,ok :=<-ch
 <- ch可以单独调用获取通道的(下一个)值，当前值会被丢弃，但是可以用来验证
-if <- ch != 1000{
-    ...
-}
+if <- ch != 1000{   ...  }
 
 defer close(ch)    //关闭通道
+不要在接收端关闭channel，接收端通常无法判断发送端是否还会发送数值。
+在发送端关闭channel
+如果channel在关闭时还有值，可以使用接收表达式取出
 
 v, ok := <-ch// ok is true if v received value   使用ok操作符检测通道是否被关闭
-if !ok {
-  break
-}
+if !ok {  break  }
 当关闭或者阻塞的时候使用 break
+
+
+发送channel
+chan<-T   只能向通道发送值，不能接受值
+接收channel
+<-chan T
+
+func fun(ch chan<- int) <-chan int{...}
+ch是只能写的channel
+返回的chan是只能读的channel
+
 
 使用 select 切换协程
 select和switch控制语句非常相似，也被称作通信开关
 select {
-case u:= <- ch1:
-        ...
-case v:= <- ch2:
-        ...
-default: // no value ready to be received
-        ...
+case u:= <- ch1:        ...
+case v:= <- ch2:        ...
+default:  	...	// no value ready to be received  
 }
-
+select语句需要放在一个单独的goruntine中，这样即使select语句阻塞了，也不会造成死锁
 
 
 
