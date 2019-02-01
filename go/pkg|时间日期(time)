@@ -58,3 +58,15 @@ func (t Time) Sub(u Time) Duration  //返回一个时间段t-u
 
 Round 和 Truncate 方法
         
+
+
+timer
+type Timer struct { C<-chan Time }
+
+func NewTimer(d Duration) *Timer
+
+func (t *Timer) Reset(d Duration) bool
+func (t *Timer) Stop() bool
+
+func AfterFunc(d Duration, f func()) *Timer
+
