@@ -10,7 +10,10 @@ go的并发同步模型来自一个叫作通信顺序进程(communicating sequen
 任何 Go 程序都必须有的 main() 函数也可以看做是一个协程，尽管它并没有通过 go 来启动。协程可以在程序初始化的过程中运行（在 init() 函数中）
 
 
-
+ch := make(chan int) //无缓冲通道(可读可写通道)
+ch := make(chan int, 10)//缓冲为10的通道（可读可写通道）
+ch := make(chan<- int)//无缓冲通道（只写通道）
+ch := make(<-chan int)//无缓冲通道（只读通道）
 
 
 通道(channel)
