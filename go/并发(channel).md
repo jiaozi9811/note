@@ -1,22 +1,24 @@
+tags： golang
+
 go的并发同步模型来自一个叫作通信顺序进程(communicating sequential processes,CSP)的范型
 在goroutine之间同步和传递数据的数据类型是通道(channel)
 
 
-并发(concurrency)	同时管理很多事情
-并行(parallelism)	同时做很多事情
-并行是让不同的代码片段同时在不同的物理处理器执行
+>并发(concurrency)	同时管理很多事情
+>并行(parallelism)	同时做很多事情
+>并行是让不同的代码片段同时在不同的物理处理器执行
 
 
 任何 Go 程序都必须有的 main() 函数也可以看做是一个协程，尽管它并没有通过 go 来启动。协程可以在程序初始化的过程中运行（在 init() 函数中）
 
 
-ch := make(chan int) //无缓冲通道(可读可写通道)
-ch := make(chan int, 10)//缓冲为10的通道（可读可写通道）
-ch := make(chan<- int)//无缓冲通道（只写通道）
-ch := make(<-chan int)//无缓冲通道（只读通道）
+>ch := make(chan int) //无缓冲通道(可读可写通道)
+>ch := make(chan int, 10)//缓冲为10的通道（可读可写通道）
+>ch := make(chan<- int)//无缓冲通道（只写通道）
+>ch := make(<-chan int)//无缓冲通道（只读通道）
 
 
-通道(channel)
+## 通道(channel)
 unbuffered :=make(chan type)	无缓冲通道
 buffered :=make(chan type,len)	有缓冲通道
 
@@ -74,7 +76,7 @@ select语句需要放在一个单独的goruntine中，这样即使select语句�
 
 
 
-
+```
 给程序1 秒时间输出上万个整数
 import (	"fmt",	"time")
 func main() {
@@ -107,3 +109,29 @@ sending 10
 received 10
 sent 10
 */
+```
+
+
+**并发编程的难度在于协调，而协调就要通过交流。从这个角度看来，并发单元间的通信是最大的问题。**
+
+----------
+在工程上，有两种最常见的并发通信模型：共享数据和消息。
+
+ - 共享数据是指多个并发单元分别保持对同一个数据的引用，实现对该数据的共享。被共享的数据可能有多种形式，比如内存数据块、磁盘文件、网络数据等。在实际工程应用中最常见的无疑是内存了，也就是常说的共享内存。
+ - 消息机制认为每个并发单元是自包含的、独立的个体，并且都有自己的变量，但在不同并发单元间这些变量不共享。每个并发单元的输入和输出只有一种，那就是消息。这有点类似于进程的概念，每个进程不会被其他进程打扰，它只做好自己的工作就可以了。不同进程间靠消息来通信，它们不会共享内存。
+
+###出让时间片
+&nbsp;&nbsp;&nbsp;&nbsp;我们可以在每个goroutine中控制何时主动出让时间片给其他goroutine，这可以使用runtime包中的Gosched()函数实现。
+
+###Goroutine(协程)
+进程、线程、协程的关系和区别
+
+ - 进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。
+ - 线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是的)。
+ - 协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。
+
+>&nbsp;&nbsp;&nbsp;&nbsp;goroutine是Go语言中的轻量级线程实现，由Go运行时(runtime)管理。在一个函数调用前加上go关键字，这次调用就会在一个新的goroutine中并发执行。当被调用的函数返回时，这个goroutine也自动结束了。
+&nbsp;&nbsp;&nbsp;&nbsp;需要注意的是，如果这个函数有返回值，那么这个返回值会被丢弃
+
+
+  [1]: https://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif
