@@ -1,9 +1,3 @@
-# os
-
-tags： golang
-
----
-```
 package main
 
 import (
@@ -99,12 +93,3 @@ func main() {
 	// fmt.Println("Sleeping 1,000 hours in main function...")
 	// time.Sleep(1000 * time.Hour)
 }
-```
-
-
-
-
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI3OTg3ODkzMl19
--->
