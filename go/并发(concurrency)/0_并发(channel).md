@@ -1,7 +1,7 @@
 tags： golang
 
-- defer: Stack(Last-In-First-Out)
-- goroutine: Queue(First-In-First-Out)
+- defer: Stack(堆)(Last-In-First-Out)
+- goroutine: Queue(队列)(First-In-First-Out)
 
 go的并发同步模型来自一个叫作通信顺序进程(communicating sequential processes,CSP)的范型
 在goroutine之间同步和传递数据的数据类型是通道(channel)
