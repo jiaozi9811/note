@@ -14,7 +14,7 @@ func main() {
 	for v := range ch {
 		fmt.Println(v)
 	}
-}
+
 
 /*
 5
@@ -61,3 +61,4 @@ main.main()
 		// , returning the zero value of channel type and false.
 
 	}
+}
