@@ -104,7 +104,7 @@ const (
 )
 ```
 
-### Now with timezone  [↑ top]# time
+### Now with timezone  [↑ top]#time
 
 ```go
 package main
