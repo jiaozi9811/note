@@ -103,8 +103,8 @@ const (
     StampNano  = "Jan _2 15:04:05.000000000"
 )
 ```
-[↑ top]
-#### Now with timezone
+
+### Now with timezone  [↑ top]# time
 
 ```go
 package main
