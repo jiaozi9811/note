@@ -114,6 +114,18 @@ sent 10
 */
 ```
 
+```
+ch:=make(chan int,10)
+for i:=0;i<10;i++{
+	ch<-i
+}
+fmt.Println(ch,len(ch),cap(ch))
+sum:=len(ch)
+//不能写成for i:=0;i<len(ch);i++
+for i:=0;i<sum;i++{
+	fmt.Println(<-ch)
+}
+```
 
 **并发编程的难度在于协调，而协调就要通过交流。从这个角度看来，并发单元间的通信是最大的问题。**
 
