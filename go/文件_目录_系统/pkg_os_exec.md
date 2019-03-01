@@ -90,7 +90,9 @@ func Command(name string, arg ...string) *Cmd
  ## StdoutPipe、StderrPipe 和 StdinPipe
  
  >func (c *Cmd) StdoutPipe() (io.ReadCloser, error)
+ 
  >func (c *Cmd) StderrPipe() (io.ReadCloser, error)
+ 
  >func (c *Cmd) StdinPipe() (io.WriteCloser, error)
  
  
