@@ -70,9 +70,6 @@ git fetch
 git pull
 git push
 
-
-
-
 ## ERROE
 
 ### error: src refspec master does not match any
