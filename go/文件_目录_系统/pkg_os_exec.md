@@ -61,9 +61,9 @@ func Command(name string, arg ...string) *Cmd
 一般通过exec.Command函数产生 Cmd 实例
 
 >接下来一般有两种写法：
-	>- exec.Output(),返回([]byte, error)
-	>- 调用 Start()，接着调用 Wait()，然后会阻塞直到命令执行完成；只返回error
-	>- 调用 Run()，它内部会先调用 Start()，接着调用 Wait(),只返回error
+>	- exec.Output(),返回([]byte, error)
+>	- 调用 Start()，接着调用 Wait()，然后会阻塞直到命令执行完成；只返回error
+>	- 调用 Run()，它内部会先调用 Start()，接着调用 Wait(),只返回error
  
  func (c *Cmd) Start() error
  func (c *Cmd) Wait() error
