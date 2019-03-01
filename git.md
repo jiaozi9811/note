@@ -66,7 +66,7 @@ git fetch
 git pull
 git push
 
-### Pro Git
+## Pro Git
 
 <http://iissnan.com/progit/>
 
