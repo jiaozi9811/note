@@ -1,12 +1,5 @@
-# (实例)12AB34CD56EF78GH910IJ
-
-tags： golang code
-
----
-###问题描述：
-使用两个goroutine交替打印序列，一个goroutinue打印数字，另一个goroutine打印字母，最终结果如下：                     12AB34CD45EF78GH910IJ
-
-```golang
+//###问题描述：
+//使用两个goroutine交替打印序列，一个goroutinue打印数字，另一个goroutine打印字母，最终结果如下：                     //12AB34CD45EF78GH910IJ
 package main
 
 import (
@@ -56,8 +49,3 @@ func main() {
 
         wg.Wait()
 }
-```
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMjM1MjE1OTldfQ==
--->
