@@ -42,17 +42,29 @@ exec包装了 os.StartProcess 函数以便更容易的重定向标准输入和�
 ```go
 //Cmd类型
 type Cmd struct {
-    Path string // 将要执行的命令的路径
-    Args []string  //保管命令的参数，包括命令名作为第一个参数；如果为空切片或者nil，相当于无参数命令
-    Env []string  //指定进程的环境，如为nil，则是在当前进程的环境下执行
-    Dir string    //指定命令的工作目录。如为空字符串，会在调用者的进程当前目录下执行
-    Stdin io.Reader
-    Stdout io.Writer
-    Stderr io.Writer
-    ExtraFiles []*os.File //指定额外被新进程继承的已打开文件流
-    SysProcAttr *syscall.SysProcAttr  //保管可选的、各操作系统特定的sys执行属性
-    Process *os.Process   //是底层的，只执行一次的进程
-    ProcessState *os.ProcessState //包含一个已经存在的进程的信息，只有在调用Wait或Run后才可用
+	Path string // 将要执行的命令的路径
+	Args []string  //保管命令的参数，包括命令名作为第一个参数；如果为空切片或者nil，相当于无参数命令
+	Env []string  //指定进程的环境，如为nil，则是在当前进程的环境下执行
+	Dir string    //指定命令的工作目录。如为空字符串，会在调用者的进程当前目录下执行
+
+	Stdin io.Reader
+	Stdout io.Writer
+	Stderr io.Writer
+	ExtraFiles []*os.File //指定额外被新进程继承的已打开文件流
+	SysProcAttr *syscall.SysProcAttr  //保管可选的、各操作系统特定的sys执行属性
+	Process *os.Process   //是底层的，只执行一次的进程
+	ProcessState *os.ProcessState //包含一个已经存在的进程的信息，只有在调用Wait或Run后才可用
+    
+	finished        bool            // when Wait was called
+
+	ctx             context.Context  nil means none
+	lookPathErr     error           // LookPath error, if any.
+	childFiles      []*os.File
+	closeAfterStart []io.Closer
+	closeAfterWait  []io.Closer
+	goroutine       []func() error
+	errch           chan error // one send per goroutine
+	waitDone        chan struct{}
 }
 ``` 
 
