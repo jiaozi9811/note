@@ -1,4 +1,5 @@
-Printing ¶
+Printing
+
 verb：
 
 通用：
