@@ -32,6 +32,45 @@
 
 >git log
 
+### 查看之前的commit
+
+git checkout [commit] [file]
+git checkout [commit]
+git checkout [branch]
+
+### 撤销公共修改
+
+git revert [commit]
+
+### 撤销本地修改
+
+git reset
+git clean
+
+### 重写Git历史记录
+
+git commit --amend
+git rebase
+git reflog
+
+### 分支
+
+git branch
+git checkout
+git merge
+
+### 仓库同步
+
+git remote
+git fetch
+git pull
+git push
+
+### Pro Git
+
+<http://iissnan.com/progit/>
+
+
 ## ERROE
 
 ### error: src refspec master does not match any
