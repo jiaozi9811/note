@@ -2,6 +2,10 @@
 
 [TOC]
 
+## Pro Git
+
+<http://iissnan.com/progit/>
+
 ## git
 
 ### 全局设置
@@ -66,9 +70,7 @@ git fetch
 git pull
 git push
 
-## Pro Git
 
-<http://iissnan.com/progit/>
 
 
 ## ERROE
