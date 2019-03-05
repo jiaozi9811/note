@@ -345,15 +345,11 @@ view
 在文档要插入图片的地方写![图片Alt][标记]
 
 在文档的最后写上[标记]:图片地址 “Title”
-```markdown
-![美丽风景](https://yuhongjun.github.io/assets/media/scenery.jpeg "美丽风景")
 
-[scenery]:https://yuhongjun.github.io/assets/media/scenery.jpeg "美丽风景"
-```
 view
 ![美丽风景](https://yuhongjun.github.io/assets/media/scenery.jpeg "美丽风景")
 
-[scenery]:https://yuhongjun.github.io/assets/media/scenery.jpeg "美丽风景"
+
 
 ---
 #### 8. 内容目录
