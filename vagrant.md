@@ -102,5 +102,5 @@ config.ssh.insert_key = 'true'
 
 ## 共享目录
 
-  config.vm.synced_folder "D:/python", "/code", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"]#, type: "rsync"
+  config.vm.synced_folder "D:/python", "/code", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"]#, type: "rsync"  
   config.vm.synced_folder ".","/vagrant",disabled:true
