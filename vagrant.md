@@ -27,6 +27,8 @@ https://app.vagrantup.com/boxes/search
 
 ## 常用命令
 
+vagrant global-status
+
    vagrant box add [vagrant_name] [vagrant_url]  --name [name]
 
     vagrant init [vagrant_name]
