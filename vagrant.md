@@ -106,3 +106,17 @@ config.ssh.insert_key = 'true'
 
   config.vm.synced_folder "D:/python", "/code", create: true, owner: "root", group: "root", mount_options: ["dmode=755","fmode=644"]#, type: "rsync"  
   config.vm.synced_folder ".","/vagrant",disabled:true
+
+ 网络
+
+### 端口映射(Forwarded port)
+
+`config.vm.forwarded_port 80, 8080`
+
+### 私有网络(Private network)
+
+`config.vm.network "private_network", ip: "192.168.21.4"`
+
+### 公有网络(Public network)
+
+`config.vm.network "public_network", ip: "10.0.0.10"`
