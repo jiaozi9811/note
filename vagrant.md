@@ -10,6 +10,8 @@ Vagrant还会创建一些共享文件夹，用来给你在主机和虚拟机之�
 
 Vagrant不仅可以用来作为个人的虚拟开发环境工具，而且特别适合团队使用，它使得我们虚拟化环境变得如此的简单，只要一个简单的命令就可以开启虚拟之路。
 
+https://www.wanglibing.com/vagrant/
+
 ## VAGRANT 中文文档
 
 ##安装配置
@@ -24,6 +26,8 @@ box
 http://www.vagrantbox.es/
 
 https://app.vagrantup.com/boxes/search
+
+https://cloud.centos.org
 
 ## 常用命令
 
@@ -85,6 +89,8 @@ update
 
 ### 永久设置环境变量
 
+在Vagrant中添加box时，加载目录默认在 ~/.vagrant.d/，具体的目录结构是C:\Users\Your Username\.vagrant.d</em>
+
 永久设置用户的环境变量
           setx VAGRANT_HOME "/your/path"
 永久设置系统的环境变量
@@ -116,7 +122,92 @@ config.ssh.insert_key = 'true'
 ### 私有网络(Private network)
 
 `config.vm.network "private_network", ip: "192.168.21.4"`
+`config.vm.network "private_network", type: "dhcp",auto_config: false`
+
+Disable Auto-Configuration
+ want to manually configure the network interface yourself, you can disable Vagrant's auto-configure feature by specifying auto_config
+    auto_config: false
 
 ### 公有网络(Public network)
 
 `config.vm.network "public_network", ip: "10.0.0.10"`
+
+
+config.vm.box = "centos/7" //配置box
+config.vm.hostname = “node1"配置hostname
+
+config.vm.provider "virtualbox" do |vb|
+  vb.name = "centos7" //配置虚拟机名称
+  vb.cpus = 2 配置CPU个数
+  vb.memory = "1024"配置内存单位：MB
+end
+
+
+## 端口转发
+
+onfig.vm.network "forwarded_port", guest: 80, host: 8080
+config.vm.network "forwarded_port", guest: 81, host: 8081
+
+挂载/oracle/virtulbox/VBoxGuestAdditions.iso
+mount挂载上
+bash VBoxLinuxAdditions.run
+
+验证”virtualbox的文件系统模块“是否加载了,lsmod=list modules
+lsmod | grep vboxsf
+ 
+如果查找不到，使用加载模块，接着再验证，每次reboot都要做这个操作
+modprobe -a vboxsf
+
+在安装增强功能的时候出现了，kernel headers not found for target kernel的错误。特记下我的解决方案。
+
+1.update kernel
+
+yum update kernel -y
+2.Install the kernel-headers, kernel-devel and other required packages
+
+yum install kernel-headers kernel-devel gcc make -y
+
+## 导出box
+
+$ vagrant package --base <虚拟机名称> --output BoxName.box
+
+Vagrant.configure("2") do |config|
+    config.vm.define :web do |web|
+        web.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--name", "web", "--memory", "1024"]
+        end
+        web.vm.box = "centos/7"
+        web.vm.hostname = "node1"
+        web.vm.network :private_network, ip : "11.11.11.1"
+    end
+
+    config.vm.define :db do |db|
+        db.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--name", "db", "--memory", "1024"]
+        end
+        db.vm.box = "centos/7"
+        db.vm.hostname = "node2"
+        db.vm.network :private_network, ip : "11.11.11.2"
+    end
+end
+
+
+Vagrant.configure("2") do |config|
+    config.vm.define :master do |master|
+        web.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--name", "master", "--memory", "512"]
+        end
+        web.vm.box = "centos"
+        web.vm.hostname = "master"
+        web.vm.network :private_network, ip : "10.0.0.10"
+    end
+
+    config.vm.define :node1 do |node1|
+        db.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--name", "node1", "--memory", "512"]
+        end
+        db.vm.box = "centos"
+        db.vm.hostname = "node1"
+        db.vm.network :private_network, ip : "10.0.0.11"
+    end
+end

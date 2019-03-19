@@ -6,3 +6,5 @@ kubernetes由以下核心组件组成
     kubelet         负责维护容器的生命周期，同时负责volume(CVI)和网络(CNI)的管理
     kube-proxy      负责为service提供sclster内部的服务发现和负载均衡
     container runtime 负责镜像管理以及pod和容器的真正运行(CRI)
+
+

@@ -19,7 +19,22 @@
 
 ### 添加远程仓库
 
->git remote add origin <https://github.com/google/go>
+>git remote <!-- MarkdownTOC -->
+
+- 同步操作
+- 查看状态
+- 查看commit记录
+- 查看之前的commit
+- 撤销公共修改
+- 撤销本地修改
+- 重写Git历史记录
+- 分支
+- 仓库同步
+- ERROE
+- error: src refspec master does not match any
+
+<!-- /MarkdownTOC -->
+add origin <https://github.com/google/go>
 
 ### 同步操作
 
