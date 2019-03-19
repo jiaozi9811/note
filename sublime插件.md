@@ -10,6 +10,7 @@ SublimeCodeIntel
 
 AutoFileName
 	快速帮助你在文件中写路径
+	
 BufferScroll
 	不同的位置可以有相同的文件名
 ChineseLocalization
