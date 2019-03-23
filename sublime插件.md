@@ -1,4 +1,16 @@
 
+解决被墙问题
+https://packagecontrol.io/channel_v3.json
+
+prefrences->package setting->Package control->setting-user
+
+{
+	"channels":
+	[
+	"C:/Users/jiao/AppData/Roaming/Sublime Text 3/channel_v3.json"
+	],
+}
+
 PlainTasks
 
 
@@ -53,3 +65,22 @@ WordCount
 Sublime CodeIntel 	代码自动提示
 Color​Picker		调色板
 IMESupport		sublime中文输入法
+
+
+## gosublime
+gotools
+gofmt
+godef
+进入插件packeage目录
+git clone https://margo.sh/GoSublime
+
+修改gosublime user设置
+{
+	"env": {
+		"GOPATH":"D:/pyth/script",
+		"GOROOT":"D:/envpath/go",
+		"PATH":"$PATH;$GOPATH/bin"
+	},
+	"autocomplete_builtins": true,
+	"autocomplete_closures": true,
+}

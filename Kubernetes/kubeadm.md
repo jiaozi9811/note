@@ -62,7 +62,7 @@ vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 
 初始化Master
-#kubeadm init --kubernetes-version=1.13.4 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12  --ignore-preflight-errors=Swap 
+#kubeadm init --kubernetes-version=1.13.4 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12  --ignore-preflight-errors=Swap
 
 kubeadm init --image-repository=registry.aliyuncs.com/google_containers --kubernetes-version=1.13.4 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap --apiserver-advertise-address=10.0.0.10
 
@@ -74,7 +74,7 @@ https://kubethink.com/posts/create-an-on-premises-cluster-in-china-v1-12/
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-kubeadm join 10.0.4.10:6443 --token xcqp4o.70xcijxgogyoysrq --discovery-token-ca-cert-hash sha256:395ce644da3f730873df2adb4568172235b395f57006659bc1d2a3873cfe3193
+kubeadm join 10.0.4.10:6443 --token 4n60no.0k3z0rfg18c7fdyt --discovery-token-ca-cert-hash sha256:dacdc9388d3e787bb7718e3282b6f0e7091cd021148ead0ba8fd3f09a4d239df
 
 
 部署flannel

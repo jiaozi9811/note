@@ -8,3 +8,29 @@ kubernetes由以下核心组件组成
     container runtime 负责镜像管理以及pod和容器的真正运行(CRI)
 
 
+pod生命周期
+	pending
+	running
+	failed
+	succeeded
+	unknown
+
+pod生命过程
+	初始化容器
+	容器探测
+		liveness
+		readlless
+	钩子
+	重启策略
+		always
+		onfailure
+		never
+		default to always
+
+pod控制器
+	ReplicaSet
+	Deployment
+	DaemonSet
+	job
+	cronjob
+	StatefulSet
