@@ -4,7 +4,7 @@
 
 https://jimmysong.io/kubernetes-handbook/images/kubernetes-pod-cheatsheet.png
 
-##pod的生命周期
+## pod的生命周期
 * pending(挂起)
 * running
 * susseeded
