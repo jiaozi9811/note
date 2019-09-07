@@ -89,4 +89,13 @@ spec:
       periodSeconds: 5
 ```
 
+# pod hook(钩子)
+- Pod hook（钩子）是由Kubernetes管理的kubelet发起的，当容器中的进程启动前或者容器中的进程终止之前运行，这是包含在容器的生命周期之中。
+- 可以同时为Pod中的所有容器都配置hook。
 
+## hook类型
+- exec 执行一段命令
+- http 发送http请求
+
+## 调试hook
+Hook调用的日志没有暴露给Pod的event，所以只能通过describe命令来获取，如果有错误将可以看到FailedPostStartHook或FailedPreStopHook这样的event。
