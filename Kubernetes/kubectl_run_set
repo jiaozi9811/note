@@ -1,7 +1,0 @@
-kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=replicas] [--dry-run=bool] [--overrides=inline-json] [--command] -- [COMMAND] [args...] [options]
-
-
-kubectl set SUBCOMMAND [options]
-Available Commands:
-  image       Update image of a pod template
-  resources   update resource requests/limits on objects with pod templates
