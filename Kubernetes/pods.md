@@ -99,3 +99,5 @@ spec:
 
 ## 调试hook
 Hook调用的日志没有暴露给Pod的event，所以只能通过describe命令来获取，如果有错误将可以看到FailedPostStartHook或FailedPreStopHook这样的event。
+
+# Label
