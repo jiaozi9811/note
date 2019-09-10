@@ -1,7 +1,6 @@
 默认kubernetes中所有容器都没有任何cpu和内存的限制。LimitRange用来给namespace增加一个资源限制，包括最小，最大和默认资源
 
-ex
-
+```
 apiVersion: v1
 kind: LimitRange
 metadata:
@@ -28,4 +27,4 @@ spec:
       cpu: 100m
       memory: 3Mi
     type: Container
-      
+```
