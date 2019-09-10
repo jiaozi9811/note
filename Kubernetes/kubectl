@@ -1,14 +1,35 @@
-kubectl命令自动补全
+# kubectl
 
+## kubectl命令自动补全
+```
 source <(kubectl completion bash)
 echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
 
+## kubectl cluster-info
+```kubectl cluster-info```
 
-kubectl cluster-info
-
+### 转储集群信息
+转储集群信息,用用调试和诊断集群问题
+```
 kubectl cluster-info dump
+kubectl cluster-info dump --output-directory=/path/to/cluster-state
+kubectl cluster-info dump --namespaces default,kube-system --output-directory=/path/to/cluster-state
+```
 
+## kubectl run
+```kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=replicas] [--dry-run=bool] [--overrides=inline-json] [--command] -- [COMMAND] [args...] [options]```
 
+## kubectl set
+```
+kubectl set SUBCOMMAND [options]
+Available Commands:
+  image       Update image of a pod template
+  resources   update resource requests/limits on objects with pod templates
+```  
+
+## kubectl --help
+```
 Basic Commands (Beginner):
   create         Create a resource by filename or stdin
   expose         Take a replication controller, service, deployment or pod and expose it as a new Kubernetes Service
@@ -61,3 +82,70 @@ Other Commands:
   config         Modify kubeconfig files
   help           Help about any command
   version        Print the client and server version information
+```
+
+## kubectl delete
+```
+kubectl delete ([-f FILENAME] | TYPE [(NAME | -l label | --all)]) [options]
+
+Examples:
+  # Delete a pod using the type and name specified in pod.json.
+  kubectl delete -f ./pod.json
+  
+  # Delete a pod based on the type and name in the JSON passed into stdin.
+  cat pod.json | kubectl delete -f -
+  
+  # Delete pods and services with same names "baz" and "foo"
+  kubectl delete pod,service baz foo
+  
+  # Delete pods and services with label name=myLabel.
+  kubectl delete pods,services -l name=myLabel
+  
+  # Delete a pod with minimal delay
+  kubectl delete pod foo --now
+  
+  # Force delete a pod on a dead node
+  kubectl delete pod foo --grace-period=0 --force
+  
+  # Delete a pod with UID 1234-56-7890-234234-456456.
+  kubectl delete pod 1234-56-7890-234234-456456
+  
+  # Delete all pods
+  kubectl delete pods --all
+```
+
+
+## kubectl get
+```
+kubectl get
+  * clusters (valid only for federation apiservers)  
+  * componentstatuses (aka 'cs')      各组件信息
+  * configmaps (aka 'cm')             用来保存单个属性，也可以用来保存整个配置文件或者JSON二进制大对象
+  * daemonsets (aka 'ds')             DaemonSet保证了所有或者某些节点运行的是同一个Pod的副本
+  * deployments (aka 'deploy')        Deployment其实就是内部调用 ReplicaSet
+  * endpoints (aka 'ep')              直接将外部服务器映射为kubernetes内部的一个服务
+  * events (aka 'ev')                 事件log
+  * horizontalpodautoscalers (aka 'hpa')    Horizontal Pod Autoscaler,对rc, deployment管理的pods进行自动伸缩
+  * ingresses (aka 'ing')   只占用一台主机的 HTTP 端口，通过虚拟主机或者虚拟目录的方式为K8S上的所有HTTP服务提供暴露服务，还能实现 HTTPS、负载均衡、状态统计等功能
+  * jobs                              job包含的pod多用于执行一次性任务、批处理工作等，执行完成后pod便会停止 
+  * limitranges (aka 'limits')        资源配额
+  * namespaces (aka 'ns')  
+  * networkpolicies                   network policies
+  * nodes (aka 'no')  
+  * persistentvolumeclaims (aka 'pvc')  PersistentVolumes是用户在不知道特定云环境的细节的情况下“声称”的一种持久存储
+  * persistentvolumes (aka 'pv')        PersistentVolumes是用户在不知道特定云环境的细节的情况下“声称”的一种持久存储
+  * pods (aka 'po')  
+  * podsecuritypolicies (aka 'psp')     pod security policies
+  * podtemplates                        pod template
+  * replicasets (aka 'rs')  
+  * replicationcontrollers (aka 'rc')  
+  * resourcequotas (aka 'quota')        resource quotas
+  * secrets                             用来保存敏感信息，例如密码、OAuth 令牌和ssh key
+  * serviceaccounts (aka 'sa')  
+  * services (aka 'svc')  
+  * statefulsets                        是一个给Pod提供唯一标志的控制器，它可以保证部署和扩展的顺序
+  * storageclasses  
+  * thirdpartyresources                 TPR是一种无需改变代码就可以扩展Kubernetes API的机制，可以用来管理自定义对象
+  * processlifecycle (aka 'plc')        process lifecycle
+  * clouds (aka 'cld') 
+```
