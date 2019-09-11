@@ -2,7 +2,7 @@
 
 [TOC]
 
-(Deployment 结构示意图)<https://jimmysong.io/kubernetes-handbook/images/deployment-cheatsheet.png>
+![Deployment 结构示意图](https://jimmysong.io/kubernetes-handbook/images/deployment-cheatsheet.png)
 
 ## deployment
 deployment为pod和replicaset提供了一个声明式定义(declarative)方法，用来替代以前的replicationcontroller来方便的管理应用
