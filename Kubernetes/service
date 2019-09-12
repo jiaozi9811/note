@@ -1,18 +1,21 @@
-服务发现与负载均衡 
-机制
-service                 直接用service提供cluster内部的负载均衡，并借助cloud provider提供的LB提供外部访问
-lngress controller      用service提供cluster内部的负载均衡，通过自定义LB提供外部访问
-service load balancer   把load lalancer直接跑在容器中，实现bare metal的service load balancer
-custom load balancer    自定义负载均衡，并替代kube-proxy，一般在物理部署kubernetes时使用，方便接入公司已有的外部服务
+# 服务发现与负载均衡 
+
+[TOC]
+
+## 机制
+- service                 直接用service提供cluster内部的负载均衡，并借助cloud provider提供的LB提供外部访问
+- lngress controller      用service提供cluster内部的负载均衡，通过自定义LB提供外部访问
+- service load balancer   把load lalancer直接跑在容器中，实现bare metal的service load balancer
+- custom load balancer    自定义负载均衡，并替代kube-proxy，一般在物理部署kubernetes时使用，方便接入公司已有的外部服务
 
 
-service
+## service
 service是对一组提供相同功能的pods的抽象，并为它们提供一个统一的入口。借助service，应用可以方便的实现服务发现和负载均衡，并实现应用的另宕机升级。
 service通过标签(label)选取服务后端，一般配合replication controller或deployment来保证后端容器的正常运行。匹配标签的pod ip 和端口列表组成endpoints，由kube-proxy负责将服务ip负载均衡到这些endpoints上
 
 
-service 类型
-clusterip       默认类型，自动分配一个仅cluster内部可以访问的虚拟ip
-nodeport        在clusterip基础上为service在每台机器上绑定一个端口，这样可以通过<nodeip>:nodeport来访问该服务
-loadbalancer    在nodeport基础上，借助cloud provider创建一个外部的负载均衡器，并将请求转发到<nodeip>:nodeport
-externalname    将服务通过DNS CNAME记录方式转发到指定的域名(通过spec.externlName设定)
+## service 类型
+- clusterip       默认类型，自动分配一个仅cluster内部可以访问的虚拟ip
+- nodeport        在clusterip基础上为service在每台机器上绑定一个端口，这样可以通过<nodeip>:nodeport来访问该服务
+- loadbalancer    在nodeport基础上，借助cloud provider创建一个外部的负载均衡器，并将请求转发到<nodeip>:nodeport
+- externalname    将服务通过DNS CNAME记录方式转发到指定的域名(通过spec.externlName设定)
