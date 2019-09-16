@@ -13,9 +13,9 @@ RBAC API中,一个角色包含了一套表示一组权限的规则
 
 - Role对象只能用于授予对某个单一namespace中的资源的访问权限
 - ClusterRole对象可以授予与Role相同的权限,但由于它们属于集群范围对象，也可以使用它们授予对以下资源的访问权限
--- 集群范围的资源(如节点node)
--- 非资源类型Endpoint(如/healthz)
--- 跨所有namespace的命名空间范围的资源(如pod,需要运行命令kubectl get pods --all-namespaces来查询集群中所有的pod)
+- - 集群范围的资源(如节点node)
+- - 非资源类型Endpoint(如/healthz)
+- - 跨所有namespace的命名空间范围的资源(如pod,需要运行命令kubectl get pods --all-namespaces来查询集群中所有的pod)
 
 ## RoleBinding与ClusterRoleBinding
 角色绑定将一个角色中定义的权限授予一个或一组用户
