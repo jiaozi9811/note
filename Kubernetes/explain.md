@@ -6,6 +6,7 @@ kubectl explain pods.spec.containers
 kubectl explain pods|rs
 
 资源的清单格式
+```
     一级字段
         apiVersion(group/version)
         kind(类别)
@@ -15,19 +16,21 @@ kubectl explain pods|rs
             labels
             annotations
         spec
+```
+pod资源
+**kubectl explain pods.spec.containers**
+```
+    spec.containers []object 
 
-    pod资源
-    **kubectl explain pods.spec.containers**
-        spec.containers []object 
+    -name [string]
+     image [string]
+     imagePullPolicy:[Always|Never|IfNotPresent]
+     env
+     ports
+     volumeDevices
+     volumeMounts
+     workingDir
 
-        -name [string]
-         image [string]
-         imagePullPolicy:[Always|Never|IfNotPresent]
-         env
-         ports
-         volumeDevices
-         volumeMounts
-         workingDir
-
-         command
-         args
+     command
+     args
+```
