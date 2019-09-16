@@ -6,6 +6,7 @@
 service account是为了方便pod里面的进程调用kubernetes API或其他外部服务而设计的
 
 创建service account
+```
 kubectl create serviceaccount jenkins
 kubectl get serviceaccounts jenkins -o yaml
 apiVersion: v1
@@ -19,3 +20,4 @@ metadata:
   uid: 4d66eb4c-42e9-11e7-9860-ee7d8982865f
 secrets:
 - name:jenkins-token-l9v7v
+```
