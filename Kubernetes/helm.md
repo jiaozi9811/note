@@ -26,6 +26,8 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 
 ### 安装服务端tiller
 
-```helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.12.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts```
+```
+helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.12.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+```
 
 ## 创建chart
