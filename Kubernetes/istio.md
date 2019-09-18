@@ -37,7 +37,7 @@ istio使用envoy作为sidecar，实现了Service Mesh对于微服务之间传输
 - Citadel
 - - citadel通过内置身份和凭证管理提供"服务间"和"最终用户"身份验证，cidadel可用于升级服务网格中未加密的流量，并能为运维人员提供基于服务标识而不是网络层的强制执行策略
 
-
+![Istio service mesh 架构图](https://jimmysong.io/istio-handbook/images/006tNc79ly1fz73sprcdlj31580u046j.jpg)
 
 
 
