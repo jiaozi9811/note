@@ -8,7 +8,7 @@ helm chart是用来封装kubernetes原生应用程序的yaml文件。可以在�
 
 ## 安装
 
-###安装客户端
+### 安装客户端
 
 下载
 https://github.com/helm/helm/releases
