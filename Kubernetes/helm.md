@@ -28,6 +28,17 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 
 ```
 helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.12.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
 ```
 
 ## 创建chart
+```helm create nginx```
+
+## 检查chart是否有效
+
+```helm install --dry-run --debug <chart_dir>```
+
+
+## 部署
+```helm install . ···
