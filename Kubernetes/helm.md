@@ -47,6 +47,12 @@ kubectl get all -n kube-system -l app=helm -o name|xargs kubectl delete -n kube-
 
 ```helm reset```
 
+## chart仓库
+
+chart仓库用来存储和分享打包的chart，官方chart仓库由Kubernetes Charts维护， Helm允许创建私有chart仓库
+
+chart仓库是一个可用来存储index.yml与打包的chart文件的HTTP server，当要分享chart时，需要上传chart文件到chart仓库。任何一个能能够提供YAML与tar文件的HTTP server都可以当做chart仓库，比如Google Cloud Storage (GCS) bucket、Amazon S3 bucket、Github Pages或创建你自己的web服务器
+
 # 使用
 
 
@@ -77,3 +83,25 @@ helm install https://example.com/charts/chart.tgz # 指定url
 ```
 helm fetch stable/mysql --version 0.2.8 --untar # 获取版本，并解压
 ```
+
+## 版本回滚
+ ```
+ helm hist mysql # 查看版本
+ helm rollback --debug mysql 1 #回滚
+ ```
+ 
+ ## 删除chart
+ ```
+ helm delete --purge mysql #彻底删除，release不会保留
+ helm delete mysql #release会保留
+ helm ls -a mysql # 确认删除
+ ```
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
