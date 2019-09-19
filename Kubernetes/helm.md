@@ -41,7 +41,7 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 
 ## 部署
-```helm install . ···
+```helm install . ```
 
 
 ## 删除tiller
