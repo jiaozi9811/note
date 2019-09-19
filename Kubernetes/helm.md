@@ -42,3 +42,10 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 ## 部署
 ```helm install . ···
+
+
+## 删除tiller
+```
+kubectl get -n kube-system secrets,sa,clusterrolebinding -o name|grep tiller|xargs kubectl -n kube-system delete
+kubectl get all -n kube-system -l app=helm -o name|xargs kubectl delete -n kube-system
+```
