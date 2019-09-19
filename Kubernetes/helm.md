@@ -28,7 +28,10 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 
 tiller以deployment的方式部署在集群中
 
+**在所有节点安装socat**
+
 ```
+yum install socat -y
 helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.12.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
