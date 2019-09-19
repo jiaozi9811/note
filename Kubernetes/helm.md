@@ -49,11 +49,36 @@ kubectl get all -n kube-system -l app=helm -o name|xargs kubectl delete -n kube-
 
 ## chart仓库
 
+### 启动本地chart库
+
+```
+helm serve --address ip:port # 以http server的方式提供chart库
+```
+
+### 添加chart库
+
 chart仓库用来存储和分享打包的chart，官方chart仓库由Kubernetes Charts维护， Helm允许创建私有chart仓库
 
 chart仓库是一个可用来存储index.yml与打包的chart文件的HTTP server，当要分享chart时，需要上传chart文件到chart仓库。任何一个能能够提供YAML与tar文件的HTTP server都可以当做chart仓库，比如Google Cloud Storage (GCS) bucket、Amazon S3 bucket、Github Pages或创建你自己的web服务器
 
+```
+helm repo add <chart_name> <url>
+helm repo add fabric8 https://fabric8.io/helm
+```
+
+
+
 # 使用
+
+## 命令自动补全
+
+```
+yum install -y bash-completion
+source /usr/share/bash-completion/completions/docker
+sh /usr/share/bash-completion/bash_completion
+source <(kubectl completion bash)
+source <(helm completion bash)
+```
 
 
 ## 检查chart是否有效
