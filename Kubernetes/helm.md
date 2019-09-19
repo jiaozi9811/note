@@ -60,8 +60,17 @@ helm install --dry-run --debug <chart_dir>`
 
 ```
 helm search mysql # 查询chart
-helm create nginx # 创建chart
-helm install <chart_dir> 部署chart
+helm create mysql # 创建chart
+helm lint <chart_dir> # 检查chart的错误
+helm package <chart_dir> -d <dir> # 打包chart
+helm status mysql # 查看状态
+helm list -a #
+
+# 下载
+helm install <chart_dir> # 部署chart
+helm install stable/mysql #指定chart上的包
+helm install chart.tgz # 指定chart包
+helm install https://example.com/charts/chart.tgz # 指定url
 ```
 
 下载chart
