@@ -16,7 +16,9 @@ helm chart是用来封装kubernetes原生应用程序的yaml文件。可以在�
 https://github.com/helm/helm/releases
 
 将helm二进制文件复制到/usr/local/bin
-```helm version```
+```
+helm version
+```
 
 创建tiller的serviceaccount和clusterrolebinding
 ```
@@ -37,18 +39,6 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 ```
 
-## 创建chart
-```helm create nginx```
-
-## 检查chart是否有效
-
-```helm install --dry-run --debug <chart_dir>```
-
-
-## 部署
-```helm install . ```
-
-
 ## 删除tiller
 ```
 kubectl get -n kube-system secrets,sa,clusterrolebinding -o name|grep tiller|xargs kubectl -n kube-system delete
@@ -56,3 +46,25 @@ kubectl get all -n kube-system -l app=helm -o name|xargs kubectl delete -n kube-
 ```
 
 ```helm reset```
+
+# 使用
+
+
+## 检查chart是否有效
+
+```
+helm install --dry-run --debug <chart_dir>`
+```
+
+## 常用命令
+
+```
+helm search mysql # 查询chart
+helm create nginx # 创建chart
+helm install <chart_dir> 部署chart
+```
+
+下载chart
+```
+helm fetch stable/mysql --version 0.2.8 --untar # 获取版本，并解压
+```
