@@ -26,6 +26,8 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 
 ### 安装服务端tiller
 
+tiller以deployment的方式部署在集群中
+
 ```
 helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.12.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
@@ -49,3 +51,5 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 kubectl get -n kube-system secrets,sa,clusterrolebinding -o name|grep tiller|xargs kubectl -n kube-system delete
 kubectl get all -n kube-system -l app=helm -o name|xargs kubectl delete -n kube-system
 ```
+
+```helm reset```
