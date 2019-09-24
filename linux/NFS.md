@@ -4,7 +4,6 @@
 
 ## NFS(network file system)
 
-
 ```yum install -y rpcbind nfs-utils```
 
 配置文件 /etc/exports
@@ -46,6 +45,8 @@
 systemctl start rpcbind
 systemctl start nfs
 ```
+
+exportfs -rv  #重新读取配置文件,不中断服务
 
 客户端挂载
 
