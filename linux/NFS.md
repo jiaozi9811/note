@@ -46,11 +46,38 @@ systemctl start rpcbind
 systemctl start nfs
 ```
 
-exportfs -rv  #重新读取配置文件,不中断服务
-
-客户端挂载
+## 客户端挂载
 
 ```
 mount -t nfs nfs_server:/var/www/html  /bendikongmulu
 showmount -e nfs_server_ip
 ```
+
+## 相关命令
+
+### exportfs
+
+exportfs -rv  #重新读取配置文件,不中断服务
+
+参数
+- -a 全部挂载或卸载 /etc/exports中的内容
+- -r 重新读取/etc/exports 中的信息 ，并同步更新/etc/exports、/var/lib/nfs/xtab
+- -u 卸载单一目录（和-a一起使用为卸载所有/etc/exports文件中的目录）
+- -v 在export的时候，将详细的信息输出到屏幕上
+
+### nfsstat
+查看NFS的运行状态，对于调整NFS的运行有很大帮助
+
+### showmount
+
+- -a 显示已经于客户端连接上的目录信息
+- -e IP或者hostname 显示此IP地址分享出来的目录
+
+
+
+
+
+
+
+
+
