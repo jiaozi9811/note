@@ -106,7 +106,12 @@ helm install https://example.com/charts/chart.tgz # 指定url
 
 下载chart
 ```
-helm fetch stable/mysql --version 0.2.8 --untar # 获取版本，并解压
+helm fetch stable/mysql --version 0.2.8 --untar --untardir <dir> # 获取版本，并解压
+```
+
+### 导出yaml
+```
+helm template --output-dir <output_dir> <chart_dir>
 ```
 
 ## 版本回滚
