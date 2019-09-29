@@ -40,11 +40,16 @@ istio使用envoy作为sidecar，实现了Service Mesh对于微服务之间传输
 - - mixer中还包括一个灵活的插件，使其能接入各种主机环境和基础设施的后段，并得到sidecar代理和istio所管理的服务
 - Citadel
 - - citadel通过内置身份和凭证管理提供"服务间"和"最终用户"身份验证，cidadel可用于升级服务网格中未加密的流量，并能为运维人员提供基于服务标识而不是网络层的强制执行策略
+- Galley
+- - Galley代表其他istio控制平面组件,用来验证用户编写的istio APi配置。随着时间推移，galley将接管istio获取配置，处理和分配组件的顶级责任
 
 ![Istio service mesh 架构图](https://jimmysong.io/istio-handbook/images/006tNc79ly1fz73sprcdlj31580u046j.jpg)
 
 
+## Pilot流量控制
+istio流量控制的核心组件是Pilot。pilot管理和配置部署在特定istio服务网格中的所有envoy代理实例
 
+polit允许指定在envoy代理之间使用什么样的路由流量规则，并配置故障恢复功能,如超时，重试和熔断器。还维护了网格中所有服务的规范模型，并使用这个模型通过服务发现让envoy了解网格中的其他实例
 
 
 
