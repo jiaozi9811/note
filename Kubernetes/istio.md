@@ -27,6 +27,8 @@ istio使用envoy作为sidecar，实现了Service Mesh对于微服务之间传输
 - **控制面** 负责管理和配置代理路由流量。通过mixer来实施策略和收集各个sidecar的遥测数据
 - **数据面** 由一组sidecar构成。这些sidecar可以调节和控制微服务及mixer之间所有的网络通信
 
+![Istio 架构](https://archive.istio.io/v1.2/docs/concepts/what-is-istio/arch.svg)
+
 ### 组件的功能
 - sidecar(默认为Envoy)
 - - envoy是c++开发的高性能代理，用于调解服务网格中服务的入站和出站流量。istio中envoy用于sidecar，和对应的服务部署在同一个pod中。envoy调解所有出入服务的流量。所有经过envoy的流量都会调用mixer，为mixer提供一组描述请求和请求周围环境的attribute。根据envoy的配置和attribute，mixer会调用各种后台的基础设施资源。而这些attribute又可以在mixer中用于决策使用何种策略，并发送给监控系统，以提供整个网格行为的信息
