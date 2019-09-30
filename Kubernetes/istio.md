@@ -46,11 +46,6 @@ istio使用envoy作为sidecar，实现了Service Mesh对于微服务之间传输
 ![Istio service mesh 架构图](https://jimmysong.io/istio-handbook/images/006tNc79ly1fz73sprcdlj31580u046j.jpg)
 
 
-## Pilot流量控制
-istio流量控制的核心组件是Pilot。pilot管理和配置部署在特定istio服务网格中的所有envoy代理实例
-
-polit允许指定在envoy代理之间使用什么样的路由流量规则，并配置故障恢复功能,如超时，重试和熔断器。还维护了网格中所有服务的规范模型，并使用这个模型通过服务发现让envoy了解网格中的其他实例
-
 
 
 
