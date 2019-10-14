@@ -2,6 +2,10 @@
 
 [TOC]
 
+https://github.com/istio/istio
+
+https://istio.io/
+
 https://archive.istio.io/v1.2/zh/docs/concepts/what-is-istio/
 
 ## service mesh(服务网格)
@@ -46,7 +50,23 @@ istio使用envoy作为sidecar，实现了Service Mesh对于微服务之间传输
 ![Istio service mesh 架构图](https://jimmysong.io/istio-handbook/images/006tNc79ly1fz73sprcdlj31580u046j.jpg)
 
 
+# istio helm
 
+istio helm总体结构
+
+![istio helm总体结构](https://blog.fleeto.us/post/istio-helm-deep-dive-overview/images/istio-overview.png)
+
+## Chart.yaml
+
+chart的基础信息
+
+## values-*.yaml
+
+- values.yaml：罗列了（可能）所有变量，也是我们做定制的基础
+- values-istio-auth.yaml：启用控制面 mTLS；缺省打开网格内的 mTLS
+- values-istio-demo-auth.yaml：启用控制面 mTLS；缺省打开网格内的 mTLS；激活 Grafana、Jaeger、ServiceGraph 以及 Galley；允许自动注入
+- values-istio-demo.yaml：激活 Grafana、Jaeger、ServiceGraph 以及 Galley；允许自动注入
+- values-istio.yaml：oneNameSpace 设置为 True，让 Pilot 只监控单一的 Namespace，目前的情况是只监控 Istio 的部署命名空间。此处的 istiotesting 似乎是个 Issue
 
 
 
