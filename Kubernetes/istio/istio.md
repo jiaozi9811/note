@@ -62,16 +62,37 @@ chart的基础信息
 
 ## values-*.yaml
 
+https://istio.io/docs/setup/additional-setup/config-profiles/
+
 - values.yaml：罗列了（可能）所有变量，也是我们做定制的基础
 - values-istio-auth.yaml：启用控制面 mTLS；缺省打开网格内的 mTLS
 - values-istio-demo-auth.yaml：启用控制面 mTLS；缺省打开网格内的 mTLS；激活 Grafana、Jaeger、ServiceGraph 以及 Galley；允许自动注入
 - values-istio-demo.yaml：激活 Grafana、Jaeger、ServiceGraph 以及 Galley；允许自动注入
 - values-istio.yaml：oneNameSpace 设置为 True，让 Pilot 只监控单一的 Namespace，目前的情况是只监控 Istio 的部署命名空间。此处的 istiotesting 似乎是个 Issue
 
+## requiremtens.yaml
+用于管理chart的依赖关系。istio的各个组件在这里定义，并且可通过变量控制
 
+## templates
+- \_affinity.tpl 该文件会产生一组节点亲和/互斥的元素，供各个组件在渲染yaml时使用
+- \——helpers.tpl 创建了四个变量供helm使用
+- sidecar-injector-configmap.yaml 定义了configmap对象istio-sidecar-injector,为sidecarInjectorWebhook提供配置支持，在全局变量 omitSidecarInjectorConfigMap 为 False 的时候进行渲染，这一参数会用在生成新的 Gateway 之类的调整功能上，防止创建多余的 ConfigMap
+- configmap.yaml 定义configmap对象istio，该对象会随pilot一同创建，是pilot的依赖项
 
-
-
+## charts
+- certmanager：一个基于 Jetstack Cert-Manager 项目的 ACME 证书客户端，用于自动进行证书的申请、获取以及分发
+- galley：Istio 利用 Galley 进行配置管理工作。
+- gateways：使用 Gateways 一节的配置，可以实现多个 Gateway Controller
+- grafana：图形化的 Istio Dashboard。
+- ingress：一个遗留设计，缺省关闭，v1alpha3 之后建议弃用。
+- kiali：带有分布式跟踪、配置校验等多项功能的 Dashboard。
+- mixer：
+- pilot：
+- prometheus：
+- security：
+- servicegraph：
+- sidecarInjectorWebhook：自动注入 Webhook 的相关配置
+- tracing：Jaeger 的分布式跟踪相关配置。
 
 
 
