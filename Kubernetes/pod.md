@@ -56,6 +56,10 @@ https://jimmysong.io/kubernetes-handbook/images/kubernetes-pod-cheatsheet.png
 - Failure
 - Unknown 未能执行检查，因此不采取任何措施
 
+### kubectl get pod 中的ready
+kubectl get pod中的READY列给出的是每个pod内部容器的readiness，即就绪状态。每个集群节点上的kubelet会根据容器本身readiness规则的定义，分别是tcp、http或exec的方式，来确认对应容器的readiness情况
+
+
 ### 重启策略 restartPolicy
 - Always 默认
 - OnFailure
