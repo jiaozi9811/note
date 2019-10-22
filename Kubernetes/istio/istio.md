@@ -98,6 +98,10 @@ https://istio.io/docs/setup/additional-setup/config-profiles/
 
 
 
-
+## CRD
+istio资源分为三组进行管理
+- networking.istio.io 流量管理
+- config.istio.io 为mixer组件提供配置
+- authentication.istio.io 定义认证策略
 
 
