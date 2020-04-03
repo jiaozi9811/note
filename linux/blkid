@@ -1,0 +1,29 @@
+# blkid
+
+blkid命令对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包
+
+https://man.linuxde.net/blkid
+
+```
+-c <file>   指定cache文件(default: /etc/blkid.tab, /dev/null = none)
+-d          don't encode non-printing characters
+-h          显示帮助信息
+-g          garbage collect the blkid cache
+-o <format> 指定输出格式
+-k          list all known filesystems/RAIDs and exit
+-s <tag>    显示指定信息，默认显示所有信息
+-t <token>  find device with a specific token (NAME=value pair)
+-l          look up only first device with token specified by -t
+-L <label>  convert LABEL to device name
+-U <uuid>   convert UUID to device name
+-v          显示版本信息
+-w <file>   write cache to different file (/dev/null = no write)
+<dev>       specify device(s) to probe (default: all devices)
+Low-level probing options:
+-p          low-level superblocks probing (bypass cache)
+-i          gather information about I/O limits
+-S <size>   overwrite device size
+-O <offset> probe at the given offset
+-u <list>   filter by "usage" (e.g. -u filesystem,raid)
+-n <list>   filter by filesystem type (e.g. -n vfat,ext3)
+```
