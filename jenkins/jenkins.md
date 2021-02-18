@@ -20,3 +20,8 @@ userContent     可以使用这个目录存放自己为jenkins定制化的一些
 users           如果用的是jenkins本地用户数据库，用户账户信息存放在此目录
 war             此目录包含了扩展的web应用程序，当以单机应用程序的形式运行时，会把web应用程序解压到此目录
 ```
+
+
+## Jenkins Pipeline的总体介绍
+
+(Jenkins Pipeline的总体介绍)[https://blog.csdn.net/diantun00/article/details/81075007]
