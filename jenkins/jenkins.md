@@ -25,3 +25,5 @@ war             此目录包含了扩展的web应用程序，当以单机应用�
 ## Jenkins Pipeline的总体介绍
 
 (Jenkins Pipeline的总体介绍)[https://blog.csdn.net/diantun00/article/details/81075007]
+
+(自定义Jenkins-slave镜像)[https://www.bladewan.com/2018/10/23/jenkins_slave/]
