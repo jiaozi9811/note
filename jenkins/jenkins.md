@@ -27,3 +27,15 @@ war             此目录包含了扩展的web应用程序，当以单机应用�
 (Jenkins Pipeline的总体介绍)[https://blog.csdn.net/diantun00/article/details/81075007]
 
 (自定义Jenkins-slave镜像)[https://www.bladewan.com/2018/10/23/jenkins_slave/]
+
+
+```
+def string=params.service.split("\n")
+for (i=0;i<string.size();i++)
+{
+  echo string[i]
+  def ip=string[i].split(" ")[0]
+  def port=string[i].split(" ")[1]
+  def user=string[i].split(" ")[2]
+}
+```
